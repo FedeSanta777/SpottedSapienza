@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/spottedsapienza'
@@ -14,8 +15,6 @@ class Utenti(db.Model):
     email = db.Column(db.String(100))
     password = db.Column(db.String(100))
     facolta = db.Column(db.String(100))
-
-from sqlalchemy import text
 
 def test_database_connection():
     try:
