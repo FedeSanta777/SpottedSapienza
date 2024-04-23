@@ -1,0 +1,133 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  .menu-bar {
+    background-color: yellow;
+    height: 50px; /* Altezza della barra del menu */
+    width: 100%; /* Occupa tutta la larghezza della pagina */
+  }
+  
+  .container {
+    display: flex;
+    height: calc(100% - 52px); /* Altezza della pagina meno altezza del menu */
+  }
+
+  .left-column {
+    background-color: lightblue;
+    flex: 1;
+    border: 1px solid black;
+    height: 100%;
+  }
+    
+  .title-scoreboard {
+    background-color: lightsalmon;
+    flex: 1;
+    /* larghezza della div e margin proporzionale */
+    margin: 5% 5% 0% 5%;
+    border: 1px solid black;
+  }
+
+  .title-scoreboard h3 {
+    text-align: center;
+    /* font size che cambia in base a l container-title-score*/
+    font-size: 1.2em; /* Imposto la dimensione del carattere dell'h3 a 2 volte la dimensione del carattere del container */
+  }
+
+  .scoreboard {
+    background-color: rgb(0, 217, 255);
+    flex: 1;
+    margin: 0% 5% 5% 5%;
+    border: 1px solid black;
+  }
+
+  .scoreboard table {
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+  }
+
+  .scoreboard td {
+    text-align: center;
+  }
+
+  /* stile della colonna a sinistra */
+
+  .right-column {
+    background-color: lightcoral;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    height: 100%;
+  }
+
+  .img-argomento img{
+    width: 100%;
+    height: auto;
+  }
+
+  .box-domanda {
+    background-color: lightsalmon;
+    flex: 1;
+    /* larghezza della div e margin proporzionale */
+    margin: 5% 5% 0% 5%;
+    border: 1px solid black;
+    height: 90%;
+  }
+
+  .box-domanda h3 {
+    text-align: center;
+    /* font size che cambia in base a l container-title-score*/
+    font-size: 1em; /* Imposto la dimensione del carattere dell'h3 a 2 volte la dimensione del carattere del container */
+    border: 1px solid black;
+  }
+
+  .box-domanda p {
+    text-align: center;
+    border: 1px solid black;
+    margin: 3% 5%;
+    
+  }
+
+  .domanda {
+    height: 10%;
+  }
+
+  .box-risposta {
+    background-color: rgb(0, 217, 255);
+    flex: 1;
+    margin: 0% 5% 5% 5%;
+    border: 1px solid black;
+  }
+
+  .box-risposta table {
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+  }
+
+  .box-risposta td {
+    text-align: center;
+    width: 30%;
+    height: 40%;
+  }
+
+  .box-risposta button{
+    width: 90%;
+    height: 90%;
+    background-color: bisque;
+  }
+
+  /* Stile della transizione */
+  #contenuto {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  /* Stile per nascondere temporaneamente il contenuto */
+  #contenuto.hidden {
+    opacity: 0;
+  }
