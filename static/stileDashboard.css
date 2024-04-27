@@ -65,10 +65,6 @@ body, html {
     height: 100%;
   }
 
-  .img-argomento img{
-    width: 100%;
-    height: auto;
-  }
 
   .box-domanda {
     background-color: lightsalmon;
@@ -76,7 +72,7 @@ body, html {
     /* larghezza della div e margin proporzionale */
     margin: 5% 5% 0% 5%;
     border: 1px solid black;
-    height: 90%;
+    /* height: 80%; */
   }
 
   .box-domanda h3 {
@@ -94,7 +90,19 @@ body, html {
   }
 
   .domanda {
-    height: 10%;
+    height: 70%;
+  }
+
+  .img-argomento{
+    text-align: center;
+    border: seagreen 1px solid;
+    width: 100%;
+  }
+
+  .img-argomento img{
+    
+    width: 70%;
+    height: 50%;
   }
 
   .box-risposta {
@@ -102,6 +110,7 @@ body, html {
     flex: 1;
     margin: 0% 5% 5% 5%;
     border: 1px solid black;
+    height: 30%;
   }
 
   .box-risposta table {
