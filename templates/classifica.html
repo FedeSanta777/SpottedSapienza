@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <!-- caricare un file di stile -->
-<link rel="stylesheet" href="stileDashboard.css">
+<link rel="stylesheet" href="/static/stileDashboard.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,82 +16,16 @@
             </div>
             <div class="scoreboard">
                 <table>
-                    <tr>
-                        <td>1</td>
-                        <td>Gianni</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Luca</td>
-                        <td>90</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Marco</td>
-                        <td>80</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Paolo</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Andrea</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Gianni</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Luca</td>
-                        <td>90</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Marco</td>
-                        <td>80</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Paolo</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Andrea</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Gianni</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Luca</td>
-                        <td>90</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Marco</td>
-                        <td>80</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Paolo</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Andrea</td>
-                        <td>60</td>
-                    </tr>
-                    
+                    {% set count = 0 %}
+                    {% for faco in facolta %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ faco.nome }}</td>
+                            <td>{{ faco.puntiTot }}</td>
+                        </tr>
+                        {% set count = count + 1 %}
+                    {% endfor %}
+
                 </table>
         </div>
         </div>
@@ -99,21 +33,30 @@
             <div class="box-domanda">
                 <div class="img-argomento">
                 <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
-                    <img src="img/informatica.jpg" alt="immagine domanda">
+                    <img src="{{ domande.srcArg }}" alt="{{ domande.argomento }}">
                 </div>
                 <div class="domanda">
-                    <p>Quanti anni ha pino?</p>
+                    <p>{{ domande.testo }}</p>
                 </div>
             </div>
-            <div class="box-risposta">
+            <div class="box-risposta" id="box-risposta">
                 <table>
+                    
                     <tr>
-                        <td><button>2</button></td>
-                        <td><button>4</button></td>
+                        <td>
+                            <button id="risposta_1" class="{% if 'risposta_1' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_1 }}</button>
+                        </td>
+                        <td>
+                            <button id="risposta_2" class="{% if 'risposta_2' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_2 }}</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td><button>8</button></td>
-                        <td><button>16</button></td>
+                        <td>
+                            <button id="risposta_3" class="{% if 'risposta_3' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_3 }}</button>
+                        </td>
+                        <td>
+                            <button id="risposta_4" class="{% if 'risposta_4' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_4 }}</button>
+                        </td>
                     </tr>
                 </table>  
             </div>
@@ -140,6 +83,35 @@
               }, 500); // Tempo corrispondente alla durata dell'animazione (0.5s)
             });
           </script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var buttons = document.querySelectorAll('#box-risposta button');
+                buttons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        if (this.classList.contains('risposta-esatta')) {
+                            this.style.backgroundColor = 'green';
+                        } else {
+                            this.style.backgroundColor = 'red';
+                            
+                            // Identifica e colora di verde la risposta corretta
+                            buttons.forEach(function(btn) {
+                                if (btn.classList.contains('risposta-esatta')) {
+                                    btn.style.backgroundColor = 'green';
+                                }
+                            });
+                        }
+                        
+                        // Disabilita gli altri bottoni
+                        buttons.forEach(function(btn) {
+                            if (btn !== button) {
+                                btn.disabled = true;
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+        
     </div>
 </body>
 </html>
