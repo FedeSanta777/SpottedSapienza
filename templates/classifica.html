@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classifica</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
-    <div class="menu-bar">Contenuto del menu qui</div>
+<body onload="toggleDiv()">
+    <div class="menu-bar">Contenuto del menu qui {{ oggi }},{{ data }},{{enable_button}},{{utente_scelto.facolta_codice}}</div>
     <div class="container">
         <div class="left-column">
             <div class="title-scoreboard">
@@ -29,42 +30,65 @@
                 </table>
         </div>
         </div>
+
         <div class="right-column"  id="contenuto">
-            <div class="box-domanda">
-                <div class="img-argomento">
-                <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
-                    <img src="{{ domande.srcArg }}" alt="{{ domande.argomento }}">
+            <div id="div1" class="div1">
+
+                <!-- Bottone visibile se enable_button è True -->
+                <div id="button_div" style="display: none;">
+                    <!-- <button>Il bottone è abilitato</button> -->
+                    <button id="cambiaDiv">Cambia Div</button>
                 </div>
-                <div class="domanda">
-                    <p>{{ domande.testo }}</p>
+
+                <!-- Div nascosto se enable_button è False -->
+                <div id="hidden_div" style="display: none;">
+                    <p>Il bottone non è abilitato.</p>
+                    <div class="countdown" id="countdown"></div>
+                <button id="myButton" disabled>Attendi il timer</button>
                 </div>
             </div>
-            <div class="box-risposta" id="box-risposta">
-                <table>
-                    
-                    <tr>
-                        <td>
-                            <button id="risposta_1" class="{% if 'risposta_1' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_1 }}</button>
-                        </td>
-                        <td>
-                            <button id="risposta_2" class="{% if 'risposta_2' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_2 }}</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="risposta_3" class="{% if 'risposta_3' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_3 }}</button>
-                        </td>
-                        <td>
-                            <button id="risposta_4" class="{% if 'risposta_4' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button">{{ domande.risposta_4 }}</button>
-                        </td>
-                    </tr>
-                </table>  
+            <div id="div2" class="hidden">
+                <div class="box-domanda">
+                    <div class="img-argomento">
+                    <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
+                        <p>{{ domande.srcArg }}</p>
+                        <!-- <img src="{{ url_for('static', filename='domande.srcArg') }}" alt="Immagine"> -->
+                        <img src="{{ url_for('static', filename=image_path) }}" alt="{{ domande.argomento }}">
+                        
+                    </div>
+
+                    <div class="domanda">
+                        <p>{{ domande.testo }}</p>
+                    </div>
+                </div>
+                <div class="box-risposta" id="box-risposta">
+                    <form action="/incrementa/{{ utente_scelto.facolta_codice }}" method="POST">
+                    <table>
+                        <tr>
+                            <td>
+                                <button id="risposta_1" class="{% if 'risposta_1' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button" data-codice="{{ utente_scelto.facolta_codice }}">{{ domande.risposta_1 }}</button>
+                            </td>
+                            <td>
+                                <button id="risposta_2" class="{% if 'risposta_2' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button" data-codice="{{ utente_scelto.facolta_codice }}">{{ domande.risposta_2 }}</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="risposta_3" class="{% if 'risposta_3' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button" data-codice="{{ utente_scelto.facolta_codice }}">{{ domande.risposta_3 }}</button>
+                            </td>
+                            <td>
+                                <button id="risposta_4" class="{% if 'risposta_4' == domande.risposta_corretta %}risposta-esatta{% else %}risposta-sbagliata{% endif %}" type="button" data-codice="{{ utente_scelto.facolta_codice }}">{{ domande.risposta_4 }}</button>
+                            </td>
+                        </tr>
+                    </table> 
+                </form> 
+                </div>
             </div>
-            <button id="cambiaContenutoBtn">Cambia Contenuto</button>
+            <!-- <button id="cambiaContenutoBtn">Cambia Contenuto</button> -->
         </div>
           
           
-        <script>
+        <!-- <script>
             // Ottieni riferenze agli elementi DOM
             const contenutoDiv = document.getElementById('contenuto');
             const cambiaContenutoBtn = document.getElementById('cambiaContenutoBtn');
@@ -82,7 +106,7 @@
                 contenutoDiv.classList.remove('hidden');
               }, 500); // Tempo corrispondente alla durata dell'animazione (0.5s)
             });
-          </script>
+          </script> -->
           <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var buttons = document.querySelectorAll('#box-risposta button');
@@ -107,6 +131,104 @@
                                 btn.disabled = true;
                             }
                         });
+                    });
+                });
+            });
+        </script>
+        <script>
+            document.getElementById("cambiaDiv").addEventListener("click", function() {
+            var div1 = document.getElementById("div1");
+            var div2 = document.getElementById("div2");
+
+            // Aggiungi una piccola pausa prima di cambiare le classi
+            setTimeout(function() {
+                div1.classList.toggle("visible");
+                div1.classList.toggle("hidden");
+                div2.classList.toggle("visible");
+                div2.classList.toggle("hidden");
+            }, 50); // Ritardo di 50 millisecondi
+
+            if (div1.classList.contains("visible")) {
+                div1.classList.remove("visible");
+                div1.classList.add("hidden");
+                div2.classList.remove("hidden");
+                div2.classList.add("visible");
+            } else {
+                div2.classList.remove("visible");
+                div2.classList.add("hidden");
+                div1.classList.remove("hidden");
+                div1.classList.add("visible");
+            }
+        });
+        </script>
+
+        <script>
+            // Funzione per mostrare/nascondere il div in base al valore di enable_button
+            function toggleDiv() {
+                var enable_button = "{{ enable_button }}";
+                if (enable_button == 'True') {
+                    document.getElementById("button_div").style.display = "block";
+                    document.getElementById("hidden_div").style.display = "none";
+                } else {
+                    document.getElementById("button_div").style.display = "none";
+                    document.getElementById("hidden_div").style.display = "block";
+                }
+            }
+        </script>
+        
+        <script>
+            // Funzione per calcolare il tempo rimanente fino a mezzanotte
+            function getRemainingTime() {
+            const now = new Date();
+            const midnight = new Date(now);
+            midnight.setHours(24, 0, 0, 0); // Imposta a mezzanotte
+        
+            return midnight - now; // Tempo rimanente in millisecondi
+            }
+        
+            // Funzione per aggiornare il timer
+            function updateTimer() {
+            const remainingTime = getRemainingTime();
+        
+            // Calcola le ore, i minuti e i secondi rimanenti
+            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+        
+            // Aggiorna il testo del timer
+            document.getElementById('countdown').innerText = `Tempo rimanente: ${hours}h ${minutes}m ${seconds}s`;
+        
+            // Abilita il pulsante quando il timer scade
+            const button = document.getElementById('myButton');
+            if (remainingTime <= 0) {
+                button.removeAttribute('disabled');
+            } else {
+                button.setAttribute('disabled', 'disabled');
+            }
+            }
+        
+            // Avvia il timer
+            updateTimer();
+            setInterval(updateTimer, 1000); // Aggiorna il timer ogni secondo
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('.risposta-esatta').click(function() {
+                    var codiceFacolta = $(this).data('codice');
+                    $.ajax({
+                        url: '/incrementa/' + codiceFacolta,
+                        type: 'POST',
+                        success: function(response) {
+                            if (response.success) {
+                                $('#punti_' + codiceFacolta).text(response.nuovi_punti);
+                            } else {
+                                alert('Errore nell\'incremento dei punti.');
+                            }
+                        },
+                        error: function() {
+                            alert('Errore nella richiesta AJAX.');
+                        }
                     });
                 });
             });
