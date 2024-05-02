@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spotted Sapienza</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
     <link rel="stylesheet" href="stile homepage.css">
+    <title>Spotted Sapienza</title>
 </head>
 <body>
 
@@ -10,10 +12,11 @@
         <img src="LOGO.svg" alt="Spotted Sapienza logo" class="logo">
 
         <div class="sign">
-         <a href="" class="signup">
-            <img src="user-plus.svg" alt="signup">Registrati
-        </a>
-         <a href="" class="signin">Accedi</a>
+         <span class="signin">
+            <img src="user-plus.svg" class="userimg">
+            <a href="reg_page.html" class="reg">Registrati</a>
+         </span>
+         <a href="loginpage.html" class="login">Accedi</a>
         </div>
      
         
@@ -22,11 +25,35 @@
         
     <nav class="menu">
         <ul>
-            <a href="">Esplora</a>
-            <a href="">Feste</a>
-            <a href="">Classifica</a>
-        </ul>
+            <li><a href="">Bacheca</a></li>
+           <li><a href="">Feste</a></li> 
+            <li><a href="">Quiz</a></li>
+        </ul>   
     </nav>
     
+    <ul class="bacheca">
+        <div class="spot">
+            <a href="">Spotto persone!!</a>
+            <a href="">Spotto !!</a>
+            <a href=""> persone!!</a>
+        </div>
+        <a href="" class="filtri">Filtri
+            Facoltà <select name="" id="Facoltà">
+                <option value="Nessuna">Nessuna</option>
+                <option value="Architettura">Architettura</option>
+                <option value="Economia">Economia</option>
+                <option value="Farmacia e medicina">Farmacia e medicina</option>
+                <option value="Giurisprudenza">Giurisprudenza</option>
+                <option value="Ingegneria civile e industriale">Ingegneria civile e industriale</option>
+                <option value="Ingegneria dell'informazione, informatica e statistica">Ingegneria dell'informazione, informatica e statistica</option>
+                <option value="Lettere e filosofia">Lettere e filosofia</option>
+                <option value="Medicina e odontoiatria">Medicina e odontoiatria</option>
+                <option value="Medicina e psicologia">Medicina e psicologia</option>
+                <option value="Scienze matematiche, fisiche e naturali">Scienze matematiche, fisiche e naturali</option>
+                <option value="Scienze politiche sociologia comunicazione">Scienze politiche sociologia comunicazione</option>
+            </select>
+        </a>
+    </ul>
+
 </body>
 </html>
