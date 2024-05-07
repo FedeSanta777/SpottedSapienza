@@ -44,7 +44,7 @@ def registrazione():
     try:
         db.session.add(nuovo_utente)
         db.session.commit()
-        return redirect(url_for('index'))  # Reindirizza alla pagina principale dopo la registrazione
+        return redirect('home.html')  # Reindirizza alla pagina principale dopo la registrazione
     except Exception as e:
         print(f"Errore durante la registrazione: {e}")
         db.session.rollback()
