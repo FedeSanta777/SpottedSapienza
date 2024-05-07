@@ -92,27 +92,43 @@ body,html {
 
 .bacheca {
   display: flex;
-  border: 3px solid #881c1c;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin: 0;
   padding: 0;
 }
 
 
+.riquadrospot {
+  display: flexbox;
+  width: 70%;
+  background-color:  #f2f2f2;
+  margin: 20px;
+  padding: 20px;
+}
+
 .spot {
   display: grid;
-  width: 100%;
-  background-color:  #5c64cd;
-  border: #19de0b solid 3px;
+  box-shadow: 0 0 10px 0 #5f5f5f;
+  -webkit-box-shadow: 0 0 10px 0 #5f5f5f;
+  -moz-box-shadow: 0 0 10px 0 #5f5f5f;
+  border: solid 3px #fff;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 90%;
   margin: 20px;
   padding: 20px;
 }
 
 .filtri {
   display: flex;
+  box-shadow: 0 0 10px 0 #5f5f5f;
+  -webkit-box-shadow: 0 0 10px 0 #5f5f5f;
+  -moz-box-shadow: 0 0 10px 0 #5f5f5f;
   width: 30%;
-  background-color: rgb(16, 148, 242);
+  border: solid 3px #fff;
+  border-radius: 5px;
+  background-color: #fff;
   justify-content: space-between;
   align-items: center;
   margin: 20px;
