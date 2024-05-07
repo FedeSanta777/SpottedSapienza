@@ -1,4 +1,4 @@
-h1 {font-size: 16px;color: darkred;}
+h1 {font-size: 16px;color: #881c1c;}
 .card {
     width: 190px;
     padding: 1.9rem 1.2rem;
@@ -21,7 +21,7 @@ h1 {font-size: 16px;color: darkred;}
    .input-icon {
     height: 1em;
     width: 1em;
-    fill: darkred;
+    fill: #881c1c;
    }
    
    .input-field {
@@ -37,7 +37,7 @@ h1 {font-size: 16px;color: darkred;}
     margin-bottom: 1rem;
     font-size: 1.5em;
     font-weight: 500;
-    color: darkred;
+    color: #881c1c;
    }
    
    /*Buttons*/
@@ -49,7 +49,7 @@ h1 {font-size: 16px;color: darkred;}
     font-size: .8em;
     text-transform: uppercase;
     padding: 0.6em 1.2em;
-    background-color: darkred;
+    background-color: #881c1c;
     color: whitesmoke;
     box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
     transition: all .3s ease-in-out;
@@ -70,11 +70,11 @@ h1 {font-size: 16px;color: darkred;}
    
    .btn:hover {
     background-color: whitesmoke;
-    color: darkred;
+    color: #881c1c;
     box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
    }
    
    .btn-link:hover {
-    color: darkred;
+    color: #881c1c;
    }
    

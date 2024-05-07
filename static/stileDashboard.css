@@ -140,3 +140,40 @@ body, html {
   #contenuto.hidden {
     opacity: 0;
   }
+
+  .div1, .div2 {
+    opacity: 1; /* Imposta l'opacità iniziale */
+    transition: opacity 1s ease; /* Aggiungi una transizione per l'opacità */
+    text-align: center;
+    border: solid 4px black;
+    height: 100%;
+    width: 100%;
+}
+
+  .div1 button{
+    display: block;
+    margin: 0 auto; /* Centra il bottone */
+  }
+
+.hidden {
+    opacity: 0; /* Nascondi la div */
+    pointer-events: none; /* Disabilita gli eventi del mouse */
+    display: none;
+}
+
+.visible {
+    opacity: 1; /* Mostra la div */
+    pointer-events: auto; /* Abilita gli eventi del mouse */
+    transition: opacity 1s ease;
+    
+}
+
+.countdown {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+form{
+  height: 100%;
+}
+
