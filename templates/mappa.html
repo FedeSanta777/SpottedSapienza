@@ -9,6 +9,8 @@
     <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> -->
     <!-- Includi JavaScript di Leaflet -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- CSS Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         body {
             margin: 0;
@@ -29,11 +31,14 @@
             padding: 20px;
         }
         .left-column {
-            width: 50%;
+            flex: 1; /* Imposta la colonna sinistra con flex 1 */
             background-color: #f0f0f0;
+            display: flex;
+            justify-content: center; /* Centra il contenuto orizzontalmente */
+            align-items: center; /* Centra il contenuto verticalmente */
         }
         .right-column {
-            width: 50%;
+            flex: 2; /* Imposta la colonna destra con flex 2 */
             background-color: #e0e0e0;
             position: relative; /* Posizione relativa necessaria per la mappa */
         }
@@ -44,7 +49,20 @@
             top: 0;
             left: 0;
         }
+        .form-container {
+            max-width: 400px; /* Imposta una larghezza massima per il form container */
+            width: 100%; /* Imposta la larghezza al 100% per il form container */
+            padding: 20px; /* Aggiungi spazio interno al form container */
+            background-color: #fff; /* Sfondo bianco per il form container */
+            border-radius: 8px; /* Bordi arrotondati per il form container */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombra leggera per il form container */
+            box-sizing: border-box; /* Imposta il box-sizing a border-box */
+            margin-right: 20px; /* Aggiunge un margine a destra per separare dalla mappa */
+        }
     </style>
+    
+
+    
 </head>
 <body>
     <header>
@@ -53,19 +71,16 @@
     </header>
     <div class="container">
         <div class="left-column">
-            <h1>Inserisci un nuovo evento</h1>
-            <div>
-                <form id="newEventForm">
-                    <label for="nome_evento">Nome dell'evento:</label>
+            <div class="form-container">
+                <h1>Inserisci un nuovo evento</h1>
+                <form id="newEventForm" action="/submit_event" method="POST">
+                    <label for="nome_evento">Nome dell'evento:</label><br>
                     <input type="text" id="nome_evento" name="nome_evento" required><br>
-                    <label for="via">Via dell'evento:</label>
-                    <input type="text" id="via" name="via" required autocomplete="off"><br>
-                    <div id="suggestions"></div>
-                    <label for="data_evento">Data e ora dell'evento:</label>
-                    <input type="datetime-local" id="data_evento" name="data_evento" required><br>
-                    <label for="latitudine">Latitudine:</label>
+                    <label for="data_evento">Data e ora dell'evento:</label><br>
+                    <input type="text" id="datetimepicker" name="datetimepicker" required><br>
+                    <label for="latitudine">Latitudine:</label><br>
                     <input type="text" id="latitudine" name="latitudine" readonly><br>
-                    <label for="longitudine">Longitudine:</label>
+                    <label for="longitudine">Longitudine:</label><br>
                     <input type="text" id="longitudine" name="longitudine" readonly><br>
                     <button type="submit">Inserisci</button>
                 </form>
@@ -81,7 +96,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Inizializza la mappa Leaflet centrata su Roma
-        var map = L.map('map').setView([41.9028, 12.4964], 13); // Coordinate di Roma e livello di zoom
+        var map = L.map('map').setView([41.9028, 12.4964], 15); // Coordinate di Roma e livello di zoom
         // Aggiungi un layer di mappa OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -95,32 +110,28 @@
             marker.bindPopup("<b>{{ evento.nome_evento }}</b><br>{{ evento.data_evento }}").openPopup();
             // <li>{{ evento.nome_evento }} - Posizione: ({{ evento.latitudine }}, {{ evento.longitudine }}) - Data: {{ evento.data_evento }}</li>
         {% endfor %}
+
+        var marker; // Variabile per memorizzare il marker
+        var isFirstClick = true; // Variabile per tenere traccia del primo click
+
+        map.on('click', function(e) {
+            var lat = e.latlng.lat.toFixed(6);
+            var lon = e.latlng.lng.toFixed(6);
+
+            document.getElementById('latitudine').value = lat;
+            document.getElementById('longitudine').value = lon;
+
+            // Se è il primo click, crea un nuovo marker
+            if (isFirstClick) {
+                marker = L.marker([lat, lon]).addTo(map);
+                isFirstClick = false; // Imposta isFirstClick a false per indicare che non è più il primo click
+            } else {
+                // Aggiorna la posizione del marker con le nuove coordinate
+                marker.setLatLng([lat, lon]);
+            }
+        });
     </script>
     <script>
-        document.getElementById("via").addEventListener("input", function() {
-            var via = this.value;
-            fetch("https://nominatim.openstreetmap.org/search/" + encodeURIComponent(via) + "?format=json&addressdetails=1&limit=5")
-                .then(response => response.json())
-                .then(data => {
-                    var suggestionsDiv = document.getElementById("suggestions");
-                    suggestionsDiv.innerHTML = ""; // Cancella i suggerimenti precedenti
-                    data.forEach(place => {
-                        var suggestion = document.createElement("div");
-                        suggestion.textContent = place.display_name;
-                        suggestion.style.cursor = "pointer";
-                        suggestion.addEventListener("click", function() {
-                            document.getElementById("via").value = place.display_name;
-                            marker.setLatLng([place.lat, place.lon]);
-                            map.setView([place.lat, place.lon], 15);
-                            suggestionsDiv.innerHTML = ""; // Cancella i suggerimenti dopo aver selezionato uno
-                        });
-                        suggestionsDiv.appendChild(suggestion);
-                    });
-                })
-                .catch(error => {
-                    console.error("Errore durante la richiesta di suggerimenti:", error);
-                });
-        });
 
         map.on('click', function(e) {
             var lat = e.latlng.lat.toFixed(6);
@@ -132,6 +143,18 @@
             marker.setLatLng([lat, lon]);
         });
     </script>
+    <!-- JavaScript Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr('#datetimepicker', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true,
+            minDate: "today" // Imposta la data minima come quella attuale
+        });
+    </script>
+
 </body>
 
 </html>
