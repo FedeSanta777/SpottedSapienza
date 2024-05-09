@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <link rel="stylesheet" href="stile homepage.css">
+    <link rel="stylesheet" href="../static/stile homepage.css">
     <title>Spotted Sapienza</title>
 </head>
 <body>
 
     <header class="header">
-        <img src="LOGO.svg" alt="Spotted Sapienza logo" class="logo">
+        <img src="../static/images/LOGO.svg" alt="Spotted Sapienza logo" class="logo">
 
         <div class="sign">
          <span class="signin">
-            <img src="user-plus.svg" class="userimg">
+            <img src="../static/images/user-plus.svg" class="userplusimg">
             <a href="reg_page.html" class="reg">Registrati</a>
          </span>
          <a href="loginpage.html" class="login">Accedi</a>
         </div>
+
+        <span class="userpage utentelog">
+            <img src="../static/images/user.svg" class="userimg">
+            <a href="" class="profilo">Il mio profilo</a>
+        </span>
      
         
     
@@ -25,7 +30,7 @@
         
     <nav class="menu">
         <ul>
-            <li><a href="">Bacheca</a></li>
+            <li><a href="./home.html">Bacheca</a></li>
            <li><a href="">Feste</a></li> 
             <li><a href="">Quiz</a></li>
         </ul>   
@@ -37,8 +42,10 @@
 
     <div class="bacheca">
         <div class="riquadrospot">
-            <div>
-                <a href="" class="spot">Spotto persone!!</a>
+            <div class="spot">
+                <a href="">Nome utente</a>
+                <a href="" class="">Spotto persone!!</a>
+                <a href="" class="commenti">Commenti</a>
             </div>
             <div>
                 <a href="" class="spot">Spotto persone!!</a>
@@ -55,6 +62,12 @@
             <div>
                 <a href="" class="spot">Spotto persone!!</a>
             </div>        
+            <div>
+                <a href="" class="spot">Spotto persone!!</a>
+            </div>
+            <div>
+                <a href="" class="spot">Spotto persone!!</a>
+            </div>        
 
             <div>
                 <a href="" class="spot">Spotto persone!!</a>
@@ -62,10 +75,18 @@
             <div>
                 <a href="" class="spot">Spotto persone!!</a>
             </div>
+            <div>
+                <a href="" class="spot">Spotto persone!!</a>
+            </div>
+            <div>
+                <a href="" class="spot">Spotto persone!!</a>
+            </div>
         </div>
+
+    <div class="container">
         <div class="filtri">
             <a href="">Filtri
-                Facoltà <select name="" id="Facoltà">
+                Facoltà <select name="" class="facolta">
                     <option value="Nessuna">Nessuna</option>
                     <option value="Architettura">Architettura</option>
                     <option value="Economia">Economia</option>
@@ -81,15 +102,50 @@
                 </select>
                 </a>
         </div>
+
+        <div class="utentelog">
+            <label for="PORCODIO"></label>
+            <input type="text" placeholder="CREA IL TUO CAZZO DI SPOTTTTT" name="PORCODIO">
+        </div>
+    </div>
+        
         
         
     </div>
 
 <script>
-    porcodio
+    document.addEventListener("DOMContentLoaded", function() {
+    var isLoggedIn = false; // Imposta lo stato di accesso dell'utente
+
+    // Verifica se l'utente è già autenticato (ad esempio, tramite cookie o sessione)
+    // Imposta isLoggedIn a true o false di conseguenza
+
+    if (isLoggedIn) {
+        // L'utente è autenticato, mostra il pulsante per la pagina dell'utente
+        document.getElementById("utentelog").style.display = "inline-block";
+    } else {
+        // L'utente non è autenticato, mostra i pulsanti di accesso e registrazione
+        document.getElementById("sign").style.display = "inline-block";
+    }
+
+    // Aggiungi un gestore di eventi per il clic sul pulsante di accesso
+    document.getElementById("sign").addEventListener("click", function() {
+        // Simula l'accesso dell'utente (nel tuo caso, potresti implementare la logica di autenticazione)
+        isLoggedIn = true;
+        // Nascondi i pulsanti di accesso e registrazione
+        document.getElementById("sign").style.display = "none";
+        // Mostra il pulsante per la pagina dell'utente
+        document.getElementById("utentelog").style.display = "inline-block";
+    });
+
+    // Aggiungi un gestore di eventi per il clic sul pulsante della pagina dell'utente
+    document.getElementById("userpage").addEventListener("click", function() {
+        // Reindirizza l'utente alla pagina dell'utente
+        window.location.href = "paginautente";
+    });
+});
+
 </script>
-
-
-
+    
 </body>
 </html>
