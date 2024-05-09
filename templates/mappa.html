@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout a due colonne con mappa Leaflet</title>
+    <!-- Aggiungi il link alla libreria Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> -->
+    <!-- Includi JavaScript di Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- CSS Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            height: calc(100vh - 40px); /* Altezza della finestra meno l'altezza del menu */
+        }
+        .left-column,
+        .right-column {
+            padding: 20px;
+        }
+        .left-column {
+            flex: 1; /* Imposta la colonna sinistra con flex 1 */
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center; /* Centra il contenuto orizzontalmente */
+            align-items: center; /* Centra il contenuto verticalmente */
+        }
+        .right-column {
+            flex: 2; /* Imposta la colonna destra con flex 2 */
+            background-color: #e0e0e0;
+            position: relative; /* Posizione relativa necessaria per la mappa */
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            position: absolute; /* Posizione assoluta per far occupare la mappa l'intera altezza e larghezza della colonna */
+            top: 0;
+            left: 0;
+        }
+        .form-container {
+            max-width: 400px; /* Imposta una larghezza massima per il form container */
+            width: 100%; /* Imposta la larghezza al 100% per il form container */
+            padding: 20px; /* Aggiungi spazio interno al form container */
+            background-color: #fff; /* Sfondo bianco per il form container */
+            border-radius: 8px; /* Bordi arrotondati per il form container */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombra leggera per il form container */
+            box-sizing: border-box; /* Imposta il box-sizing a border-box */
+            margin-right: 20px; /* Aggiunge un margine a destra per separare dalla mappa */
+        }
+    </style>
+    
+
+    
+</head>
+<body>
+    <header>
+        <!-- Menu -->
+        <h1>Menu</h1>
+    </header>
+    <div class="container">
+        <div class="left-column">
+            <div class="form-container">
+                <h1>Inserisci un nuovo evento</h1>
+                <form id="newEventForm" action="/submit_event" method="POST">
+                    <label for="nome_evento">Nome dell'evento:</label><br>
+                    <input type="text" id="nome_evento" name="nome_evento" required><br>
+                    <label for="data_evento">Data e ora dell'evento:</label><br>
+                    <input type="text" id="datetimepicker" name="datetimepicker" required><br>
+                    <label for="latitudine">Latitudine:</label><br>
+                    <input type="text" id="latitudine" name="latitudine" readonly><br>
+                    <label for="longitudine">Longitudine:</label><br>
+                    <input type="text" id="longitudine" name="longitudine" readonly><br>
+                    <button type="submit">Inserisci</button>
+                </form>
+            </div>
+        </div>
+        <div class="right-column">
+            <!-- Contenuto della colonna destra con mappa -->
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Includi la libreria Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Inizializza la mappa Leaflet centrata su Roma
+        var map = L.map('map').setView([41.9028, 12.4964], 15); // Coordinate di Roma e livello di zoom
+        // Aggiungi un layer di mappa OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Aggiungi un marker alla posizione desiderata a Roma
+        // var marker = L.marker([41.9028, 12.4964]).addTo(map);
+        // marker.bindPopup("<b>Colosseo</b><br>Il famoso Colosseo di Roma.").openPopup();
+        {% for evento in eventi %}
+            var marker = L.marker([{{ evento.latitudine }}, {{ evento.longitudine }}]).addTo(map);
+            marker.bindPopup("<b>{{ evento.nome_evento }}</b><br>{{ evento.data_evento }}").openPopup();
+            // <li>{{ evento.nome_evento }} - Posizione: ({{ evento.latitudine }}, {{ evento.longitudine }}) - Data: {{ evento.data_evento }}</li>
+        {% endfor %}
+
+        var marker; // Variabile per memorizzare il marker
+        var isFirstClick = true; // Variabile per tenere traccia del primo click
+
+        map.on('click', function(e) {
+            var lat = e.latlng.lat.toFixed(6);
+            var lon = e.latlng.lng.toFixed(6);
+
+            document.getElementById('latitudine').value = lat;
+            document.getElementById('longitudine').value = lon;
+
+            // Se è il primo click, crea un nuovo marker
+            if (isFirstClick) {
+                marker = L.marker([lat, lon]).addTo(map);
+                isFirstClick = false; // Imposta isFirstClick a false per indicare che non è più il primo click
+            } else {
+                // Aggiorna la posizione del marker con le nuove coordinate
+                marker.setLatLng([lat, lon]);
+            }
+        });
+    </script>
+    <script>
+
+        map.on('click', function(e) {
+            var lat = e.latlng.lat.toFixed(6);
+            var lon = e.latlng.lng.toFixed(6);
+
+            document.getElementById('latitudine').value = lat;
+            document.getElementById('longitudine').value = lon;
+
+            marker.setLatLng([lat, lon]);
+        });
+    </script>
+    <!-- JavaScript Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr('#datetimepicker', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true,
+            minDate: "today" // Imposta la data minima come quella attuale
+        });
+    </script>
+
+</body>
+
+</html>
