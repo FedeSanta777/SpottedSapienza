@@ -3,88 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <link rel="stylesheet" href="../static/stile homepage.css">
+    <link rel="stylesheet" href="/static/stile homepage.css">
     <title>Spotted Sapienza</title>
 </head>
 <body>
 
     <header class="header">
-        <img src="../static/images/LOGO.svg" alt="Spotted Sapienza logo" class="logo">
+        <img src="/static/images/LOGO.svg" alt="Spotted Sapienza logo" class="logo">
+
+        <nav class="menu">
+            <ul>
+                <li><a href="home.html">Bacheca</a></li>
+               <li><a href="mappa.html">Feste</a></li> 
+                <li><a href="">Quiz</a></li>
+            </ul>   
+        </nav>
 
         <div class="sign">
          <span class="signin">
-            <img src="../static/images/user-plus.svg" class="userplusimg">
+            <img src="/static/images/user-plus.svg" class="userplusimg">
             <a href="reg_page.html" class="reg">Registrati</a>
          </span>
          <a href="loginpage.html" class="login">Accedi</a>
         </div>
 
         <span class="userpage utentelog">
-            <img src="../static/images/user.svg" class="userimg">
+            <img src="/static/images/user.svg" class="userimg">
             <a href="" class="profilo">Il mio profilo</a>
         </span>
      
         
     
     </header>
-        
-    <nav class="menu">
-        <ul>
-            <li><a href="./home.html">Bacheca</a></li>
-           <li><a href="">Feste</a></li> 
-            <li><a href="">Quiz</a></li>
-        </ul>   
-    </nav>
 
-
-
-
-
+    
     <div class="bacheca">
         <div class="riquadrospot">
-            <div class="spot">
+            <div class="spotted">
                 <a href="">Nome utente</a>
                 <a href="" class="">Spotto persone!!</a>
                 <a href="" class="commenti">Commenti</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>        
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>        
 
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
             <div>
-                <a href="" class="spot">Spotto persone!!</a>
+                <a href="" class="spotted">Spotto persone!!</a>
             </div>
         </div>
 
     <div class="container">
         <div class="filtri">
+            <img src="/static/images/search.svg" alt="">
             <a href="">Filtri
                 Facoltà <select name="" class="facolta">
                     <option value="Nessuna">Nessuna</option>
@@ -103,9 +101,11 @@
                 </a>
         </div>
 
-        <div class="utentelog">
-            <label for="PORCODIO"></label>
-            <input type="text" placeholder="CREA IL TUO CAZZO DI SPOTTTTT" name="PORCODIO">
+        <div class="creaspot utentelog">
+            <label for="creaspot"></label>
+            <img src="/static/images/create.svg" class="createimg">
+            <input type="text" placeholder="CREA IL TUO CAZZO DI SPOTTTTT" id="spot">
+            <button class="btninvia">Invia</button>
         </div>
     </div>
         
