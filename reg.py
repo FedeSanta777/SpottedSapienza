@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-
+from flask import jsonify
+import sqlite3
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/spottedsapienza' #dopo i due punti andrebbe la password
 db = SQLAlchemy(app)
@@ -38,7 +39,8 @@ def registrazione():
     email = request.form['email']
     password = request.form['password']
     facolta = request.form['facolta']
-
+    
+   
     nuovo_utente = Utenti(nome=nome, cognome=cognome, email=email, password=password, facolta=facolta)
 
     try:
