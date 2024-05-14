@@ -174,5 +174,45 @@ def profilo():
     # Passa i dati al template
     return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot)
 
+    # Registrazione
+    
+@app.route('/reg_page')
+def reg():
+    if test_database_connection():
+        facolta = Facolta.query.all()
+        return render_template('reg_page.html', facolta=facolta)
+    else:
+        return "Errore di connessione al database"
+    
+@app.route('/registrazione', methods=['POST'])
+def registrazione():
+    # Accedi ai dati inviati come JSON
+    data = request.json
+
+    # Estrai i valori dei campi
+    nome = data['nome']
+    cognome = data['cognome']
+    email = data['email']
+    password = data['password']
+    facolta_codice = data['facolta']
+
+
+    # Creazione di un nuovo utente
+    nuovo_utente = Utenti(nome=nome, cognome=cognome, email=email, password=password, facolta_codice=facolta_codice)
+
+    # Salvataggio dell'utente nel database
+    try:
+        db.session.add(nuovo_utente)
+        db.session.commit()
+        return redirect('/successo')  # Reindirizza alla pagina di registrazione avvenuta con successo
+    except Exception as e:
+        print(f"Errore durante la registrazione: {e}")
+        db.session.rollback()
+        return "Errore durante la registrazione"
+    
+@app.route('/successo')
+def successo():
+    return "Registrazione avvenuta con successo!"
+
 if __name__ == '__main__':
     app.run(debug=True)
