@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from datetime import datetime
@@ -38,6 +38,15 @@ class Domande(db.Model):
     risposta_4 = db.Column(db.String(255))
     risposta_corretta = db.Column(db.Enum('risposta_1', 'risposta_2', 'risposta_3', 'risposta_4'))
     srcArg = db.Column(db.String(255))
+    
+# Definizione del modello della tabella "eventi"
+class Eventi(db.Model):
+    __tablename__ = 'eventi'
+    id_evento = db.Column(db.Integer, primary_key=True)
+    nome_evento = db.Column(db.String(255))
+    latitudine = db.Column(db.Float)
+    longitudine = db.Column(db.Float)
+    data_evento = db.Column(db.DateTime)
 
 def test_database_connection():
     try:
@@ -47,8 +56,13 @@ def test_database_connection():
         print(f"Errore di connessione al database: {e}")
         return False
 
-
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+## Codice per la pagina classifica
+
+@app.route('/classifica')
 def index():
     if test_database_connection():
         utenti = Utenti.query.all()  # Recupera tutti i dati dalla tabella "utenti"
@@ -61,26 +75,55 @@ def index():
         prima_tupla_utenti = Utenti.query.order_by(db.func.random()).first()
         ultima_giocata = prima_tupla_utenti.ultimaGiocata
         
-        
         ultima_giocata = ultima_giocata.strftime('%Y-%m-%d')
 
         # Verifica se la data dell'ultima giocata è diversa dalla data attuale
         today = datetime.now().date()
         enable_button = str(ultima_giocata) != str(today)
-        
-        
-    
         return render_template('classifica.html', utenti=utenti, facolta=facolta, domande=random_question, image_path=random_question.srcArg, enable_button=enable_button, oggi=today, data=ultima_giocata, utente_scelto=prima_tupla_utenti)
     else:
         return "Errore di connessione al database"
-    
-@app.route('/incrementa/<int:codice_facolta>', methods=['POST'])
-def incrementa_punti(codice_facolta):
-    facolta = Facolta.query.get_or_404(codice_facolta)
-    facolta.puntiTot += 10
-    db.session.commit()
-    return jsonify({'success': True, 'nuovi_punti': facolta.puntiTot})
 
+@app.route('/incrementa/<int:codice_facolta>/<int:codice_utente>', methods=['POST'])
+def incrementa_punti(codice_facolta, codice_utente):
+    # Ottieni la facoltà dal database
+    facolta = Facolta.query.get_or_404(codice_facolta)
+    # Incrementa i punti della facoltà
+    facolta.puntiTot += 10
+
+    # Ottieni l'utente dal database
+    utente = Utenti.query.get_or_404(codice_utente)
+    # Aggiorna il campo ultima_giocata con la data attuale
+    utente.ultimaGiocata = datetime.now().strftime('%Y-%m-%d')
+
+    # Salva le modifiche nel database
+    db.session.commit()
+
+    # Restituisci una risposta JSON
+    return jsonify({'success': True, 'nuovi_punti': facolta.puntiTot, 'ultima_giocata': utente.ultimaGiocata})
+
+## Codice per la pagina Spotted Eventi
+# Pagina principale
+@app.route('/mappa')
+def mappa():
+    # Recupera tutti gli eventi dal database
+    eventi = Eventi.query.all()
+    return render_template('mappa.html', eventi=eventi)
+
+# Gestione della richiesta POST per l'inserimento di un nuovo evento
+@app.route('/submit_event', methods=['POST'])
+def submit_event():
+    if request.method == 'POST':
+        nome_evento = request.form['nome_evento']
+        latitudine = request.form['latitudine']
+        longitudine = request.form['longitudine']
+        data_evento = datetime.strptime(request.form['datetimepicker'], '%Y-%m-%d %H:%M')
+
+        nuovo_evento = Eventi(nome_evento=nome_evento, latitudine=latitudine, longitudine=longitudine, data_evento=data_evento)
+        db.session.add(nuovo_evento)
+        db.session.commit()
+
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

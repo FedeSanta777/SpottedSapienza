@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body onload="toggleDiv()">
-    <div class="menu-bar">Contenuto del menu qui {{ oggi }},{{ data }},{{enable_button}},{{utente_scelto.facolta_codice}}</div>
+    <div class="menu-bar">Contenuto del menu qui {{ oggi }},{{ data }},{{enable_button}},{{utente_scelto.facolta_codice}},{{utente_scelto.ultimaGiocata}}</div>
     <div class="container">
         <div class="left-column">
             <div class="title-scoreboard">
@@ -216,12 +216,13 @@
             $(document).ready(function() {
                 $('.risposta-esatta').click(function() {
                     var codiceFacolta = $(this).data('codice');
+                    var codiceUtente = {{ utente_scelto.id }};
                     $.ajax({
-                        url: '/incrementa/' + codiceFacolta,
+                        url: '/incrementa/' + codiceFacolta + '/' + codiceUtente,
                         type: 'POST',
                         success: function(response) {
                             if (response.success) {
-                                $('#punti_' + codiceFacolta).text(response.nuovi_punti);
+                                $('#punti_' + codiceFacolta + codiceUtente).text(response.nuovi_punti);
                             } else {
                                 alert('Errore nell\'incremento dei punti.');
                             }
@@ -233,7 +234,9 @@
                 });
             });
         </script>
-        
+
+
+            
     </div>
 </body>
 </html>

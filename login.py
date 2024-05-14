@@ -57,8 +57,5 @@ def index():
     else:
         return "Errore di connessione al database"
 
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
