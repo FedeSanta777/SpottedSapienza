@@ -153,3 +153,7 @@ body,html {
   box-sizing: border-box; /* Imposta il box-sizing a border-box */
   margin-right: 20px; /* Aggiunge un margine a destra per separare dalla mappa */
 }
+
+.utentelog{
+  display: none;
+}
