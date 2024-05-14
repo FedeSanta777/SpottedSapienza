@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo</title>
+</head>
+<body>
+    <h1>Profilo di INSERIRE NOME UTENTE LOGGATO</h1>
+    
+    <h2>I tuoi spot</h2>
+    <div>
+        {% for spot in spots %}
+            <div class="spot">
+                <h3>Spot #{{ spot.id_spot }}</h3>
+                <p>Contenuto: {{ spot.contenuto }}</p>
+                <p>Anonimato: {{ 'Sì' if spot.anonimato else 'No' }}</p>
+                
+                <h4>Risposte</h4>
+                <ul>
+                    {% for risposta in risposte_per_spot[spot.id_spot] %}
+                        <li>{{ risposta.contenuto }}</li>
+                    {% else %}
+                        <li>Nessuna risposta</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -32,52 +32,33 @@
 
         <span class="userpage utentelog">
             <img src="/static/images/user.svg" class="userimg">
-            <a href="" class="profilo">Il mio profilo</a>
+            <a href="/profilo" class="profilo">Il mio profilo</a>
         </span>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
     </header>
 
+    
 
     <div class="bacheca">
         <div class="riquadrospot">
+            <a href="/profilo">asdsdasas</a>
             <div class="spotted">
                 <a href="">Nome utente</a>
                 <a href="" class="">Spotto persone!!</a>
                 <a href="" class="commenti">Commenti</a>
             </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
+            {% for spot in spot %}
+            <div class="spotted">
+                <p>{{ spot.utente }}</p>
+                <p>{{ spot.contenuto }}</p>
             </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>        
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>        
-
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
-            <div>
-                <a href="" class="spotted">Spotto persone!!</a>
-            </div>
+            {% endfor %}
         </div>
 
     <div class="container">

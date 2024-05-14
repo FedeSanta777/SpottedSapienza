@@ -47,6 +47,29 @@ class Eventi(db.Model):
     latitudine = db.Column(db.Float)
     longitudine = db.Column(db.Float)
     data_evento = db.Column(db.DateTime)
+    
+# Definizione del modello della tabella "spot"
+class Spot(db.Model):
+    __tablename__ = 'spot'
+    id_spot = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_utente = db.Column(db.Integer, db.ForeignKey('utenti.id'))
+    id_facolta = db.Column(db.Integer, db.ForeignKey('facolta.codice'))
+    contenuto = db.Column(db.Text)
+    anonimato = db.Column(db.Boolean)
+    utente = db.relationship('Utenti', backref=db.backref('spot', lazy=True))
+    facolta = db.relationship('Facolta', backref=db.backref('spot', lazy=True))
+    
+# Definizione del modello della tabella "risposte"
+class Risposte(db.Model):
+    __tablename__ = 'risposte'
+    id_risposta = db.Column(db.Integer, primary_key=True)
+    id_utente_risp = db.Column(db.Integer, db.ForeignKey('utenti.id'))
+    id_utente_spot = db.Column(db.Integer, db.ForeignKey('utenti.id'))
+    id_spot = db.Column(db.Integer, db.ForeignKey('spot.id_spot'))
+    contenuto = db.Column(db.Text)
+    utente_risp = db.relationship('Utenti', foreign_keys=[id_utente_risp])
+    utente_spot = db.relationship('Utenti', foreign_keys=[id_utente_spot])
+    spot = db.relationship('Spot', foreign_keys=[id_spot])
 
 def test_database_connection():
     try:
@@ -58,7 +81,11 @@ def test_database_connection():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    if test_database_connection():
+        spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
+        return render_template('home.html', spot=spot)
+    else:
+        return "Errore di connessione al database"
 
 ## Codice per la pagina classifica
 
@@ -124,6 +151,28 @@ def submit_event():
         db.session.commit()
 
         return redirect(url_for('index'))
+    
+@app.route('/profilo')
+def profilo():
+    # Recupera l'ID dell'utente loggato
+    user_id = Utenti.query.first().id
+    
+    # Query per ottenere gli spot dell'utente loggato
+    spots = Spot.query.filter(Spot.id_utente == user_id).all()
+    
+    # Query per ottenere le risposte relative agli spot dell'utente loggato
+    spot_ids = [spot.id_spot for spot in spots]
+    risposte = Risposte.query.filter(Risposte.id_spot.in_(spot_ids)).all()
+    
+    # Organizza le risposte per spot
+    risposte_per_spot = {}
+    for risposta in risposte:
+        if risposta.id_spot not in risposte_per_spot:
+            risposte_per_spot[risposta.id_spot] = []
+        risposte_per_spot[risposta.id_spot].append(risposta)
+    
+    # Passa i dati al template
+    return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot)
 
 if __name__ == '__main__':
     app.run(debug=True)
