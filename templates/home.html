@@ -16,9 +16,9 @@
 
         <nav class="menu">
             <ul>
-                <li><a href="/home">Bacheca</a></li>
-               <li><a href="/mappa">Feste</a></li> 
-                <li><a href="/classifica">Quiz</a></li>
+                <li><a href="home.html">Bacheca</a></li>
+               <li><a href="mappa.html">Feste</a></li> 
+                <li><a href="classifica.html">Quiz</a></li>
             </ul>   
         </nav>
         <div class="sign">
@@ -81,10 +81,14 @@
         </div>
 
     <div class="container">
-        <div class="filtri">
-            <img src="/static/images/search.svg" alt="">
-            <a href="">Filtri
-                Facoltà <select name="" class="facolta">
+        <div class="cerca">
+            <div class="filtri">
+                <label for="creaspot"></label>
+                <img src="/static/images/search.svg" class="searchimg">
+                <input type="text" placeholder="Cerca filtro" id="spot">
+            </div>
+            <div class="facoltà">        
+                 Facoltà <select name="">
                     <option value="Nessuna">Nessuna</option>
                     <option value="Architettura">Architettura</option>
                     <option value="Economia">Economia</option>
@@ -98,7 +102,7 @@
                     <option value="Scienze matematiche, fisiche e naturali">Scienze matematiche, fisiche e naturali</option>
                     <option value="Scienze politiche sociologia comunicazione">Scienze politiche sociologia comunicazione</option>
                 </select>
-                </a>
+            </div>
         </div>
 
         <div class="creaspot utentelog">
