@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <!-- CSS Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="/static/stile mappa.css">
     <style>
         body {
             margin: 0;
@@ -65,10 +66,33 @@
     
 </head>
 <body>
-    <header>
-        <!-- Menu -->
-        <h1>Menu</h1>
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/Logo sapienza.jpg" class="logoimg">SPOTTED SAPIENZA
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="home.html">Bacheca</a></li>
+               <li><a href="mappa.html">Feste</a></li> 
+                <li><a href="">Quiz</a></li>
+            </ul>   
+        </nav>
+
+        <div class="sign">
+         <span class="signin">
+            <img src="/static/images/user-plus.svg" class="userplusimg">
+            <a href="reg_page.html" class="reg">Registrati</a>
+         </span>
+         <a href="loginpage.html" class="login">Accedi</a>
+        </div>
+
+        <span class="userpage utentelog">
+            <img src="/static/images/user.svg" class="userimg">
+            <a href="" class="profilo">Il mio profilo</a>
+        </span>
     </header>
+
     <div class="container">
         <div class="left-column">
             <div class="form-container">

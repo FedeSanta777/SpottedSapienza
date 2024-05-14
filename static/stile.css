@@ -1,28 +1,45 @@
 h1 {font-size: 16px;color: #881c1c;}
 .card {
-    width: 190px;
-    padding: 1.9rem 1.2rem;
-    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 320px;
+    height: 400px;
+    margin: 20px;
+    position: relative;
     background: white;
-   }
+}
+.card iframe {
+  width: 100%;
+  height: calc(100% - 30px);
+  border: none;
+} 
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}  
+/*Inputs*/
+.field {
+  margin-top: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  padding: .5em 1em;
+}
    
-   /*Inputs*/
-   .field {
-    margin-top: .5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5em;
-    background-color: whitesmoke;
-    border-radius: 4px;
-    padding: .5em 1em;
-   }
-   
-   .input-icon {
-    height: 1em;
-    width: 1em;
-    fill: #881c1c;
-   }
+.input-icon {
+  height: 1em;
+  width: 1em;
+  fill: #881c1c;
+}
    
    .input-field {
     background: none;
