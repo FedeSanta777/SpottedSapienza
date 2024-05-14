@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", function() {
     var isLoggedIn = false; // Imposta lo stato di accesso dell'utente
 
@@ -29,4 +28,3 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "paginautente";
     });
 });
-</script>
