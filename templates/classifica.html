@@ -9,7 +9,40 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body onload="toggleDiv()">
-    <div class="menu-bar">Contenuto del menu qui {{ oggi }},{{ data }},{{enable_button}},{{utente_scelto.facolta_codice}},{{utente_scelto.ultimaGiocata}}</div>
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/Logo sapienza.jpg" class="logoimg">SPOTTED SAPIENZA
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="/home">Bacheca</a></li>
+               <li><a href="/mappa">Feste</a></li> 
+                <li><a href="/classifica">Quiz</a></li>
+            </ul>   
+        </nav>
+        <div class="sign">
+            <span class="signin">
+                <img src="/static/images/user-plus.svg" class="userplusimg">
+                <a href="reg_page.html" class="reg" onclick="openCard(event, 'reg_page.html')">Registrati</a>
+            </span>
+            <a href="loginpage.html" class="login" onclick="openCard(event, 'loginpage.html')">Accedi</a>
+        </div>
+        
+
+        <span class="userpage utentelog">
+            <img src="/static/images/user.svg" class="userimg">
+            <a href="/profilo" class="profilo">Il mio profilo</a>
+        </span>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </header>
+
     <div class="container">
         <div class="left-column">
             <div class="title-scoreboard">
@@ -35,13 +68,13 @@
             <div id="div1" class="div1">
 
                 <!-- Bottone visibile se enable_button è True -->
-                <div id="button_div" style="display: none;">
+                <div id="button_div" class="button_div" style="display: none;">
                     <!-- <button>Il bottone è abilitato</button> -->
                     <button id="cambiaDiv">Cambia Div</button>
                 </div>
 
                 <!-- Div nascosto se enable_button è False -->
-                <div id="hidden_div" style="display: none;">
+                <div id="hidden_div" class="hidden_div" style="display: none;">
                     <p>Il bottone non è abilitato.</p>
                     <div class="countdown" id="countdown"></div>
                 <button id="myButton" disabled>Attendi il timer</button>
@@ -113,14 +146,14 @@
                 buttons.forEach(function(button) {
                     button.addEventListener('click', function() {
                         if (this.classList.contains('risposta-esatta')) {
-                            this.style.backgroundColor = 'green';
+                            this.style.backgroundColor = '881c1c';
                         } else {
-                            this.style.backgroundColor = 'red';
+                            this.style.backgroundColor = '#e4e4e4';
                             
                             // Identifica e colora di verde la risposta corretta
                             buttons.forEach(function(btn) {
                                 if (btn.classList.contains('risposta-esatta')) {
-                                    btn.style.backgroundColor = 'green';
+                                    btn.style.backgroundColor = '#881c1c';
                                 }
                             });
                         }

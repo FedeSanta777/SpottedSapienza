@@ -1,159 +1,346 @@
-
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-
-  .menu-bar {
-    background-color: yellow;
-    height: 50px; /* Altezza della barra del menu */
-    width: 100%; /* Occupa tutta la larghezza della pagina */
-  }
-  
-  .container {
-    display: flex;
-    height: calc(100% - 52px); /* Altezza della pagina meno altezza del menu */
-  }
-
-  .left-column {
-    background-color: lightblue;
-    flex: 1;
-    border: 1px solid black;
-    height: 100%;
-  }
-    
-  .title-scoreboard {
-    background-color: lightsalmon;
-    flex: 1;
-    /* larghezza della div e margin proporzionale */
-    margin: 5% 5% 0% 5%;
-    border: 1px solid black;
-  }
-
-  .title-scoreboard h3 {
-    text-align: center;
-    /* font size che cambia in base a l container-title-score*/
-    font-size: 1.2em; /* Imposto la dimensione del carattere dell'h3 a 2 volte la dimensione del carattere del container */
-  }
-
-  .scoreboard {
-    background-color: rgb(0, 217, 255);
-    flex: 1;
-    margin: 0% 5% 5% 5%;
-    border: 1px solid black;
-  }
-
-  .scoreboard table {
-    width: 100%;
-    height: 100%;
-    font-size: 1em;
-  }
-
-  .scoreboard td {
-    text-align: center;
-  }
-
-  /* stile della colonna a sinistra */
-
-  .right-column {
-    background-color: lightcoral;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    height: 100%;
-  }
-
-
-  .box-domanda {
-    background-color: lightsalmon;
-    flex: 1;
-    /* larghezza della div e margin proporzionale */
-    margin: 5% 5% 0% 5%;
-    border: 1px solid black;
-    /* height: 80%; */
-  }
-
-  .box-domanda h3 {
-    text-align: center;
-    /* font size che cambia in base a l container-title-score*/
-    font-size: 1em; /* Imposto la dimensione del carattere dell'h3 a 2 volte la dimensione del carattere del container */
-    border: 1px solid black;
-  }
-
-  .box-domanda p {
-    text-align: center;
-    border: 1px solid black;
-    margin: 3% 5%;
-    
-  }
-
-  .domanda {
-    height: 70%;
-  }
-
-  .img-argomento{
-    text-align: center;
-    border: seagreen 1px solid;
-    width: 100%;
-  }
-
-  .img-argomento img{
-    
-    width: 70%;
-    height: 50%;
-  }
-
-  .box-risposta {
-    background-color: rgb(0, 217, 255);
-    flex: 1;
-    margin: 0% 5% 5% 5%;
-    border: 1px solid black;
-    height: 30%;
-  }
-
-  .box-risposta table {
-    width: 100%;
-    height: 100%;
-    font-size: 1em;
-  }
-
-  .box-risposta td {
-    text-align: center;
-    width: 30%;
-    height: 40%;
-  }
-
-  .box-risposta button{
-    width: 90%;
-    height: 90%;
-    background-color: bisque;
-  }
-
-  /* Stile della transizione */
-  #contenuto {
-    transition: opacity 0.5s ease-in-out;
-  }
-
-  /* Stile per nascondere temporaneamente il contenuto */
-  #contenuto.hidden {
-    opacity: 0;
-  }
-
-  .div1, .div2 {
-    opacity: 1; /* Imposta l'opacità iniziale */
-    transition: opacity 1s ease; /* Aggiungi una transizione per l'opacità */
-    text-align: center;
-    border: solid 4px black;
-    height: 100%;
-    width: 100%;
+body,html {
+  font-family: 'Helvetica Neue', sans-serif;
+  line-height: 1; font-size: 16px ;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  background-color: #f2f2f2;
 }
 
-  .div1 button{
-    display: block;
-    margin: 0 auto; /* Centra il bottone */
+
+.header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  border-bottom: 5px solid #e4e4e4;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  background-color: #fff;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logoimg {
+  width: 10%;
+  margin-right: 10px;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold ;
+  background-color: #fff;
+  margin-top: 3px;
+}
+
+.menu ul{padding: 0px; margin: 0;}
+.menu li {display: inline-block ;}
+.menu a {text-decoration: none ; color: black; padding: 5px 10px; display: block;}
+.menu li ::after{
+  content: '';
+  width: 0%;
+  height: 3px;
+  background: #881c1c;
+  border-radius: 3px;
+  display: block;
+  margin:auto;
+  margin-top: 3px;
+  transition: 0.5s;
+}
+.menu li :hover::after {
+  width: 100%;
+}
+
+.sign{
+  display: flex;
+  border: 3px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.signin {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  border: solid 5px #881c1c;
+  background-color: #881c1c;
+  border-radius: 3px;
+  margin: 3px;
+  padding: 3px;
+}
+
+.reg {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  color: #881c1c;
+  border: solid 5px #eaeaea;
+  background-color: #eaeaea;
+  text-decoration: none;
+  border-radius: 3px;
+  margin: 3px;
+  padding: 3px;
+}
+
+.userpage {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  border: solid 5px #881c1c;
+  background-color: #881c1c;
+  border-radius: 3px;
+  margin: 3px;
+  padding: 3px;
+}
+
+.profilo {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+.hamburger{display: none;}
+
+@media (max-width: 768px) {
+  .header{
+    position:relative;
+    padding-left: 20px;
+    padding-right: 60px;
+    width: auto;
+    justify-content:space-around;
+    background-color: #fff;
+    overflow:hidden}
+  .menu{
+    position: absolute;
+    top:47px;
+    right:-100%;
+    width: 100%;
+    transition: 0.3s;
   }
+  .menu li{width: 100%;} 
+
+  .menu open {right:0}
+
+  .hamburger{
+    display: block;
+    justify-content: center;
+    border: #000 solid;
+    height: 25px;
+    width: 30px;
+    position: absolute;
+    right:10px;
+  }
+
+  .hamburger span{
+    display: block;
+    top: 8px;
+    position: absolute;
+    width: 30px; 
+    height: 3px;
+    background-color: #881c1c;
+  }
+
+  .hamburger span:nth-child(1){margin-top: 5px;}
+  .hamburger span:nth-child(2){margin-top: 10px}
+  .hamburger span:nth-child(3){margin-top: 15px;}
+}
+
+
+
+
+
+.container {
+  display: flex;
+  height: calc(100vh - 64px); /* Altezza della pagina meno altezza del menu */
+}
+
+.left-column {
+  margin-top: 54px;
+  background-color: #fff;
+  flex: 1;
+  border: 1px ;
+  height: 100%;
+}
+  
+.title-scoreboard {
+  background-color: #881c1c;
+  flex: 1;
+  color: #fff;
+  /* larghezza della div e margin proporzionale */
+  margin: 5% 5% 0% 5%;
+  padding: 2px;
+  border: 3px;
+  border-radius: 5px;
+}
+
+.title-scoreboard h3 {
+  text-align: center;
+  /* font size che cambia in base a l container-title-score*/
+  font-size: 1.2em; /* Imposto la dimensione del carattere dell'h3 a 2 volte la dimensione del carattere del container */
+}
+
+.scoreboard {
+  background-color: #e4e4e4;
+  flex: 1;
+  margin: 0% 5% 5% 5%;
+  border: 3px ;
+  border-radius: 5px;
+}
+
+.scoreboard table {
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+}
+
+.scoreboard td {
+  text-align: center;
+}
+
+/* stile della colonna a sinistra */
+
+.right-column {
+  margin-top: 54px;
+  background-color: #eaeaea;
+  border: 3px;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  height: 100%;
+}
+
+.hidden_div{
+  background-color: #881c1c;
+  color: #fff;
+  width: 80%;
+  padding: 10px;
+  border: 3px;
+  border-radius: 5px ;
+}
+
+.box-domanda {
+  background-color: #fff;
+  flex: 1;
+  /* larghezza della div e margin proporzionale */
+  margin: 5% 5% 0% 5%;
+  /* height: 80%; */
+}
+
+.box-domanda h3 {
+  text-align: center;
+  /* font size che cambia in base a l container-title-score*/
+  font-size: 1em; /* Imposto la dimensione del carattere dell'h3 a 2 volte la dimensione del carattere del container */
+}
+
+.box-domanda p {
+  text-align: center;
+  border: 3px solid #e4e4e4;
+  background-color: #e4e4e4;
+  border-radius: 3px;
+  margin: 3% 5%;
+  padding: 0.5%;
+}
+
+.domanda {
+  height: 70%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.img-argomento{
+  text-align: center;
+  display: none;
+  width: 100%;
+}
+
+.img-argomento img{
+  
+  width: 70%;
+  height: 50%;
+}
+
+.box-risposta {
+  background-color: #eaeaea;
+  flex: 1;
+  margin: 0% 5% 5% 5%;
+
+  height: 30%;
+}
+
+.box-risposta table {
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+}
+
+.box-risposta td {
+  text-align: center;
+  width: 30%;
+  height: 40%;
+}
+
+.box-risposta button{
+  width: 90%;
+  height: 90%;
+  background-color: #fff;
+  border: 3px;
+  border-radius: 5px;
+}
+
+/* Stile della transizione */
+#contenuto {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Stile per nascondere temporaneamente il contenuto */
+#contenuto.hidden {
+  opacity: 0;
+}
+
+.div1{
+  opacity: 1; /* Imposta l'opacità iniziale */
+  transition: opacity 1s ease; /* Aggiungi una transizione per l'opacità */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.div2 {
+  opacity: 1; /* Imposta l'opacità iniziale */
+  transition: opacity 1s ease; /* Aggiungi una transizione per l'opacità */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+
+.div1 button{
+  display: block;
+  margin: 0 auto; /* Centra il bottone */
+}
 
 .hidden {
     opacity: 0; /* Nascondi la div */
@@ -177,3 +364,7 @@ form{
   height: 100%;
 }
 
+
+.utentelog{
+  display: none;
+}
