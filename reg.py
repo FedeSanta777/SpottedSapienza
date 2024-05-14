@@ -4,7 +4,7 @@ from sqlalchemy import text
 from flask import jsonify
 import sqlite3
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/spottedsapienza' #dopo i due punti andrebbe la password
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/spotted_sapienza' #dopo i due punti andrebbe la password
 db = SQLAlchemy(app)
 
 class Utenti(db.Model):
