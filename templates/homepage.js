@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
+    let hamburger = document.querySelector('.hamburger');
+    let menu = document.querySelector('.menu');
+
+    hamburger.addEventListener("click", function() {
+        menu.classList.toggle('open');
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
     var isLoggedIn = false; // Imposta lo stato di accesso dell'utente
 
     // Verifica se l'utente è già autenticato (ad esempio, tramite cookie o sessione)
