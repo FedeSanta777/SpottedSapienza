@@ -21,14 +21,14 @@
                 <li><a href="">Quiz</a></li>
             </ul>   
         </nav>
-
         <div class="sign">
-         <span class="signin">
-            <img src="/static/images/user-plus.svg" class="userplusimg">
-            <a href="reg_page.html" class="reg">Registrati</a>
-         </span>
-         <a href="loginpage.html" class="login">Accedi</a>
+            <span class="signin">
+                <img src="/static/images/user-plus.svg" class="userplusimg">
+                <a href="reg_page.html" class="reg" onclick="openCard(event, 'reg_page.html')">Registrati</a>
+            </span>
+            <a href="loginpage.html" class="login" onclick="openCard(event, 'loginpage.html')">Accedi</a>
         </div>
+        
 
         <span class="userpage utentelog">
             <img src="/static/images/user.svg" class="userimg">
@@ -111,6 +111,33 @@
         
         
         
-    </div>    
+    </div>
+    <script>
+        function openCard(event, url) {
+            event.preventDefault();
+        
+            // Crea un div card
+            var card = document.createElement('div');
+            card.classList.add('card');
+        
+            // Crea un iframe all'interno della card
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            card.appendChild(iframe);
+        
+            // Crea un pulsante di chiusura
+            var closeButton = document.createElement('button');
+            closeButton.innerHTML = 'Chiudi';
+            closeButton.classList.add('close-btn');
+            closeButton.onclick = function() {
+                document.body.removeChild(card);
+            };
+            card.appendChild(closeButton);
+        
+            // Aggiungi la card al body del documento
+            document.body.appendChild(card);
+        }
+        
+    </script>  
 </body>
 </html>
