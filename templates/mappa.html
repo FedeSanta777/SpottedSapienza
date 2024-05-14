@@ -12,58 +12,6 @@
     <!-- CSS Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="/static/stile mappa.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .container {
-            display: flex;
-            height: calc(100vh - 40px); /* Altezza della finestra meno l'altezza del menu */
-        }
-        .left-column,
-        .right-column {
-            padding: 20px;
-        }
-        .left-column {
-            flex: 1; /* Imposta la colonna sinistra con flex 1 */
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center; /* Centra il contenuto orizzontalmente */
-            align-items: center; /* Centra il contenuto verticalmente */
-        }
-        .right-column {
-            flex: 2; /* Imposta la colonna destra con flex 2 */
-            background-color: #e0e0e0;
-            position: relative; /* Posizione relativa necessaria per la mappa */
-        }
-        #map {
-            width: 100%;
-            height: 100%;
-            position: absolute; /* Posizione assoluta per far occupare la mappa l'intera altezza e larghezza della colonna */
-            top: 0;
-            left: 0;
-        }
-        .form-container {
-            max-width: 400px; /* Imposta una larghezza massima per il form container */
-            width: 100%; /* Imposta la larghezza al 100% per il form container */
-            padding: 20px; /* Aggiungi spazio interno al form container */
-            background-color: #fff; /* Sfondo bianco per il form container */
-            border-radius: 8px; /* Bordi arrotondati per il form container */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombra leggera per il form container */
-            box-sizing: border-box; /* Imposta il box-sizing a border-box */
-            margin-right: 20px; /* Aggiunge un margine a destra per separare dalla mappa */
-        }
-    </style>
-    
-
-    
 </head>
 <body>
     <header class="header">
