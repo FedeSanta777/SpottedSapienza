@@ -14,7 +14,18 @@ class Utenti(db.Model):
     cognome = db.Column(db.String(50))
     email = db.Column(db.String(100))
     password = db.Column(db.String(100))
-    facolta = db.Column(db.String(100))
+    facolta_codice = db.Column(db.Integer, db.ForeignKey('facolta.codice'))
+    ultimaGiocata = db.Column(db.Date)
+
+    # Definizione della relazione con la tabella facolta
+    facolta = db.relationship('Facolta', backref='utenti')
+
+class Facolta(db.Model):
+    __tablename__ = 'facolta'
+    codice = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome = db.Column(db.String(255))
+    puntiTot = db.Column(db.Integer, nullable=False)
+    
 #funzione di test collegamento al database
 def test_database_connection():
     try:
