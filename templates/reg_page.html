@@ -44,31 +44,49 @@
                 facolta: facolta // Invia il codice della facoltà al server
             };
 
-            // Invia una richiesta POST al server Flask
-            fetch('/registrazione', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Reindirizza alla pagina di successo se la registrazione è avvenuta con successo
-                    window.location.href = '/successo';
-                } else {
-                    // Gestisci eventuali errori di registrazione
-                alert("Errore durante la registrazione");
-                }
-            })
-            .catch(error => {
-                console.error('Errore durante la richiesta di registrazione:', error);
-            });
+             // Invia una richiesta GET per controllare se l'email è già registrata
+            fetch('/check_email?email=' + email)
+            .then(response => response.json())
+            .then(data => {
+            if (data.exists) {
+                alert("L'email inserita è già registrata. Si prega di utilizzare un'email diversa.");
+            } else {
+                // Invia una richiesta POST al server Flask solo se l'email non è già registrata
+                fetch('/registrazione', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    cognome: cognome,
+                    email: email,
+                    password: password,
+                    facolta: facolta
+                })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Reindirizza alla pagina di successo se la registrazione è avvenuta con successo
+                        window.location.href = '/successo';
+                    } else {
+                        // Gestisci eventuali errori di registrazione
+                        alert("Errore durante la registrazione");
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore durante la richiesta di registrazione:', error);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Errore durante la verifica dell\'email:', error);
+        });
 
-            // Impedisce l'invio del modulo HTML
-            return false;
-        }
-    </script>
+        // Impedisce l'invio del modulo HTML
+        return false;
+    }
+</script>
     
 </head>
 <body>
