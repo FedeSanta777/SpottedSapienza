@@ -93,7 +93,7 @@ body,html {
   text-decoration: none;
   border-radius: 3px;
   margin: 3px;
-  padding: 3px;
+  padding: 4px 3px;
 }
 
 .userpage {
@@ -114,51 +114,12 @@ body,html {
   font-size: 12px;
 }
 
+
+
 .hamburger{display: none;}
 
-@media (max-width: 768px) {
-  .header{
-    position:relative;
-    padding-left: 20px;
-    padding-right: 60px;
-    width: auto;
-    justify-content:space-around;
-    background-color: #fff;
-    overflow:hidden}
-  .menu{
-    position: absolute;
-    top:47px;
-    right:-100%;
-    width: 100%;
-    transition: 0.3s;
-  }
-  .menu li{width: 100%;} 
 
-  .menu open {right:0}
 
-  .hamburger{
-    display: block;
-    justify-content: center;
-    border: #000 solid;
-    height: 25px;
-    width: 30px;
-    position: absolute;
-    right:10px;
-  }
-
-  .hamburger span{
-    display: block;
-    top: 8px;
-    position: absolute;
-    width: 30px; 
-    height: 3px;
-    background-color: #881c1c;
-  }
-
-  .hamburger span:nth-child(1){margin-top: 5px;}
-  .hamburger span:nth-child(2){margin-top: 10px}
-  .hamburger span:nth-child(3){margin-top: 15px;}
-}
 
 
 
@@ -185,7 +146,8 @@ body,html {
   margin: 5% 5% 0% 5%;
   padding: 2px;
   border: 3px;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .title-scoreboard h3 {
@@ -198,8 +160,10 @@ body,html {
   background-color: #e4e4e4;
   flex: 1;
   margin: 0% 5% 5% 5%;
+  padding: 2% 0;
   border: 3px ;
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .scoreboard table {
@@ -216,7 +180,7 @@ body,html {
 
 .right-column {
   margin-top: 54px;
-  background-color: #eaeaea;
+  background-color: #881c1c;
   border: 3px;
   display: flex;
   flex-direction: column;
@@ -225,7 +189,7 @@ body,html {
 }
 
 .hidden_div{
-  background-color: #881c1c;
+  background-color: #eaeaea;
   color: #fff;
   width: 80%;
   padding: 10px;
@@ -235,6 +199,8 @@ body,html {
 
 .box-domanda {
   background-color: #fff;
+  border: 3px;
+  border-radius: 5px;
   flex: 1;
   /* larghezza della div e margin proporzionale */
   margin: 5% 5% 0% 5%;
@@ -275,10 +241,12 @@ body,html {
 }
 
 .box-risposta {
-  background-color: #eaeaea;
+  background-color: #fff;
+  padding: 2%;
+  border: 3px;
+  border-radius: 5px;
   flex: 1;
-  margin: 0% 5% 5% 5%;
-
+  margin: 2% 5% 5% 5%;
   height: 30%;
 }
 
@@ -297,9 +265,13 @@ body,html {
 .box-risposta button{
   width: 90%;
   height: 90%;
-  background-color: #fff;
+  background-color: #eaeaea;
   border: 3px;
   border-radius: 5px;
+}
+
+.box-risposta button:hover{
+  transform: scale(1.1);
 }
 
 /* Stile della transizione */
@@ -318,7 +290,7 @@ body,html {
   text-align: center;
   display: flex;
   justify-content: center;
-  background-color: #f2f2f2;
+  background-color: #881c1c;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -330,7 +302,7 @@ body,html {
   text-align: center;
   display: flex;
   justify-content: center;
-  background-color: #f2f2f2;
+  background-color: #881c1c;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -367,4 +339,74 @@ form{
 
 .utentelog{
   display: none;
+}
+
+@media (max-width: 768px) {
+  .header{
+    position:relative;
+    padding-left: 20px;
+    padding-right: 60px;
+    width: auto;
+    justify-content:space-around;
+    background-color: #fff;
+    overflow: hidden;
+  }
+  .menu{
+    position: absolute;
+    top:47px;
+    right:-100%;
+    width: 100%;
+    transition: 0.5s ease-in-out;
+  }
+  .menu li{width: 100%;} 
+
+  .hamburger{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 21px;
+    width: 30px;
+    position: absolute;
+    right:10px;
+  }
+
+  .hamburger span{
+    display: block;
+    top: 8px;
+    position: absolute;
+    width: 30px; 
+    height: 3px;
+    border: 3px;
+    border-radius: 3px;
+    background-color: #881c1c;
+  }
+
+  .hamburger span:nth-child(1){margin-top: -6px;}
+  .hamburger span:nth-child(2){margin-top: 0px}
+  .hamburger span:nth-child(3){margin-top: 6px;}
+
+  .open.header{overflow: visible;  transition: 0.5s ease-in-out;}
+  
+  .open.header .menu{
+    position: absolute;
+    top:47px;
+    right:0%;
+    width: 100%;
+  }
+
+  .container {
+    margin-top: 0;
+    height: calc(100vh - 20px);
+  }
+
+  .left-column{
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .right-column{
+    margin-top: 0;
+    padding-top: 0;
+  }  
+ 
 }

@@ -147,13 +147,17 @@
                     button.addEventListener('click', function() {
                         if (this.classList.contains('risposta-esatta')) {
                             this.style.backgroundColor = '#881c1c';
+                            this.style.color = '#ffff';
                         } else {
-                            this.style.backgroundColor = '#e4e4e4';
+                            this.style.backgroundColor = '#881c1c';
+                            this.style.color = '#ffff'
+                            this.style.opacity='20%';
                             
                             // Identifica e colora di verde la risposta corretta
                             buttons.forEach(function(btn) {
                                 if (btn.classList.contains('risposta-esatta')) {
                                     btn.style.backgroundColor = '#881c1c';
+                                    btn.style.color = '#ffff';
                                 }
                             });
                         }
@@ -264,6 +268,17 @@
                             alert('Errore nella richiesta AJAX.');
                         }
                     });
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            let hamburger = document.querySelector('.hamburger');
+            let header = document.querySelector('.header');
+
+            hamburger.addEventListener("click", function() {
+                header.classList.toggle('open');
                 });
             });
         </script>

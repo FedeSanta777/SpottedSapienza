@@ -21,24 +21,31 @@
 
         <nav class="menu">
             <ul>
-                <li><a href="home.html">Bacheca</a></li>
-               <li><a href="mappa.html">Feste</a></li> 
-                <li><a href="">Quiz</a></li>
+                <li><a href="/home">Bacheca</a></li>
+               <li><a href="/mappa">Feste</a></li> 
+                <li><a href="/classifica">Quiz</a></li>
             </ul>   
         </nav>
-
         <div class="sign">
-         <span class="signin">
-            <img src="/static/images/user-plus.svg" class="userplusimg">
-            <a href="reg_page.html" class="reg">Registrati</a>
-         </span>
-         <a href="loginpage.html" class="login">Accedi</a>
+            <span class="signin">
+                <img src="/static/images/user-plus.svg" class="userplusimg">
+                <a href="/reg_page" class="reg" onclick="openCard(event, '/reg_page')">Registrati</a>
+            </span>
+            <a href="loginpage.html" class="login" onclick="openCard(event, 'loginpage.html')">Accedi</a>
         </div>
+        
 
         <span class="userpage utentelog">
             <img src="/static/images/user.svg" class="userimg">
-            <a href="" class="profilo">Il mio profilo</a>
+            <a href="/profilo" class="profilo">Il mio profilo</a>
         </span>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
     </header>
 
     <div class="container">
@@ -125,6 +132,17 @@
             time_24hr: true,
             minDate: "today" // Imposta la data minima come quella attuale
         });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let hamburger = document.querySelector('.hamburger');
+            let header = document.querySelector('.header');
+
+            hamburger.addEventListener("click", function() {
+                header.classList.toggle('open');
+                });
+            });
     </script>
 
 </body>

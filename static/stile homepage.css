@@ -228,6 +228,10 @@ body,html {
   color: #000000;
 }
 
+.red-background {
+  background-color: red;
+  border: 3px;
+}
 
 .cerca{
   display: flexbox;

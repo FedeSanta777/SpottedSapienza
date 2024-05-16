@@ -96,7 +96,7 @@ def test_database_connection():
 def home():
     if test_database_connection():
         spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
-        session["id"] = 4
+        session["id"] = 5
         return render_template('home.html', spot=spot)
     else:
         return "Errore di connessione al database"

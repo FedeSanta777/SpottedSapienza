@@ -75,8 +75,8 @@
                 <a href="" class="">Spotto persone!!</a>
             </div>
             {% for spot in spot %}
-            <div class="spotted">
-                <p>{{ spot.utente }}</p>
+            <div class="spotted" id="{{ spot.id_utente }}" onclick="changeBackgroundColor(this)">
+                <p>{{ spot.utente.nome }}</p>
                 <p>{{ spot.contenuto }}</p>
             </div>
             {% endfor %}
@@ -156,7 +156,26 @@
             // Aggiungi la card al body del documento
             document.body.appendChild(card);
           }
-    </script>        
+    </script>
+    <script>
+        let clickedDivId = null;
+    
+        function changeBackgroundColor(element) {
+            // Rimuove il colore rosso da tutte le div
+            const allSpottedDivs = document.querySelectorAll('.spotted');
+            allSpottedDivs.forEach(div => {
+                div.classList.remove('red-background');
+            });
+    
+            // Aggiunge il colore rosso alla div cliccata
+            element.classList.add('red-background');
+    
+            // Salva l'id della div cliccata in una variabile
+            clickedDivId = element.id;
+            console.log("Clicked div id:", clickedDivId);
+        }
+    </script>
+        
      
 </body>
 </html>
