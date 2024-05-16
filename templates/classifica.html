@@ -86,10 +86,9 @@
                     <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
                         <p>{{ domande.srcArg }}</p>
                         <!-- <img src="{{ url_for('static', filename='domande.srcArg') }}" alt="Immagine"> -->
-                        <img src="{{ url_for('static', filename=image_path) }}" alt="{{ domande.argomento }}">
-                        
+                        <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}">
                     </div>
-
+                    
                     <div class="domanda">
                         <p>{{ domande.testo }}</p>
                     </div>
