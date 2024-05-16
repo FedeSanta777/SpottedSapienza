@@ -146,6 +146,7 @@ body,html {
     width: auto;
     justify-content:space-around;
     background-color: #fff;
+    overflow: hidden;
   }
   .menu{
     position: absolute;
@@ -183,12 +184,13 @@ body,html {
   .hamburger span:nth-child(2){margin-top: 0px}
   .hamburger span:nth-child(3){margin-top: 6px;}
 
-  .open.menu{
+  .open.header{overflow: visible;  transition: 0.3s;}
+  
+  .open.header .menu{
     position: absolute;
     top:47px;
     right:0%;
     width: 100%;
-    transition: 0.3s;
   }
 }
 
