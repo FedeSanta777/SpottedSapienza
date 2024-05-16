@@ -138,6 +138,49 @@ body,html {
   justify-content: center;
   align-items: center;
 }
+
+.field {
+  margin-top: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  padding: .5em 1em;
+}
+
+.input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: black;
+ }
+
+.field input:focus::placeholder {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.datapicker{
+  display: flex;
+}
+
+.btninser{
+  width: 100%;
+  margin: 1.5em 0 0 0;
+  border: 3px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: .8em;
+  padding: 0.6em 1.2em;
+  background-color: #881c1c;
+  color: #f2f2f2;
+  box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
+}
+
+
 .right-column {
   flex: 2; /* Imposta la colonna destra con flex 2 */
   background-color: #eaeaea;

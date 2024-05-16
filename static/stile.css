@@ -8,7 +8,7 @@ h1 {font-size: 16px;color: #881c1c;}
     height: 400px;
     margin: 20px;
     position: relative;
-    background: white;
+    background: #ffff;
 }
 .card iframe {
   width: 100%;
@@ -30,7 +30,7 @@ h1 {font-size: 16px;color: #881c1c;}
   align-items: center;
   justify-content: center;
   gap: .5em;
-  background-color: whitesmoke;
+  background-color: #f2f2f2;
   border-radius: 4px;
   padding: .5em 1em;
 }
@@ -70,7 +70,7 @@ h1 {font-size: 16px;color: #881c1c;}
     text-transform: uppercase;
     padding: 0.6em 1.2em;
     background-color: #881c1c;
-    color: whitesmoke;
+    color: #f2f2f2;
     box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
     transition: all .3s ease-in-out;
    }
@@ -89,7 +89,7 @@ h1 {font-size: 16px;color: #881c1c;}
    }
    
    .btn:hover {
-    background-color: whitesmoke;
+    background-color: #f2f2f2;
     color: #881c1c;
     box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
    }

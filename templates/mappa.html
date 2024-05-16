@@ -53,15 +53,19 @@
             <div class="form-container">
                 <h1>Inserisci un nuovo evento</h1>
                 <form id="newEventForm" action="/submit_event" method="POST">
-                    <label for="nome_evento">Nome dell'evento:</label><br>
-                    <input type="text" id="nome_evento" name="nome_evento" required><br>
-                    <label for="data_evento">Data e ora dell'evento:</label><br>
-                    <input type="text" id="datetimepicker" name="datetimepicker" required><br>
-                    <label for="latitudine">Latitudine:</label><br>
-                    <input type="text" id="latitudine" name="latitudine" readonly><br>
-                    <label for="longitudine">Longitudine:</label><br>
-                    <input type="text" id="longitudine" name="longitudine" readonly><br>
-                    <button type="submit">Inserisci</button>
+                    <div class="field">
+                        <input type="text" id="nome_evento" name="nome_evento" placeholder="Nome dell'evento" class="input-field" required><br>
+                    </div>
+                    <div class="field">
+                        <input type="text" id="datetimepicker" name="datetimepicker" placeholder="Data e ora dell'evento" class="input-field datapicker" required><br>
+                    </div>
+                    <div class="field">
+                        <input type="text" id="latitudine" name="latitudine" placeholder="Latitudine" class="input-field" readonly><br>
+                    </div>
+                    <div class="field">
+                        <input type="text" id="longitudine" name="longitudine" placeholder="Longitudine" class="input-field" readonly><br>
+                    </div>
+                    <button class="btninser" type="submit">INSERISCI</button>
                 </form>
             </div>
         </div>
