@@ -113,7 +113,7 @@ body,html {
   text-decoration: none;
   border-radius: 3px;
   margin: 3px;
-  padding: 3px;
+  padding: 4px 3px;
 }
 
 .userpage {
@@ -146,7 +146,8 @@ body,html {
     width: auto;
     justify-content:space-around;
     background-color: #fff;
-    overflow:hidden}
+    overflow: hidden;
+  }
   .menu{
     position: absolute;
     top:47px;
@@ -156,13 +157,13 @@ body,html {
   }
   .menu li{width: 100%;} 
 
-  .menu open {right:0}
+
 
   .hamburger{
-    display: block;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    border: #000 solid;
-    height: 25px;
+    height: 21px;
     width: 30px;
     position: absolute;
     right:10px;
@@ -174,12 +175,23 @@ body,html {
     position: absolute;
     width: 30px; 
     height: 3px;
+    border: 3px;
+    border-radius: 3px;
     background-color: #881c1c;
   }
 
-  .hamburger span:nth-child(1){margin-top: 5px;}
-  .hamburger span:nth-child(2){margin-top: 10px}
-  .hamburger span:nth-child(3){margin-top: 15px;}
+  .hamburger span:nth-child(1){margin-top: -6px;}
+  .hamburger span:nth-child(2){margin-top: 0px}
+  .hamburger span:nth-child(3){margin-top: 6px;}
+
+  .open.header{overflow: visible;  transition: 0.3s;}
+  
+  .open.header .menu{
+    position: absolute;
+    top:47px;
+    right:0%;
+    width: 100%;
+  }
 }
 
 
@@ -191,13 +203,13 @@ body,html {
   align-items: baseline;
   margin: 0;
   padding-top: 1%;
+  background-color: #881c1c;
 }
 
 
 .riquadrospot {
   display: flexbox;
   width: 70%;
-  background-color:  #f2f2f2;
   margin: 20px;
   padding: 20px;
 }
@@ -243,27 +255,41 @@ body,html {
 
 
 .creaspot {
-  display: flex;
-  justify-content: space-between;
+  display: flexbox;
+  justify-content: space-around;
   align-items: center;
   width: 90%;
-  height: 2em;
   background-color:#fff;
-  border-radius: 3px;
+  border: 3px;
+  border-radius: 5px;
+  padding: 0.3em;
   box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
   -webkit-box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
   -moz-box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
-
+  margin-bottom: 20px;
 }
+
+.spot{
+  display: flex;
+  height: 70%;
+  margin: 5px;
+}
+
 .createimg{
-  width: 15%;
-  height: 90%;
+  width: 2em;
 }
 
 #spot{
+  display: block;
   width: 100%;
   font-style: 16px;
-  border: 0px;
+  border: none;
+  margin-left: 1%;
+}
+
+.anonimo{
+  font-size: 12px;
+  margin: 5px;
 }
 
 .btninvia{
@@ -276,6 +302,23 @@ body,html {
   border-radius: 3px;
 }
 
+.rispondi{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  background-color:#fff;
+  border: 3px;
+  border-radius: 5px;
+  padding: 0.3em;
+  box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+  -webkit-box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+  -moz-box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}
+
+.rispondiimg{
+  width: 1.5em;
+}
 
 .utentelog{
   display: none;
