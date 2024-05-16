@@ -71,6 +71,12 @@
                 <div id="button_div" class="button_div" style="display: none;">
                     <!-- <button>Il bottone è abilitato</button> -->
                     <button id="cambiaDiv">Cambia Div</button>
+                    <div style="position: relative;">
+                        <div class="iframe-overlay">
+                            <!-- <iframe src="https://giphy.com/embed/YIo7D00296YL6LyV2P" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->
+                            <iframe src="https://giphy.com/embed/P7JmDW7IkB7TW" width="480" height="328" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                        </div> <!-- Elemento trasparente sopra l'iframe -->
+                    </div>  
                 </div>
 
                 <!-- Div nascosto se enable_button è False -->
@@ -181,7 +187,7 @@
                 div1.classList.toggle("hidden");
                 div2.classList.toggle("visible");
                 div2.classList.toggle("hidden");
-            }, 50); // Ritardo di 50 millisecondi
+            }, 1000); // Ritardo di 50 millisecondi
 
             if (div1.classList.contains("visible")) {
                 div1.classList.remove("visible");
@@ -252,6 +258,9 @@
                 $('.risposta-esatta').click(function() {
                     var codiceFacolta = $(this).data('codice');
                     var codiceUtente = {{ utente_scelto.id }};
+
+                    $('.iframe-overlay').addClass('show');
+
                     $.ajax({
                         url: '/incrementa/' + codiceFacolta + '/' + codiceUtente,
                         type: 'POST',
