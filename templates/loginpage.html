@@ -8,31 +8,40 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="application/javascript">
       function validateLogin() {
-        var email = $('#logemail').val();
-        var password = $('#logpass').val();
+        // Ottieni i valori inseriti dall'utente
+        var email = document.log.logemail.value;
+        var password = document.log.logpass.value;
         
-        // AJAX per invio dati al server e controllo accesso
-        $.ajax({
-          type: 'POST',
-          url: '/login',
-          data: {
+        // Costruisci l'oggetto dei dati da inviare al server
+        var info = {
             email: email,
             password: password
-          },
-          success: function(response) {
-            if (response.loginStatus === 'success') {
-              window.location.href = 'home.html';
+        };
+    
+        // Invia una richiesta POST al server Flask
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(info)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Reindirizza alla pagina di successo se il login è avvenuto con successo
+                window.location.href = '/successo';
             } else {
-              alert('ATTENZIONE: Email o password errati!');
+                // Gestisci eventuali errori di login
+                alert("Errore durante il login");
             }
-          },
-          error: function(xhr, status, error) {
-            alert('Si è verificato un errore durante il login.');
-          }
+        })
+        .catch(error => {
+            console.error('Errore durante la richiesta di login:', error);
         });
-        
+    
+        // Impedisce l'invio del modulo HTML
         return false;
-      }
+    }    
     </script>
 </head>
 <body>

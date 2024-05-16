@@ -2,10 +2,14 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from datetime import datetime
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
+app.secret_key = 'chiave log'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/spotted_sapienza'
 db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # Definisci il modello Facolta
 class Facolta(db.Model):
@@ -15,7 +19,7 @@ class Facolta(db.Model):
     puntiTot = db.Column(db.Integer, nullable=False)
 
 # Definisci il modello Utenti
-class Utenti(db.Model):
+class Utenti(db.Model, UserMixin):
     __tablename__ = 'utenti'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50))
@@ -70,6 +74,15 @@ class Risposte(db.Model):
     utente_risp = db.relationship('Utenti', foreign_keys=[id_utente_risp])
     utente_spot = db.relationship('Utenti', foreign_keys=[id_utente_spot])
     spot = db.relationship('Spot', foreign_keys=[id_spot])
+
+# Funzione per caricare un utente in base all'ID
+@login_manager.user_loader
+def load_user(user_id):
+    return Utenti.query.get(int(user_id))
+
+# Funzione per verificare le credenziali dell'utente nel database
+def verify_user(email, password):
+    return Utenti.query.filter_by(email=email, password=password).first()
 
 def test_database_connection():
     try:
@@ -186,8 +199,8 @@ def reg():
     
 @app.route('/registrazione', methods=['POST'])
 def registrazione():
-    # Accedi ai dati inviati come JSON
-    data = request.json
+     # Ricevi i dati inviati come JSON
+    data = request.get_json()
 
     # Estrai i valori dei campi
     nome = data['nome']
@@ -195,7 +208,11 @@ def registrazione():
     email = data['email']
     password = data['password']
     facolta_codice = data['facolta']
-
+    
+    # Controlla se l'email esiste già nel database
+    existing_user = Utenti.query.filter_by(email=email).first()
+    if existing_user:
+        return "L'email inserita è già registrata. Si prega di utilizzare un'email diversa."
 
     # Creazione di un nuovo utente
     nuovo_utente = Utenti(nome=nome, cognome=cognome, email=email, password=password, facolta_codice=facolta_codice)
@@ -210,6 +227,58 @@ def registrazione():
         db.session.rollback()
         return "Errore durante la registrazione"
     
+
+#Controllo email già presente nel server:
+@app.route('/check_email')
+def check_email():
+    email = request.args.get('email')
+    existing_user = Utenti.query.filter_by(email=email).first()
+    if existing_user:
+        return jsonify({'exists': True})
+    else:
+        return jsonify({'exists': False})
+    
+#login
+app.route('/loginpage')
+def log():
+    if test_database_connection():
+        # Verifica se l'utente è autenticato
+        if current_user.is_authenticated:
+            # Utente autenticato, reindirizza alla home page
+            return render_template('home.html')
+        else:
+            # Utente non autenticato, reindirizza alla pagina di login
+            return render_template('loginpage.html')
+    else:
+        return "Errore di connessione al database"
+
+@app.route('/login', methods=['POST'])
+def login():
+     # Ottieni i dati inviati dal client come JSON
+    info = request.json
+    
+    # Estrai email e password dall'oggetto dei dati
+    email = info.get('email')
+    password = info.get('password')
+
+    # Verifica le credenziali dell'utente nel database
+    user = verify_user(email, password)
+    
+    if user:
+        # Login riuscito, effettua il login dell'utente
+        login_user(user)
+        return jsonify({'loginStatus': 'success'})
+    else:
+        # Login fallito, restituisce un messaggio di errore
+        return jsonify({'loginStatus': 'failure'})
+
+@app.route('/logout')
+@login_required
+def logout():
+    # Effettua il logout dell'utente corrente
+    logout_user()
+    return redirect('/')
+
 @app.route('/successo')
 def successo():
     return "Registrazione avvenuta con successo!"

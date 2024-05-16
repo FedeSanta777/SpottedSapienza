@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -43,8 +43,8 @@ def index():
     
 @app.route('/registrazione', methods=['POST'])
 def registrazione():
-    # Accedi ai dati inviati come JSON
-    data = request.json
+    # Ricevi i dati inviati come JSON
+    data = request.get_json()
 
     # Estrai i valori dei campi
     nome = data['nome']
@@ -53,6 +53,10 @@ def registrazione():
     password = data['password']
     facolta_codice = data['facolta']
 
+    # Controlla se l'email esiste già nel database
+    existing_user = Utenti.query.filter_by(email=email).first()
+    if existing_user:
+        return "L'email inserita è già registrata. Si prega di utilizzare un'email diversa."
 
     # Creazione di un nuovo utente
     nuovo_utente = Utenti(nome=nome, cognome=cognome, email=email, password=password, facolta_codice=facolta_codice)
@@ -66,8 +70,18 @@ def registrazione():
         print(f"Errore durante la registrazione: {e}")
         db.session.rollback()
         return "Errore durante la registrazione"
+    
 @app.route('/successo')
 def successo():
     return "Registrazione avvenuta con successo!"
+
+@app.route('/check_email')
+def check_email():
+    email = request.args.get('email')
+    existing_user = Utenti.query.filter_by(email=email).first()
+    if existing_user:
+        return jsonify({'exists': True})
+    else:
+        return jsonify({'exists': False})
 if __name__ == '__main__':
     app.run(debug=True)

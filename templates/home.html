@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/static/stile homepage.css">
     <script language="JavaScript" type="text/javascript" src="homepage.js"></script>
     <title>Spotted Sapienza</title>
+
+
 </head>
 <body>
 
@@ -42,6 +44,7 @@
         </div>
 
     </header>
+    <div class="overlay"></div>
 
     
 
@@ -128,6 +131,9 @@
         function openCard(event, url) {
             event.preventDefault();
         
+            // Mostra l'overlay
+            document.querySelector('.overlay').style.display = 'block';
+        
             // Crea un div card
             var card = document.createElement('div');
             card.classList.add('card');
@@ -135,21 +141,23 @@
             // Crea un iframe all'interno della card
             var iframe = document.createElement('iframe');
             iframe.src = url;
+        
             card.appendChild(iframe);
         
-            // Crea un pulsante di chiusura
-            var closeButton = document.createElement('button');
-            closeButton.innerHTML = 'Chiudi';
-            closeButton.classList.add('close-btn');
-            closeButton.onclick = function() {
-                document.body.removeChild(card);
+            // Crea il pulsante di chiusura
+            var closeBtn = document.createElement('button');
+            closeBtn.classList.add('close-btn');
+            closeBtn.innerHTML = 'X';
+            closeBtn.onclick = function() {
+              document.querySelector('.overlay').style.display = 'none';
+              card.remove();
             };
-            card.appendChild(closeButton);
+            card.appendChild(closeBtn);
         
             // Aggiungi la card al body del documento
             document.body.appendChild(card);
-        }
-        
-    </script>  
+          }
+    </script>        
+     
 </body>
 </html>
