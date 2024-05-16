@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from datetime import datetime
@@ -96,6 +96,7 @@ def test_database_connection():
 def home():
     if test_database_connection():
         spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
+        session["id"] = 4
         return render_template('home.html', spot=spot)
     else:
         return "Errore di connessione al database"
@@ -107,12 +108,13 @@ def index():
     if test_database_connection():
         utenti = Utenti.query.all()  # Recupera tutti i dati dalla tabella "utenti"
         facolta = Facolta.query.order_by(Facolta.puntiTot.desc()).all()  # Recupera tutti i dati dalla tabella "facolta"
-        domande =  Domande.query.order_by(db.func.rand()).first()
+        id = session["id"]
         # Recupera una domanda a caso dal database
         random_question = Domande.query.order_by(db.func.random()).first()
         
         # Query per ottenere la data dall'ultima giocata per l'utente, sostituisci con la tua logica di query
-        prima_tupla_utenti = Utenti.query.order_by(db.func.random()).first()
+        # prima_tupla_utenti = Utenti.query.order_by(db.func.random()).first()
+        prima_tupla_utenti = Utenti.query.filter(Utenti.id == id).first()
         ultima_giocata = prima_tupla_utenti.ultimaGiocata
         
         ultima_giocata = ultima_giocata.strftime('%Y-%m-%d')
