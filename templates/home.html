@@ -51,7 +51,26 @@
             <div class="spotted">
                 <a href="">Nome utente</a>
                 <a href="" class="">Spotto persone!!</a>
-                <a href="" class="commenti">Commenti</a>
+            </div>
+            <div class="spotted">
+                <a href="">Nome utente</a>
+                <a href="" class="">Spotto persone!!</a>
+            </div>
+            <div class="spotted">
+                <a href="">Nome utente</a>
+                <a href="" class="">Spotto persone!!</a>
+            </div>
+            <div class="spotted">
+                <a href="">Nome utente</a>
+                <a href="" class="">Spotto persone!!</a>
+            </div>
+            <div class="spotted">
+                <a href="">Nome utente</a>
+                <a href="" class="">Spotto persone!!</a>
+            </div>
+            <div class="spotted">
+                <a href="">Nome utente</a>
+                <a href="" class="">Spotto persone!!</a>
             </div>
             {% for spot in spot %}
             <div class="spotted">
@@ -87,16 +106,24 @@
         </div>
 
         <div class="creaspot utentelog">
-            <label for="creaspot"></label>
-            <img src="/static/images/create.svg" class="createimg">
-            <input type="text" placeholder="CREA IL TUO CAZZO DI SPOTTTTT" id="spot">
+            <div class="spot">
+                <img src="/static/images/create.svg" class="createimg">
+                <input type="text" placeholder="Crea il tuo spot" id="spot">
+            </div>
+            <span class="anonimo">
+                <input type="checkbox">Anonimo
+            </span>
             <button class="btninvia">Invia</button>
         </div>
+
+        <div class="rispondi">
+            <img src="/static/images/rispondi.svg" class="rispondiimg">
+            <a >Rispondi</a>
+        </div>
+
     </div>
-        
-        
-        
     </div>
+
     <script>
         function openCard(event, url) {
             event.preventDefault();
