@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     let hamburger = document.querySelector('.hamburger');
-    let menu = document.querySelector('.menu');
+    let header = document.querySelector('.header');
 
     hamburger.addEventListener("click", function() {
-        menu.classList.toggle('open');
+        header.classList.toggle('open');
     });
 });
 
