@@ -88,15 +88,15 @@
             </div>
             <div id="div2" class="hidden">
                 <div class="box-domanda">
-                    <div class="img-argomento">
-                    <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
-                        <!-- <img src="{{ url_for('static', filename='domande.srcArg') }}" alt="Immagine"> -->
-                        <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}">
-                    </div>
-                    
                     <div class="domanda">
                         <p>{{ domande.testo }}</p>
                     </div>
+
+                    <div class="img-argomento">
+                        <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
+                            <!-- <img src="{{ url_for('static', filename='domande.srcArg') }}" alt="Immagine"> -->
+                            <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}">
+                        </div>
                 </div>
                 <div class="box-risposta" id="box-risposta">
                     <form action="/incrementa/{{ utente_scelto.facolta_codice }}" method="POST">

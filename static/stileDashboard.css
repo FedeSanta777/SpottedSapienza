@@ -129,10 +129,10 @@ body,html {
 .container {
   display: flex;
   height: calc(100vh - 64px); /* Altezza della pagina meno altezza del menu */
-  padding-top: 64px;
 }
 
 .left-column {
+  margin-top: 54px;
   background-color: #fff;
   flex: 1;
   border: 1px ;
@@ -170,16 +170,18 @@ body,html {
 .scoreboard table {
   width: 100%;
   height: 100%;
-  font-size: 1em;
+  font-size: 16px;
 }
 
 .scoreboard td {
   text-align: center;
+  padding-top: 5%;
 }
 
 /* stile della colonna a sinistra */
 
 .right-column {
+  margin-top: 54px;
   background-color: #881c1c;
   border: 3px;
   display: flex;
@@ -202,7 +204,7 @@ body,html {
   border-radius: 5px;
   flex: 1;
   /* larghezza della div e margin proporzionale */
-  margin: 5% 5% 0% 5%;
+  margin: 2.5% 5% 0% 5%;
   /* height: 80%; */
 }
 
@@ -217,13 +219,12 @@ body,html {
   border: 3px solid #e4e4e4;
   background-color: #e4e4e4;
   border-radius: 3px;
-  margin: 3% 5%;
+  margin: 5% 5%;
   padding: 0.5%;
 }
 
 .domanda {
   height: 70%;
-  padding-top: 5%;
   padding-bottom: 5%;
 }
 
@@ -234,9 +235,9 @@ body,html {
 }
 
 .img-argomento img{
-  
-  width: 70%;
-  height: 50%;
+  align-items: center;
+  width: 20%;
+  margin-top: 5%;
 }
 
 .box-risposta {
