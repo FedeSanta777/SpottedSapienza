@@ -249,7 +249,7 @@ def log():
             # Utente autenticato, reindirizza alla home page
             return render_template('home.html')
         else:
-            # Utente non autenticato, reindirizza alla pagina di login
+            #Utente non autenticato, reindirizza alla pagina di login
             return render_template('loginpage.html')
     else:
         return "Errore di connessione al database"

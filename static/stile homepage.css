@@ -171,6 +171,7 @@ body,html {
 .grey-background {
   background-color: #eaeaea;
   border: 3px;
+  opacity: 60%;
   opacity: 50%;
 }
 
@@ -295,12 +296,24 @@ body,html {
   width: 1.5em;
 }
 
+.utentelog{
+  display: flex;
+}
 #risposta{
   display: block;
   font-style: 16px;
   border: none;
   margin-left: 1%;
 }
+#risposta{
+  display: block;
+  font-style: 16px;
+  border: none;
+  margin-left: 1%;
+}
+
+
+
 
 
 
@@ -409,7 +422,7 @@ h1 {font-size: 16px;color: #881c1c;}
     text-transform: uppercase;
     padding: 0.6em 1.2em;
     background-color: #881c1c;
-    color: whitesmoke;
+    color: #fff;
     box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
     transition: all .3s ease-in-out;
    }
