@@ -94,7 +94,7 @@
         <div class="cerca">
             <div class="filtri">
                 <img src="/static/images/search.svg" class="searchimg">
-                <input type="text" placeholder="Cerca filtro" id="spot">
+                <input type="text" placeholder="Cerca..." class="cercafiltro">
             </div>
             <div>        
                  Facoltà <select class="facolta" aria-placeholder="Seleziona la facoltà">
@@ -117,7 +117,7 @@
         <div class="creaspot utentelog">
             <div class="spot">
                 <img src="/static/images/create.svg" class="createimg">
-                <input type="text" placeholder="Crea il tuo spot" id="spot">
+                <input type="text" placeholder="Crea il tuo spot" class="input-spot">
             </div>
             <span class="anonimo">
                 <input type="checkbox">Anonimo
@@ -126,9 +126,14 @@
         </div>
 
         <div class="rispondi">
-            <img src="/static/images/rispondi.svg" class="rispondiimg">Rispondi a nome utente
-            <input type="text" placeholder="Rispondi" id="risposta">
+            <div class="risp">
+                <img src="/static/images/rispondi.svg" class="rispondiimg">
+                <p>Rispondi a nome utente</p>
+            </div>
+            <div class="risposta">
+            <input type="text" placeholder="Rispondi..." class="input-risp">
             <button class="btninvia">Invia</button>
+            </div>
         </div>
 
     </div>
