@@ -171,6 +171,17 @@ body,html {
   background-color: #eaeaea;
   border: 3px;
   opacity: 60%;
+  opacity: 50%;
+}
+
+.container{
+  position: fixed;
+  right: 0;
+  width: 30%;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  margin: 20px;
+  padding: 20px;
 }
 
 .cerca{
@@ -280,6 +291,15 @@ body,html {
   border: none;
   margin-left: 1%;
 }
+#risposta{
+  display: block;
+  font-style: 16px;
+  border: none;
+  margin-left: 1%;
+}
+
+
+
 
 
 
