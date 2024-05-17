@@ -145,7 +145,7 @@ body,html {
   align-items: center;
   justify-content: center;
   gap: .5em;
-  background-color: whitesmoke;
+  background-color: #f2f2f2;
   border-radius: 4px;
   padding: .5em 1em;
 }
@@ -176,7 +176,7 @@ body,html {
   font-size: .8em;
   padding: 0.6em 1.2em;
   background-color: #881c1c;
-  color: #f2f2f2;
+  color: #fff;
   box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
 }
 
