@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/stile.css">
+    <link rel="stylesheet" href="static/stile homepage.css">
     <title>Log in pop up</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="application/javascript">
@@ -13,7 +13,7 @@
         var password = document.log.logpass.value;
         
         // Costruisci l'oggetto dei dati da inviare al server
-        var info = {
+        var data = {
             email: email,
             password: password
         };
@@ -45,7 +45,7 @@
     </script>
 </head>
 <body>
-    <div class="card">
+    <div class="logcard">
         <h4 class="title">Log In</h4>
         <form name="log">
           <div class="field">

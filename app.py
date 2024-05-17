@@ -257,11 +257,11 @@ def log():
 @app.route('/login', methods=['POST'])
 def login():
      # Ottieni i dati inviati dal client come JSON
-    info = request.json
+    data = request.json
     
     # Estrai email e password dall'oggetto dei dati
-    email = info.get('email')
-    password = info.get('password')
+    email = data.get('email')
+    password = data.get('password')
 
     # Verifica le credenziali dell'utente nel database
     user = verify_user(email, password)

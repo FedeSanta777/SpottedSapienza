@@ -329,13 +329,14 @@ body,html {
 }
 
 h1 {font-size: 16px;color: #881c1c;}
-.card {
+
+.logcard {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 360px; /* Ampiezza fissa */
-  height: 360px; /* Altezza fissa */
+  width: 20%;
+  height: 250px; 
   background: white;
   z-index: 1000;
   position: fixed;
@@ -345,10 +346,34 @@ h1 {font-size: 16px;color: #881c1c;}
   padding: 20px;
 }
 
-.card iframe {
+.logcard iframe {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 30px);
   border: none;
+  overflow: hidden;
+}
+.regcard {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 20%; 
+  height: 60%; 
+  background: white;
+  z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.regcard iframe {
+  width: 100%;
+  height: calc(100% - 30px);
+  border: none;
+  overflow: hidden;
 }
 
 .close-btn {

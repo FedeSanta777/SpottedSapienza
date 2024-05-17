@@ -26,9 +26,9 @@
         <div class="sign">
             <span class="signin">
                 <img src="/static/images/user-plus.svg" class="userplusimg">
-                <a href="/reg_page" class="reg" onclick="openCard(event, '/reg_page')">Registrati</a>
+                <a href="/reg_page" class="reg" onclick="openregCard(event, '/reg_page')">Registrati</a>
             </span>
-            <a href="loginpage.html" class="login" onclick="openCard(event, 'loginpage.html')">Accedi</a>
+            <a href="loginpage.html" class="login" onclick="openlogCard(event, '/loginpage')">Accedi</a>
         </div>
         
 
@@ -127,7 +127,7 @@
     </div>
 
     <script>
-        function openCard(event, url) {
+        function openregCard(event, url) {
             event.preventDefault();
         
             // Mostra l'overlay
@@ -135,7 +135,7 @@
         
             // Crea un div card
             var card = document.createElement('div');
-            card.classList.add('card');
+            card.classList.add('regcard');
         
             // Crea un iframe all'interno della card
             var iframe = document.createElement('iframe');
@@ -157,6 +157,39 @@
             document.body.appendChild(card);
           }
     </script>
+
+    <script>
+        function openlogCard(event, url) {
+            event.preventDefault();
+        
+            // Mostra l'overlay
+            document.querySelector('.overlay').style.display = 'block';
+        
+            // Crea un div card
+            var card = document.createElement('div');
+            card.classList.add('logcard');
+        
+            // Crea un iframe all'interno della card
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+        
+            card.appendChild(iframe);
+        
+            // Crea il pulsante di chiusura
+            var closeBtn = document.createElement('button');
+            closeBtn.classList.add('close-btn');
+            closeBtn.innerHTML = 'X';
+            closeBtn.onclick = function() {
+              document.querySelector('.overlay').style.display = 'none';
+              card.remove();
+            };
+            card.appendChild(closeBtn);
+        
+            // Aggiungi la card al body del documento
+            document.body.appendChild(card);
+          }
+    </script>
+
     <script>
         let clickedDivId = null;
     
