@@ -148,7 +148,6 @@ body,html {
   display: flex;
   flex: 2;
   flex-direction: column;
-  width: 30%;
   margin: 20px;
   padding: 20px;
 }
@@ -165,7 +164,6 @@ body,html {
   margin: 20px;
   padding: 20px;
   color: #000000;
-  overflow: auto;
 }
 
 .grey-background {
@@ -176,10 +174,7 @@ body,html {
 }
 
 .container{
-  position: fixed;
   flex: 1;
-  right: 0;
-  width: 30vw;
   flex-direction: column;
   height: calc(100vh - 70px);
   margin: 20px;
@@ -187,7 +182,8 @@ body,html {
 }
 
 .cerca{
-  display: flexbox;
+  display: flex;
+  flex-direction: column;
   width: 90%;
   height: 25%;
   box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
@@ -196,36 +192,51 @@ body,html {
   border: solid 3px #fff;
   border-radius: 5px;
   background-color: #fff;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 20px 0;
 }
 
 .filtri {
   display: flex;
+  width: 80%;
   margin-bottom: 20px;
+  margin-top: .5rem;
+  align-items: center;
+  justify-content: left;
+  gap: .5em;
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  padding: .5em 1em;
 }
 
+.searchimg{
+  width: 1em;
+}
 
+.cercafiltro{
+  background: none;
+  border: none;
+  outline: none;
+  color: black;
+}
+
+.cercafiltro:focus::placeholder{
+  opacity: 0;
+  transition: opacity .3s;
+}
 
 .facolta {
   width: 50%;
   padding: 0.1em;
   font-size: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  appearance: none; /* Rimuove lo stile predefinito del browser */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: white;
-  background-size: 10px;
-  cursor: pointer;
 }
 
 
 
 .creaspot {
-  display: flexbox;
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 90%;
@@ -240,30 +251,39 @@ body,html {
   margin: 20px 0;
 }
 
-.spot{
-  display: flex;
-  height: 70%;
-  margin: 5px;
-}
-
 .createimg{
   width: 2em;
 }
 
-#spot{
-  display: block;
-  width: 100%;
-  font-style: 16px;
-  border: none;
-  margin-left: 1%;
+.spot{
+  display: flex;
+  width: 80%;
+  margin-bottom: 20px;
+  margin-top: .5rem;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  padding: .5em 1em;
 }
 
-#spot::placeholder{
+.input-spot{
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: black;
   font-size: 16px;
 }
 
+.input-spot:focus::placeholder{
+  opacity: 0;
+  transition: opacity .3s;
+}
+
 .anonimo{
-  font-size: 12px;
+  font-size: 14px;
   margin: 5px;
 }
 
@@ -277,39 +297,66 @@ body,html {
 }
 
 .rispondi{
-  display: flexbox;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   width: 90%;
   height: 25%;
   background-color:#fff;
   border: 3px;
   border-radius: 5px;
-  padding: 0.3em;
-  margin: 20px 0;
+  padding: 0 0.3em 0 0.3em;
   box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
   -webkit-box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
   -moz-box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+  margin: 20px 0;
+}
+
+.risp{
+  display: flex;
+  align-content: top;
+  justify-content: left;
+  top: 0;
+  width: 100%;
+  border-bottom: #e4e4e4 solid 4px;
+}
+.risp p{
+  font-size: 14px;
 }
 
 .rispondiimg{
-  width: 1.5em;
+  margin: 0;
+  padding:0 2%;
+  width: 7%;
 }
 
-.utentelog{
+
+.risposta{
   display: flex;
+  width: 80%;
+  margin-bottom: 10px;
+  margin-top: .5rem;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  padding: .5em 1em;
 }
-#risposta{
-  display: block;
-  font-style: 16px;
+
+.input-risp{
+  background: none;
   border: none;
-  margin-left: 1%;
+  outline: none;
+  width: 100%;
+  color: black;
+  font-size: 14px;
 }
-#risposta{
-  display: block;
-  font-style: 16px;
-  border: none;
-  margin-left: 1%;
+
+.input-risp:focus::placeholder{
+  opacity: 0;
+  transition: opacity .3s;
 }
 
 
@@ -448,9 +495,6 @@ h1 {font-size: 16px;color: #881c1c;}
    
 
 
-.utentelog{
-display: flex;
-}
 
 @media (max-width: 768px) {
   .header{
@@ -500,7 +544,7 @@ display: flex;
   
   .open.header .menu{
     position: absolute;
-    top:47px;
+    top:53.5px;
     right:0%;
     width: 100%;
   }
@@ -515,4 +559,11 @@ display: flex;
     position: relative;
   }
 
+}
+
+
+
+
+.utentelog{
+  display: none;
 }
