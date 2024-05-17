@@ -93,12 +93,11 @@
     <div class="container">
         <div class="cerca">
             <div class="filtri">
-                <label for="creaspot"></label>
                 <img src="/static/images/search.svg" class="searchimg">
                 <input type="text" placeholder="Cerca filtro" id="spot">
             </div>
-            <div class="facoltà">        
-                 Facoltà <select name="">
+            <div>        
+                 Facoltà <select class="facolta" aria-placeholder="Seleziona la facoltà">
                     <option value="Nessuna">Nessuna</option>
                     <option value="Architettura">Architettura</option>
                     <option value="Economia">Economia</option>
@@ -203,14 +202,14 @@
         let clickedDivId = null;
     
         function changeBackgroundColor(element) {
-            // Rimuove il colore rosso da tutte le div
+            // Rimuove il colore grigio da tutte le div
             const allSpottedDivs = document.querySelectorAll('.spotted');
             allSpottedDivs.forEach(div => {
-                div.classList.remove('red-background');
+                div.classList.remove('grey-background');
             });
     
-            // Aggiunge il colore rosso alla div cliccata
-            element.classList.add('red-background');
+            // Aggiunge il colore grigio alla div cliccata
+            element.classList.add('grey-background');
 
             // Salva l'id della div cliccata in una variabile
             clickedDivId = element.id;
