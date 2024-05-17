@@ -129,14 +129,13 @@ body,html {
 .container {
   display: flex;
   height: calc(100vh - 64px); /* Altezza della pagina meno altezza del menu */
+  padding-top: 64px;
 }
 
 .left-column {
-  margin-top: 54px;
   background-color: #fff;
   flex: 1;
   border: 1px ;
-  height: 100%;
   overflow: auto;
 }
   
@@ -181,13 +180,11 @@ body,html {
 /* stile della colonna a sinistra */
 
 .right-column {
-  margin-top: 54px;
   background-color: #881c1c;
   border: 3px;
   display: flex;
   flex-direction: column;
   flex: 2;
-  height: 100%;
 }
 
 .hidden_div{
@@ -397,17 +394,8 @@ form{
   }
 
   .container {
-    margin-top: 0;
+    display: flex;
     height: calc(100vh - 20px);
-  }
-
-  .left-column{
-    margin-top: 0;
-    padding-top: 0;
-  }
-
-  .right-column{
-    margin-top: 0;
     padding-top: 0;
   }  
  
