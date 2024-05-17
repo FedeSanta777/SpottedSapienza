@@ -139,15 +139,16 @@ body,html {
   justify-content: space-between;
   align-items: flex-start;
   margin: 0;
-  padding-top: 1%;
+  padding-top: 2%;
   background-color: #881c1c;
 }
 
 
 .riquadrospot {
   display: flex;
+  flex: 2;
   flex-direction: column;
-  width: 60%;
+  width: 30%;
   margin: 20px;
   padding: 20px;
 }
@@ -167,7 +168,7 @@ body,html {
   overflow: auto;
 }
 
-.red-background {
+.grey-background {
   background-color: #eaeaea;
   border: 3px;
   opacity: 50%;
@@ -175,8 +176,9 @@ body,html {
 
 .container{
   position: fixed;
+  flex: 1;
   right: 0;
-  width: 30%;
+  width: 30vw;
   flex-direction: column;
   height: calc(100vh - 70px);
   margin: 20px;
@@ -203,8 +205,20 @@ body,html {
   margin-bottom: 20px;
 }
 
-.facolta{
+
+
+.facolta {
   width: 50%;
+  padding: 0.1em;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none; /* Rimuove lo stile predefinito del browser */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  background-size: 10px;
+  cursor: pointer;
 }
 
 
@@ -485,6 +499,10 @@ display: flex;
     display: flex;
     height: calc(100vh - 48px); /* Altezza della finestra meno l'altezza del menu */
     padding-top: 0;
+  }
+
+  .container{
+    position: relative;
   }
 
 }
