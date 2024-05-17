@@ -128,11 +128,11 @@ body,html {
 
 .container {
   display: flex;
-  height: calc(100vh - 64px); /* Altezza della pagina meno altezza del menu */
+  height: calc(100vh - 64px);
+  margin-top: 54px;
 }
 
 .left-column {
-  margin-top: 54px;
   background-color: #fff;
   flex: 1;
   border: 1px ;
@@ -181,7 +181,6 @@ body,html {
 /* stile della colonna a sinistra */
 
 .right-column {
-  margin-top: 54px;
   background-color: #881c1c;
   border: 3px;
   display: flex;
@@ -396,8 +395,9 @@ form{
 
   .container {
     display: flex;
-    height: calc(100vh - 20px);
+    height: calc(100vh - 52px);
     padding-top: 0;
+    margin-top: 0;
   }  
  
 }
