@@ -24,12 +24,12 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(info)
+            body: JSON.stringify(data)
         })
         .then(response => {
             if (response.ok) {
                 // Reindirizza alla pagina di successo se il login è avvenuto con successo
-                window.location.href = '/successo';
+                window.location.href = '/successo_accesso';
             } else {
                 // Gestisci eventuali errori di login
                 alert("Errore durante il login");

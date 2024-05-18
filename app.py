@@ -241,13 +241,13 @@ def check_email():
         return jsonify({'exists': False})
     
 #login
-app.route('/loginpage')
+@app.route('/loginpage')
 def log():
     if test_database_connection():
         # Verifica se l'utente è autenticato
         if current_user.is_authenticated:
             # Utente autenticato, reindirizza alla home page
-            return render_template('home.html')
+            return render_template('profilo.html')
         else:
             #Utente non autenticato, reindirizza alla pagina di login
             return render_template('loginpage.html')
@@ -285,5 +285,8 @@ def logout():
 def successo():
     return "Registrazione avvenuta con successo!"
 
+@app.route('/successo_accesso')
+def successo_log():
+    return "Login avvenuto con successo!"
 if __name__ == '__main__':
     app.run(debug=True)
