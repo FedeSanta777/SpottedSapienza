@@ -132,6 +132,25 @@ body,html {
 
 
 
+.icon-container{
+  display: none;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+
 
 .bacheca {
   display: flex;
@@ -549,6 +568,35 @@ h1 {font-size: 16px;color: #881c1c;}
     width: 100%;
   }
 
+  .icon-container{
+    display: flex;
+    gap: 20px;
+  }
+
+  .icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .popup {
+    display: none;
+  }
+
+  .icon.active ~ .popup {
+      display: block;
+  }
+
+
+
+
+
+
   .bacheca {
     display: flex;
     height: calc(100vh - 48px); /* Altezza della finestra meno l'altezza del menu */
@@ -565,5 +613,5 @@ h1 {font-size: 16px;color: #881c1c;}
 
 
 .utentelog{
-  display: none;
+  display: ;
 }

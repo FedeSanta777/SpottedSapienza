@@ -46,6 +46,67 @@
     </header>
     <div class="overlay"></div>
 
+    <div class="icon-container">
+        <div class="icon" data-popup="popup1">
+            <img src="/static/images/search.svg" alt="">
+        </div>
+        <div class="icon" data-popup="popup2">
+            <img src="/static/images/create.svg" alt="">
+        </div>
+        <div class="icon" data-popup="popup3">
+            <img src="/static/images/rispondi.svg" alt="">
+        </div>
+    </div>
+
+    <div id="popup1" class="popup">
+        <div class="filtri">
+            <img src="/static/images/search.svg" class="searchimg">
+            <input type="text" placeholder="Cerca..." class="cercafiltro">
+        </div>
+        <div>        
+             Facoltà <select class="facolta" aria-placeholder="Seleziona la facoltà">
+                <option value="Nessuna">Nessuna</option>
+                <option value="Architettura">Architettura</option>
+                <option value="Economia">Economia</option>
+                <option value="Farmacia e medicina">Farmacia e medicina</option>
+                <option value="Giurisprudenza">Giurisprudenza</option>
+                <option value="Ingegneria civile e industriale">Ingegneria civile e industriale</option>
+                <option value="Ingegneria dell'informazione, informatica e statistica">Ingegneria dell'informazione, informatica e statistica</option>
+                <option value="Lettere e filosofia">Lettere e filosofia</option>
+                <option value="Medicina e odontoiatria">Medicina e odontoiatria</option>
+                <option value="Medicina e psicologia">Medicina e psicologia</option>
+                <option value="Scienze matematiche, fisiche e naturali">Scienze matematiche, fisiche e naturali</option>
+                <option value="Scienze politiche sociologia comunicazione">Scienze politiche sociologia comunicazione</option>
+            </select>
+        </div>
+    </div>
+    <div id="popup2" class="popup">
+        <div class="creaspot utentelog">
+            <div class="spot">
+                <img src="/static/images/create.svg" class="createimg">
+                <input type="text" placeholder="Crea il tuo spot" class="input-spot">
+            </div>
+            <span class="anonimo">
+                <input type="checkbox">Anonimo
+            </span>
+            <button class="btninvia">INVIA</button>
+        </div>
+    </div>
+    <div id="popup3" class="popup">
+        <div class="rispondi">
+            <div class="risp">
+                <img src="/static/images/rispondi.svg" class="rispondiimg">
+                <p>Rispondi a nome utente</p>
+            </div>
+            <div class="risposta">
+            <input type="text" placeholder="Rispondi..." class="input-risp">
+            <button class="btninvia">Invia</button>
+            </div>
+        </div>
+    </div>
+
+
+
     
 
     <div class="bacheca">
