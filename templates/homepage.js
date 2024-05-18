@@ -8,6 +8,41 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const icons = document.querySelectorAll('.icon');
+    const popups = document.querySelectorAll('.popup');
+
+    icons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const popupId = this.getAttribute('data-popup');
+            const popup = document.getElementById(popupId);
+
+            // Chiudi tutti i popup aperti
+            popups.forEach(p => p.style.display = 'none');
+            icons.forEach(i => i.classList.remove('active'));
+
+            // Mostra il popup corrente
+            popup.style.display = 'block';
+            this.classList.add('active');
+
+            // Aggiungi l'overlay
+            const overlay = document.createElement('div');
+            overlay.classList.add('overlay');
+            document.body.appendChild(overlay);
+
+            // Chiudi il popup quando si clicca fuori
+            overlay.addEventListener('click', function() {
+                popup.style.display = 'none';
+                icon.classList.remove('active');
+                overlay.remove();
+            });
+        });
+    });
+});
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     var isLoggedIn = false; // Imposta lo stato di accesso dell'utente
 
