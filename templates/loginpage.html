@@ -28,12 +28,7 @@
             })
             .then(response => {
                 if (response.ok) {
-                    function closeCard() {
-                        parent.document.querySelector('.overlay').style.display = 'none';
-                        parent.document.querySelector('.logcard').remove();
-                        parent.document.querySelector('.userpage.utentelog').style.display = 'block';
-                        parent.document.querySelector('.sign').style.display = 'none';
-                    }
+                    closeCard();
                 } else {
                     // Gestisci eventuali errori di login
                     alert("Errore durante il login");
@@ -45,6 +40,42 @@
         
             // Impedisce l'invio del modulo HTML
             return false;
+        }
+        function closeCard() {
+            try {
+                var overlay = parent.document.querySelector('.overlay');
+                var logcard = parent.document.querySelector('.logcard');
+                var sign = parent.document.querySelector('.sign');
+                var userpageUtentelog = parent.document.querySelector('.userpage.utentelog');
+
+                if (overlay) {
+                    overlay.style.display = 'none';
+                } else {
+                    console.error('Overlay not found');
+                }
+
+                if (logcard) {
+                    logcard.remove();
+                } else {
+                    console.error('Logcard not found');
+                }
+
+                if (sign) {
+                    sign.style.display = 'none';
+                } else {
+                    console.error('Sign element not found');
+                }
+
+                if (userpageUtentelog) {
+                    userpageUtentelog.style.display = 'block';
+                } else {
+                    console.error('Userpage Utentelog not found');
+                }
+
+                console.log('Card closed successfully');
+            } catch (error) {
+                console.error('Error closing the card:', error);
+            }
         }
         
     </script>
