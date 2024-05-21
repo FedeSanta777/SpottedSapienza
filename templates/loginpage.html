@@ -7,41 +7,42 @@
     <title>Log in pop up</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="application/javascript">
-      function validateLogin() {
-        // Ottieni i valori inseriti dall'utente
-        var email = document.log.logemail.value;
-        var password = document.log.logpass.value;
+        function validateLogin() {
+            // Ottieni i valori inseriti dall'utente
+            var email = document.log.logemail.value;
+            var password = document.log.logpass.value;
+            
+            // Costruisci l'oggetto dei dati da inviare al server
+            var data = {
+                email: email,
+                password: password
+            };
         
-        // Costruisci l'oggetto dei dati da inviare al server
-        var data = {
-            email: email,
-            password: password
-        };
-    
-        // Invia una richiesta POST al server Flask
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (response.ok) {
-                // Reindirizza alla pagina di successo se il login è avvenuto con successo
-                window.location.href = '/successo_accesso';
-            } else {
-                // Gestisci eventuali errori di login
-                alert("Errore durante il login");
-            }
-        })
-        .catch(error => {
-            console.error('Errore durante la richiesta di login:', error);
-        });
-    
-        // Impedisce l'invio del modulo HTML
-        return false;
-    }    
+            // Invia una richiesta POST al server Flask
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Reindirizza alla pagina di successo se il login è avvenuto con successo
+                    window.location.href = '/successo_accesso';
+                } else {
+                    // Gestisci eventuali errori di login
+                    alert("Errore durante il login");
+                }
+            })
+            .catch(error => {
+                console.error('Errore durante la richiesta di login:', error);
+            });
+        
+            // Impedisce l'invio del modulo HTML
+            return false;
+        }
+        
     </script>
 </head>
 <body>
