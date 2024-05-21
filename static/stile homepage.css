@@ -407,8 +407,8 @@ h1 {font-size: 16px;color: #881c1c;}
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 42vw;
-  height: 55vh; 
+  width: 285px; 
+  height: 230px; 
   background: white;
   z-index: 1000;
   position: fixed;
@@ -421,7 +421,7 @@ h1 {font-size: 16px;color: #881c1c;}
 
 .logcard iframe {
   width: 100%;
-  height: calc(100% - 30px);
+  height: calc(100% - 50px);
   border: none;
   overflow: hidden;
 }
