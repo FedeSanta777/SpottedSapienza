@@ -29,7 +29,6 @@ class Utenti(db.Model, UserMixin):
     facolta_codice = db.Column(db.Integer, db.ForeignKey('facolta.codice'))
     facolta = db.relationship('Facolta', backref=db.backref('utenti', lazy=True))
     ultimaGiocata = db.Column(db.Date)
-    
 # Definisci il modello Domanda
 class Domande(db.Model):
     __tablename__ = 'domande'
@@ -81,6 +80,7 @@ def load_user(user_id):
     return Utenti.query.get(int(user_id))
 
 # Funzione per verificare le credenziali dell'utente nel database
+
 def verify_user(email, password):
     return Utenti.query.filter_by(email=email, password=password).first()
 
@@ -95,11 +95,34 @@ def test_database_connection():
 @app.route('/')
 def home():
     if test_database_connection():
+        # utente = Utenti.query.filter(Utenti.email == email).first()
+        session["id"] = 4
         spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
-        session["id"] = 5
         return render_template('home.html', spot=spot)
     else:
         return "Errore di connessione al database"
+    
+@app.route('/inserisci_risposta', methods=['POST'])
+def inserisci_risposta():
+    id_utente_risp = request.form.get('id_utente_risp')
+    id_spot = request.form.get('id_spot')
+    contenuto = request.form.get('contenuto')
+    
+    # Ricava id_utente_spot dalla tabella Spot
+    spot = Spot.query.get_or_404(id_spot)
+    id_utente_spot = spot.id_utente
+    
+    nuova_risposta = Risposte(
+        id_utente_risp=id_utente_risp,
+        id_utente_spot=id_utente_spot,
+        id_spot=id_spot,
+        contenuto=contenuto
+    )
+    
+    db.session.add(nuova_risposta)
+    db.session.commit()
+    
+    return jsonify(success=True)
 
 ## Codice per la pagina classifica
 
@@ -170,7 +193,8 @@ def submit_event():
 @app.route('/profilo')
 def profilo():
     # Recupera l'ID dell'utente loggato
-    user_id = Utenti.query.first().id
+    user_id = session["id"]
+    u = Utenti.query.filter(Utenti.id == user_id).first()
     
     # Query per ottenere gli spot dell'utente loggato
     spots = Spot.query.filter(Spot.id_utente == user_id).all()
@@ -187,10 +211,9 @@ def profilo():
         risposte_per_spot[risposta.id_spot].append(risposta)
     
     # Passa i dati al template
-    return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot)
+    return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot, utente=u, id=session["id"])
 
-    # Registrazione
-    
+# Registrazione
 @app.route('/reg_page')
 def reg():
     if test_database_connection():
@@ -236,15 +259,17 @@ def check_email():
     email = request.args.get('email')
     existing_user = Utenti.query.filter_by(email=email).first()
     if existing_user:
+        session["id"] = existing_user.id
         return jsonify({'exists': True})
     else:
         return jsonify({'exists': False})
-    
+
 #login
 @app.route('/loginpage')
 def log():
     if test_database_connection():
         # Verifica se l'utente è autenticato
+        print(current_user)
         if current_user.is_authenticated:
             # Utente autenticato, reindirizza alla home page
             return "Login avvenuto con successo!"
@@ -256,33 +281,28 @@ def log():
 
 @app.route('/login', methods=['POST'])
 def login():
-     # Ottieni i dati inviati dal client come JSON
+    # Ottieni i dati inviati dal client come JSON
     data = request.json
-    
     # Estrai email e password dall'oggetto dei dati
     email = data.get('email')
     password = data.get('password')
-
+    
+    print(f'Trying to login with email: {email}')
+    
     # Verifica le credenziali dell'utente nel database
     user = verify_user(email, password)
-    
-    if user:
+    print(user)
+    if user is not None:
+        print('User authenticated successfully')
         # Login riuscito, effettua il login dell'utente
         login_user(user)
-        return jsonify({'loginStatus': 'success'})
+        return jsonify({'loginStatus': 'success'})  # Invia una risposta JSON indicando il successo del login
     else:
-        # Login fallito, restituisce un messaggio di errore
-        return jsonify({'loginStatus': 'failure'})
-    
-@app.route('/profile', methods=['GET'])
-@login_required  # Assicura che solo gli utenti loggati possano accedere a questa rotta
-def profile():
-    nome_user=current_user.nome
-    cognome_user=current_user.cognome
-    return render_template('profilo.html', nome_user=nome_user, cognome_user=cognome_user)
+        print('Authentication failed')
+        # Login fallito, restituisce un messaggio di errore con codice di stato 401
+        return jsonify({'loginStatus': 'failure'}), 401
 
-
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 @login_required
 def logout():
     # Effettua il logout dell'utente corrente

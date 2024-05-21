@@ -455,9 +455,15 @@ h1 {font-size: 16px;color: #881c1c;}
   top: 5px;
   right: 5px;
   background-color: transparent;
-  border: none;
-  cursor: pointer;
+  border:none;
+  cursor:pointer;
 }
+
+.close-btn:hover {
+  background: #881c1c; /* Cambia il background al colore desiderato */
+  color: whitesmoke;    /* Cambia il colore del testo al colore desiderato */
+}
+
 
 /*Inputs*/
 .field {
