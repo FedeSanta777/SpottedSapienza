@@ -96,7 +96,7 @@ def test_database_connection():
 def home():
     if test_database_connection():
         # utente = Utenti.query.filter(Utenti.email == email).first()
-        session["id"] = 4
+        session["id"] = 1
         spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
         return render_template('home.html', spot=spot)
     else:
@@ -268,14 +268,14 @@ def check_email():
 @app.route('/loginpage')
 def log():
     if test_database_connection():
-        # Verifica se l'utente è autenticato
-        print(current_user)
-        if current_user.is_authenticated:
-            # Utente autenticato, reindirizza alla home page
-            return "Login avvenuto con successo!"
-        else:
-            #Utente non autenticato, reindirizza alla pagina di login
-            return render_template('loginpage.html')
+        # # Verifica se l'utente è autenticato
+        # print(current_user)
+        # if current_user.is_authenticated:
+        #     # Utente autenticato, reindirizza alla home page
+        #     return "Login avvenuto con successo!"
+        # else:
+        #Utente non autenticato, reindirizza alla pagina di login
+        return render_template('loginpage.html')
     else:
         return "Errore di connessione al database"
 
@@ -296,6 +296,7 @@ def login():
         print('User authenticated successfully')
         # Login riuscito, effettua il login dell'utente
         login_user(user)
+        session["id"] = Utenti.query.filter_by(email=email).first().id
         return jsonify({'loginStatus': 'success'})  # Invia una risposta JSON indicando il successo del login
     else:
         print('Authentication failed')
