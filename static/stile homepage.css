@@ -30,8 +30,6 @@ body,html {
   display: none;
 }
 
-
-
 .header {
   display: flex;
   position: fixed;
@@ -152,8 +150,11 @@ body,html {
   position: fixed;
   top: 50%;
   left: 50%;
+  align-content: center;
+  justify-content: space-between;
   transform: translate(-50%, -50%);
   width: 80%;
+  height: 15%;
   padding: 20px;
   background-color: #fff;
   border: 3px;
@@ -275,8 +276,6 @@ body,html {
   font-size: 12px;
 }
 
-
-
 .creaspot {
   display: flex;
   flex-direction: column;
@@ -337,6 +336,7 @@ body,html {
   color: #fff;
   border: #881c1c 3px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .rispondi{
@@ -374,7 +374,6 @@ body,html {
   width: 7%;
 }
 
-
 .risposta{
   display: flex;
   width: 80%;
@@ -401,11 +400,6 @@ body,html {
   opacity: 0;
   transition: opacity .3s;
 }
-
-
-
-
-
 
 
 h1 {font-size: 16px;color: #881c1c;}
@@ -535,8 +529,6 @@ h1 {font-size: 16px;color: #881c1c;}
     color: #881c1c;
     box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
    }
-   
-
 
 
 @media (max-width: 768px) {
@@ -626,6 +618,7 @@ h1 {font-size: 16px;color: #881c1c;}
     width: 50%;
   }
 
+
   .popup {
     display: none;
   }
@@ -655,9 +648,6 @@ h1 {font-size: 16px;color: #881c1c;}
 
 }
 
-
-
-
 .utentelog{
-  display: none;
+  display: ;
 }
