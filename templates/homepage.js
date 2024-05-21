@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.querySelectorAll('.close-btn').forEach(btn => {
+    document.querySelectorAll('.closebtn').forEach(btn => {
         btn.addEventListener('click', function() {
             closePopup();
         });
