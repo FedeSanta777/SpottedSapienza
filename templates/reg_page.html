@@ -34,6 +34,9 @@
             } else if (password != document.registr.confpwd.value) {
                 alert("password differenti");
                 return false;
+            } else if(facolta==""){
+                alert("Selezionare facoltà");
+                return false;
             }
             // Costruisci l'oggetto dei dati da inviare al server
             var data = {
