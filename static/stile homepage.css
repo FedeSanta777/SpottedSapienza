@@ -415,8 +415,8 @@ h1 {font-size: 16px;color: #881c1c;}
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 20%;
-  height: 250px; 
+  width: 35%;
+  height: 60%; 
   background: white;
   z-index: 1000;
   position: fixed;
