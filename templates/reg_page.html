@@ -67,8 +67,8 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Reindirizza alla pagina di successo se la registrazione è avvenuta con successo
-                        window.location.href = '/successo';
+                        // Reindirizza alla homepage
+                        closeCard();
                     } else {
                         // Gestisci eventuali errori di registrazione
                         alert("Errore durante la registrazione");
@@ -86,6 +86,12 @@
         // Impedisce l'invio del modulo HTML
         return false;
     }
+    // Funzione per chiudere la card
+    function closeCard() {
+        parent.document.querySelector('.overlay').style.display = 'none';
+        parent.document.querySelector('.regcard').remove();
+    }
+
 </script>
     
 </head>

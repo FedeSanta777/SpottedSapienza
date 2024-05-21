@@ -28,8 +28,12 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Reindirizza alla pagina di successo se il login è avvenuto con successo
-                    window.location.href = '/successo_accesso';
+                    function closeCard() {
+                        parent.document.querySelector('.overlay').style.display = 'none';
+                        parent.document.querySelector('.logcard').remove();
+                        parent.document.querySelector('.userpage.utentelog').style.display = 'block';
+                        parent.document.querySelector('.sign').style.display = 'none';
+                    }
                 } else {
                     // Gestisci eventuali errori di login
                     alert("Errore durante il login");

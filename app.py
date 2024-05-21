@@ -243,14 +243,7 @@ def check_email():
 @app.route('/loginpage')
 def log():
     if test_database_connection():
-        # Verifica se l'utente è autenticato
-        print(current_user)
-        if current_user.is_authenticated:
-            # Utente autenticato, reindirizza alla home page
-            return "Login avvenuto con successo!"
-        else:
-            #Utente non autenticato, reindirizza alla pagina di login
-            return render_template('loginpage.html')
+        return render_template('loginpage.html')
     else:
         return "Errore di connessione al database"
 
@@ -284,12 +277,5 @@ def logout():
     logout_user()
     return redirect('/')
 
-@app.route('/successo')
-def successo():
-    return "Registrazione avvenuta con successo!"
-
-@app.route('/successo_accesso')
-def successo_log():
-    return "Login avvenuto con successo!"
 if __name__ == '__main__':
     app.run(debug=True)

@@ -250,9 +250,7 @@
             // Crea un iframe all'interno della card
             var iframe = document.createElement('iframe');
             iframe.src = url;
-        
             card.appendChild(iframe);
-        
             // Crea il pulsante di chiusura
             var closeBtn = document.createElement('button');
             closeBtn.classList.add('close-btn');
@@ -260,10 +258,6 @@
             closeBtn.onclick = function() {
               document.querySelector('.overlay').style.display = 'none';
               card.remove();
-              // Rendi visibile l'elemento con la classe 'userpage utentelog'
-              document.querySelector('.userpage.utentelog').style.display = 'block';
-               // Nascondi l'elemento con la classe 'sign'
-              document.querySelector('.sign').style.display = 'none';
             };
             card.appendChild(closeBtn);
         

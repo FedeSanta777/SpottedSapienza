@@ -169,10 +169,8 @@ body,html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 15px;
   color: #881c1c;
-  border: 3px;
-  border-radius: 100%;
   cursor: pointer;
 }
 
@@ -415,8 +413,8 @@ h1 {font-size: 16px;color: #881c1c;}
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 35%;
-  height: 60%; 
+  width: 42vw;
+  height: 55vh; 
   background: white;
   z-index: 1000;
   position: fixed;
@@ -424,6 +422,7 @@ h1 {font-size: 16px;color: #881c1c;}
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
+  overflow: hidden;
 }
 
 .logcard iframe {
@@ -432,6 +431,7 @@ h1 {font-size: 16px;color: #881c1c;}
   border: none;
   overflow: hidden;
 }
+
 .regcard {
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -660,9 +660,6 @@ h1 {font-size: 16px;color: #881c1c;}
   }
 
 }
-
-
-
 
 .utentelog{
   display: none;
