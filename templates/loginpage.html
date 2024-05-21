@@ -47,6 +47,7 @@
                 var logcard = parent.document.querySelector('.logcard');
                 var sign = parent.document.querySelector('.sign');
                 var userpageUtentelog = parent.document.querySelector('.userpage.utentelog');
+                var userpageCreaspot=parent.document.querySelector('.creaspot');
 
                 if (overlay) {
                     overlay.style.display = 'none';
@@ -70,6 +71,9 @@
                     userpageUtentelog.style.display = 'block';
                 } else {
                     console.error('Userpage Utentelog not found');
+                }
+                if(userpageCreaspot){
+                    userpageCreaspot.style.display='block';
                 }
 
                 console.log('Card closed successfully');
