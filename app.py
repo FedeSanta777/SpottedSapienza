@@ -247,7 +247,7 @@ def log():
         # Verifica se l'utente è autenticato
         if current_user.is_authenticated:
             # Utente autenticato, reindirizza alla home page
-            return render_template('profilo.html')
+            return "Login avvenuto con successo!"
         else:
             #Utente non autenticato, reindirizza alla pagina di login
             return render_template('loginpage.html')
@@ -273,6 +273,14 @@ def login():
     else:
         # Login fallito, restituisce un messaggio di errore
         return jsonify({'loginStatus': 'failure'})
+    
+@app.route('/profile', methods=['GET'])
+@login_required  # Assicura che solo gli utenti loggati possano accedere a questa rotta
+def profile():
+    nome_user=current_user.nome
+    cognome_user=current_user.cognome
+    return render_template('profilo.html', nome_user=nome_user, cognome_user=cognome_user)
+
 
 @app.route('/logout')
 @login_required
