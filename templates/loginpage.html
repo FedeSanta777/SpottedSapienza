@@ -48,7 +48,7 @@
                 var sign = parent.document.querySelector('.sign');
                 var userpageUtentelog = parent.document.querySelector('.userpage.utentelog');
                 var userpageCreaspot=parent.document.querySelector('.creaspot');
-
+                var userpageRisposta=parent.document.querySelector('.rispondi');
                 if (overlay) {
                     overlay.style.display = 'none';
                 } else {
@@ -71,11 +71,15 @@
                     userpageUtentelog.style.display = 'block';
                 } else {
                     console.error('Userpage Utentelog not found');
-                }
-                if(userpageCreaspot){
+                }if(userpageCreaspot){
                     userpageCreaspot.style.display='block';
+                }else {
+                    console.error('Userpage CreaSpot not found');
+                }if(userpageRisposta){
+                    userpageRisposta.style.display='block';
+                }else {
+                    console.error('Userpage Risposta not found');
                 }
-
                 console.log('Card closed successfully');
             } catch (error) {
                 console.error('Error closing the card:', error);

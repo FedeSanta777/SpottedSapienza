@@ -125,8 +125,11 @@ font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+    overflow-y: auto; 
+    max-height: calc(100vh - 144px); 
+    margin: 20px;
+    padding: 20px;
+
 }
 
 .right-column{
@@ -138,6 +141,8 @@ h1{
     align-items: center;
     padding: 1%;
     margin-top: 0;
+    margin-bottom: 0;
+    font-size: 32px;
 }
 
 h2{
@@ -170,6 +175,27 @@ h3{
     align-items: center;
     margin: 0.5%;
     padding: 0;
+}
+
+.dati_personali{
+   display: flex;
+   flex-direction: column; 
+   margin-right:8%;
+   margin-top:0;
+}
+.utente_email{
+    margin-top: 5%;
+    font-weight: lighter;
+    font-size: 80%;
+}
+h5{
+    background-color: #eaeaea;
+    width: 80%;
+    padding: 6%;
+    border-radius: 5px;
+    font-weight: lighter;
+    font-size: 18px;
+    margin-top: 2%;
 }
 
 p{
@@ -231,6 +257,12 @@ p{
     top:53.5px;
     right:0%;
     width: 100%;
+}
+.page-profilo{
+    padding-top: 20px;
+}
+.utente_email{
+    font-size: 60%;
 }
 }
 
