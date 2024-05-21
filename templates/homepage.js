@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// script.js
 document.addEventListener('DOMContentLoaded', function() {
     const icons = document.querySelectorAll('.icon');
     const popups = document.querySelectorAll('.popup');
+    let overlay1;
 
     icons.forEach(icon => {
         icon.addEventListener('click', function() {
@@ -28,18 +28,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Aggiungi l'overlay
             const overlay = document.createElement('div');
-            overlay.classList.add('overlay');
-            document.body.appendChild(overlay);
+            overlay1.classList.add('overlay1');
+            document.body.appendChild(overlay1);
 
             // Chiudi il popup quando si clicca fuori
-            overlay.addEventListener('click', function() {
-                popup.style.display = 'none';
-                icon.classList.remove('active');
-                overlay.remove();
-            });
+            overlay1.addEventListener('click', closePopup);
         });
     });
+
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            closePopup();
+        });
+    });
+
+    function closePopup() {
+        popups.forEach(p => p.style.display = 'none');
+        icons.forEach(i => i.classList.remove('active'));
+        if (overlay1) {
+            overlay1.remove();
+        }
+    }
 });
+
 
 
 
