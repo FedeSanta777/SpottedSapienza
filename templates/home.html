@@ -113,43 +113,19 @@
 
     <div class="bacheca">
         <div class="riquadrospot">
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
-            <div class="spotted">
-                <a href="">Nome utente</a>
-                <a href="" class="">Spotto persone!!</a>
-            </div>
             {% for spot in spot %}
             <div class="spotted" id="{{ spot.id_utente }}" onclick="changeBackgroundColor(this)">
                 <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="1">
-                <p>{{ spot.utente.nome }}</p>
-                <p>{{ spot.contenuto }}</p>
+                <p class="p1">{{ spot.utente.nome }}</p>
+                <p class="p2">{{ spot.contenuto }}</p>
+            </div>
+            {% endfor %}
+
+            {% for spot in spot %}
+            <div class="spotted" id="{{ spot.id_utente }}" onclick="changeBackgroundColor(this)">
+                <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="1">
+                <p class="p1">{{ spot.utente.nome }}</p>
+                <p class="p2">{{ spot.contenuto }}</p>
             </div>
             {% endfor %}
         </div>

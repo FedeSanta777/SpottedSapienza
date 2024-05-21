@@ -187,9 +187,11 @@ body,html {
 
 
 .riquadrospot {
+  flex: 1;
   display: flex;
-  flex: 2;
   flex-direction: column;
+  overflow-y: auto; /* Aggiunto per abilitare la scrollbar */
+  max-height: calc(100vh - 110px); /* Altezza massima per abilitare la scrollbar e lasciare spazio per la div container */
   margin: 20px;
   padding: 20px;
 }
@@ -208,6 +210,20 @@ body,html {
   color: #000000;
 }
 
+.p1{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding-left: 0,5%;
+}
+
+.p2{
+  font-size: 16px;
+  background-color: #eaeaea;
+  border-radius: 3px;
+  padding: 2% 0.5%;
+}
+
 .grey-background {
   background-color: #eaeaea;
   border: 3px;
@@ -216,9 +232,7 @@ body,html {
 }
 
 .container{
-  flex: 1;
   flex-direction: column;
-  height: calc(100vh - 70px);
   margin: 20px;
   padding: 20px;
 }

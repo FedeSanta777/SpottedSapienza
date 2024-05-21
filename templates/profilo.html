@@ -3,29 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/profilo.css">
     <title>Profilo</title>
 </head>
 <body>
-    <h1>Profilo di {{ utente.nome }}, {{ utente.id }}</h1>
-    
-    <h2>I tuoi spot</h2>
-    <div>
-        {% for spot in spots %}
-            <div class="spot">
-                <h3>Spot #{{ spot.id_spot }}</h3>
-                <p>Contenuto: {{ spot.contenuto }}</p>
-                <p>Anonimato: {{ 'Sì' if spot.anonimato else 'No' }}</p>
-                
-                <h4>Risposte</h4>
-                <ul>
-                    {% for risposta in risposte_per_spot[spot.id_spot] %}
-                        <li>{{ risposta.contenuto }}</li>
-                    {% else %}
-                        <li>Nessuna risposta</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
+    <header class="header">
+        <div class="logo">
+            <img src="/static/images/Logo sapienza.jpg" class="logoimg">SPOTTED SAPIENZA
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="/">Bacheca</a></li>
+               <li><a href="/mappa">Feste</a></li> 
+                <li><a href="/classifica">Quiz</a></li>
+            </ul>   
+        </nav>
+        <div class="sign">
+            <span class="signin">
+                <img src="/static/images/user-plus.svg" class="userplusimg">
+                <a href="reg_page.html" class="reg" onclick="openCard(event, 'reg_page.html')">Registrati</a>
+            </span>
+            <a href="loginpage.html" class="login" onclick="openCard(event, 'loginpage.html')">Accedi</a>
+        </div>
+        
+        <span class="userpage utentelog">
+            <img src="/static/images/user.svg" class="userimg">
+            <a href="/profilo" class="profilo">Il mio profilo</a>
+        </span>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="page-profilo">
+
+        <div class="left-column">
+            
+
+        <h2>I tuoi spot</h2>
+            {% for spot in spots %}
+                <div class="spot">
+                    <h3>Spot #{{ spot.id_spot }}</h3>
+                    <p>{{ spot.contenuto }}</p>
+                    <!-- <p>Anonimato: {{ 'Sì' if spot.anonimato else 'No' }}</p> -->
+                    
+                    <h4>Risposte</h4>
+                    <ul>
+                        {% for risposta in risposte_per_spot[spot.id_spot] %}
+                            <li>{{ risposta.contenuto }}</li>
+                        {% else %}
+                            <li>Nessuna risposta</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="right-column">
+            <h1>Profilo di {{ utente.nome }}, {{ utente.id }}</h1>
+        </div>
+
     </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    let hamburger = document.querySelector('.hamburger');
+    let header = document.querySelector('.header');
+
+    hamburger.addEventListener("click", function() {
+        header.classList.toggle('open');
+    });
+});
+</script>
+
 </body>
 </html>
