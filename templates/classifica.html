@@ -43,6 +43,34 @@
 
     </header>
 
+    
+        <div class="scorrimento">
+            <div class="marquee">
+                <div class="marquee-content">
+                  <!-- <div class="item">Elemento 1</div>
+                  <div class="item">Elemento 2</div>
+                  <div class="item">Elemento 3</div>
+                  <div class="item">Elemento 4</div> -->
+                  {% set count = 0 %}
+                    {% for faco in facolta %}
+                        <div class="item">{{ loop.index }} {{ faco.nome }} {{ faco.puntiTot }}</div>
+                        {% set count = count + 1 %}
+                    {% endfor %}
+                  <!-- Aggiungi altri elementi qui -->
+                </div>
+              </div>
+        </div>
+        <script src="script.js">
+            // script.js
+            window.addEventListener('load', function() {
+            const marqueeContent = document.querySelector('.marquee-content');
+            const items = Array.from(marqueeContent.children);
+            items.forEach(item => {
+                const clone = item.cloneNode(true);
+                marqueeContent.appendChild(clone);
+            });
+            });
+        </script>
     <div class="container">
         <div class="left-column">
             <div class="title-scoreboard">
@@ -89,14 +117,15 @@
             <div id="div2" class="hidden">
                 <div class="box-domanda">
                     <div class="domanda">
-                        <p>{{ domande.testo }}</p>
-                    </div>
-
-                    <div class="img-argomento">
+                        <div class="img-argomento">
                         <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
                             <!-- <img src="{{ url_for('static', filename='domande.srcArg') }}" alt="Immagine"> -->
+                            <!-- <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}"> -->
+                            <!-- <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}"> -->
                             <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}">
                         </div>
+                        <p>{{ domande.testo }}</p>
+                    </div>
                 </div>
                 <div class="box-risposta" id="box-risposta">
                     <form action="/incrementa/{{ utente_scelto.facolta_codice }}" method="POST">
