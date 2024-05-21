@@ -95,11 +95,34 @@ def test_database_connection():
 @app.route('/')
 def home():
     if test_database_connection():
+        # utente = Utenti.query.filter(Utenti.email == email).first()
+        session["id"] = 1
         spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
-        session["id"] = 5
         return render_template('home.html', spot=spot)
     else:
         return "Errore di connessione al database"
+    
+@app.route('/inserisci_risposta', methods=['POST'])
+def inserisci_risposta():
+    id_utente_risp = request.form.get('id_utente_risp')
+    id_spot = request.form.get('id_spot')
+    contenuto = request.form.get('contenuto')
+    
+    # Ricava id_utente_spot dalla tabella Spot
+    spot = Spot.query.get_or_404(id_spot)
+    id_utente_spot = spot.id_utente
+    
+    nuova_risposta = Risposte(
+        id_utente_risp=id_utente_risp,
+        id_utente_spot=id_utente_spot,
+        id_spot=id_spot,
+        contenuto=contenuto
+    )
+    
+    db.session.add(nuova_risposta)
+    db.session.commit()
+    
+    return jsonify(success=True)
 
 ## Codice per la pagina classifica
 
@@ -170,7 +193,8 @@ def submit_event():
 @app.route('/profilo')
 def profilo():
     # Recupera l'ID dell'utente loggato
-    user_id = Utenti.query.first().id
+    user_id = session["id"]
+    u = Utenti.query.filter(Utenti.id == user_id).first()
     
     # Query per ottenere gli spot dell'utente loggato
     spots = Spot.query.filter(Spot.id_utente == user_id).all()
@@ -187,7 +211,7 @@ def profilo():
         risposte_per_spot[risposta.id_spot].append(risposta)
     
     # Passa i dati al template
-    return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot)
+    return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot, utente=u, id=session["id"])
 
 # Registrazione
 @app.route('/reg_page')
@@ -235,6 +259,7 @@ def check_email():
     email = request.args.get('email')
     existing_user = Utenti.query.filter_by(email=email).first()
     if existing_user:
+        session["id"] = existing_user.id
         return jsonify({'exists': True})
     else:
         return jsonify({'exists': False})
@@ -264,6 +289,7 @@ def login():
         print('User authenticated successfully')
         # Login riuscito, effettua il login dell'utente
         login_user(user)
+        session["id"] = Utenti.query.filter_by(email=email).first().id
         return jsonify({'loginStatus': 'success'})  # Invia una risposta JSON indicando il successo del login
     else:
         print('Authentication failed')

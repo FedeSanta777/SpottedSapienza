@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/stile homepage.css">
     <script language="JavaScript" type="text/javascript" src="homepage.js"></script>
     <title>Spotted Sapienza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
 </head>
@@ -58,7 +59,7 @@
         </div>
     </div>
 
-    <div id="popup1" class="popup">
+    <div id="popup1" class="popup popup-filtri">
         <div class="filtri">
             <img src="/static/images/search.svg" class="searchimg">
             <input type="text" placeholder="Cerca..." class="cercafiltro">
@@ -81,8 +82,7 @@
         </div>
         <span class="close-btn">&times;</span>
     </div>
-    <div id="popup2" class="popup">
-        <div class="creaspot">
+    <div id="popup2" class="popup popup-creaspot">
             <div class="spot">
                 <img src="/static/images/create.svg" class="createimg">
                 <input type="text" placeholder="Crea il tuo spot" class="input-spot">
@@ -91,20 +91,19 @@
                 <input type="checkbox">Anonimo
             </span>
             <button class="btninvia">INVIA</button>
-        </div>
         <span class="close-btn">&times;</span>
     </div>
-    <div id="popup3" class="popup">
-        <div class="rispondi">
+    <div id="popup3" class="popup popup-rispondi">
             <div class="risp">
                 <img src="/static/images/rispondi.svg" class="rispondiimg">
                 <p>Rispondi a nome utente</p>
             </div>
             <div class="risposta">
-            <input type="text" placeholder="Rispondi..." class="input-risp">
-            <button class="btninvia">Invia</button>
+                <form id="rispostaForm" method="POST">
+                    <input type="text" placeholder="Rispondi..." class="input-risp">
+                    <button type="submit" class="btninvia">Invia</button>
+                </form>
             </div>
-        </div>
         <span class="close-btn">&times;</span>
     </div>
 
@@ -148,6 +147,7 @@
             </div>
             {% for spot in spot %}
             <div class="spotted" id="{{ spot.id_utente }}" onclick="changeBackgroundColor(this)">
+                <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="1">
                 <p>{{ spot.utente.nome }}</p>
                 <p>{{ spot.contenuto }}</p>
             </div>
@@ -195,8 +195,12 @@
                 <p>Rispondi a nome utente</p>
             </div>
             <div class="risposta">
-            <input type="text" placeholder="Rispondi..." class="input-risp">
-            <button class="btninvia">Invia</button>
+                <form id="rispostaForm" action="/inserisci_risposta" method="POST">
+                    <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="2"> <!-- Sostituisci con il valore reale -->
+                    <input type="hidden" id="id_spot" name="id_spot" value="1"> <!-- Sostituisci con il valore reale -->
+                    <input type="text" id="contenuto" name="contenuto" placeholder="Rispondi..." class="input-risp" required>
+                    <button type="submit" class="btninvia">Invia</button>
+                </form>
             </div>
             
         </div>
@@ -283,6 +287,36 @@
             clickedDivId = element.id;
             console.log("Clicked div id:", clickedDivId);
         }
-    </script>     
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('rispostaForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impedisce l'azione predefinita del form
+
+                let form = event.target;
+                let formData = new FormData(form); // Crea un oggetto FormData con i dati del form
+
+                fetch('/inserisci_risposta', {
+                    method: 'POST',
+                    body: formData // Invia i dati come FormData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Risposta inserita con successo!');
+                        form.reset();
+                    } else {
+                        alert('Errore durante l\'inserimento della risposta.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore:', error);
+                    alert('Errore durante l\'inserimento della risposta.');
+                });
+            });
+        });
+    </script>
+        
+     
 </body>
 </html>
