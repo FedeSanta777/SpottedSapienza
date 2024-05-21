@@ -29,7 +29,6 @@ class Utenti(db.Model, UserMixin):
     facolta_codice = db.Column(db.Integer, db.ForeignKey('facolta.codice'))
     facolta = db.relationship('Facolta', backref=db.backref('utenti', lazy=True))
     ultimaGiocata = db.Column(db.Date)
-    
 # Definisci il modello Domanda
 class Domande(db.Model):
     __tablename__ = 'domande'
@@ -81,6 +80,7 @@ def load_user(user_id):
     return Utenti.query.get(int(user_id))
 
 # Funzione per verificare le credenziali dell'utente nel database
+
 def verify_user(email, password):
     return Utenti.query.filter_by(email=email, password=password).first()
 
@@ -189,8 +189,7 @@ def profilo():
     # Passa i dati al template
     return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot)
 
-    # Registrazione
-    
+# Registrazione
 @app.route('/reg_page')
 def reg():
     if test_database_connection():
@@ -239,12 +238,13 @@ def check_email():
         return jsonify({'exists': True})
     else:
         return jsonify({'exists': False})
-    
+
 #login
 @app.route('/loginpage')
 def log():
     if test_database_connection():
         # Verifica se l'utente è autenticato
+        print(current_user)
         if current_user.is_authenticated:
             # Utente autenticato, reindirizza alla home page
             return "Login avvenuto con successo!"
@@ -256,33 +256,28 @@ def log():
 
 @app.route('/login', methods=['POST'])
 def login():
-     # Ottieni i dati inviati dal client come JSON
+    # Ottieni i dati inviati dal client come JSON
     data = request.json
-    
     # Estrai email e password dall'oggetto dei dati
     email = data.get('email')
     password = data.get('password')
-
+    
+    print(f'Trying to login with email: {email}')
+    
     # Verifica le credenziali dell'utente nel database
     user = verify_user(email, password)
-    
-    if user:
+    print(user)
+    if user is not None:
+        print('User authenticated successfully')
         # Login riuscito, effettua il login dell'utente
         login_user(user)
-        return jsonify({'loginStatus': 'success'})
+        return jsonify({'loginStatus': 'success'})  # Invia una risposta JSON indicando il successo del login
     else:
-        # Login fallito, restituisce un messaggio di errore
-        return jsonify({'loginStatus': 'failure'})
-    
-@app.route('/profile', methods=['GET'])
-@login_required  # Assicura che solo gli utenti loggati possano accedere a questa rotta
-def profile():
-    nome_user=current_user.nome
-    cognome_user=current_user.cognome
-    return render_template('profilo.html', nome_user=nome_user, cognome_user=cognome_user)
+        print('Authentication failed')
+        # Login fallito, restituisce un messaggio di errore con codice di stato 401
+        return jsonify({'loginStatus': 'failure'}), 401
 
-
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 @login_required
 def logout():
     # Effettua il logout dell'utente corrente
