@@ -77,8 +77,17 @@
 
                 <!-- Bottone visibile se enable_button è True -->
                 <div id="button_div" class="button_div" style="display: none;">
+                    <div class="descrizioneQuiz">
+                        <h2 style="text-align: center;">Benvenut* {{ utente_scelto.nome }}!</h2>
+                        <p>Clicca sul bottone per giocare al quiz e guadagnare punti!
+                        <br><br> Le regole sono semplici:<li>Una volta al giorno potrai partecipare al quiz</li>
+                        <li>Dovrai rispondere ad una domanda casuale</li>
+                        <li>Se indovini guadagnerai 10 punti per la tua facoltà </li>
+                        <li>La facoltà con più punti vince </li><br>
+                        <button id="cambiaDiv" class="bottoneGioca">GIOCA ORA</button>
+                    </div>
                     <!-- <button>Il bottone è abilitato</button> -->
-                    <button id="cambiaDiv">Cambia Div</button>
+                    
                 </div>
 
                 <!-- Div nascosto se enable_button è False -->
