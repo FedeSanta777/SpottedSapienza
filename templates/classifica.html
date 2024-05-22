@@ -21,7 +21,7 @@
                 <li><a href="/classifica">Quiz</a></li>
             </ul>   
         </nav>
-        <div class="sign">
+        <div class="sign" style="visibility: hidden;">
             <span class="signin">
                 <img src="/static/images/user-plus.svg" class="userplusimg">
                 <a href="reg_page.html" class="reg" onclick="openCard(event, 'reg_page.html')">Registrati</a>
@@ -43,34 +43,14 @@
 
     </header>
 
-    
-        <div class="scorrimento">
-            <div class="marquee">
-                <div class="marquee-content">
-                  <!-- <div class="item">Elemento 1</div>
-                  <div class="item">Elemento 2</div>
-                  <div class="item">Elemento 3</div>
-                  <div class="item">Elemento 4</div> -->
-                  {% set count = 0 %}
-                    {% for faco in facolta %}
-                        <div class="item">{{ loop.index }} {{ faco.nome }} {{ faco.puntiTot }}</div>
-                        {% set count = count + 1 %}
-                    {% endfor %}
-                  <!-- Aggiungi altri elementi qui -->
-                </div>
-              </div>
-        </div>
-        <script src="script.js">
-            // script.js
-            window.addEventListener('load', function() {
-            const marqueeContent = document.querySelector('.marquee-content');
-            const items = Array.from(marqueeContent.children);
-            items.forEach(item => {
-                const clone = item.cloneNode(true);
-                marqueeContent.appendChild(clone);
-            });
-            });
-        </script>
+    <div id="overlay"></div>
+    <div id="animatedImage">
+        <img src="/static/images/elmoFire.gif" alt="Immagine animata">
+    </div>
+    <div id="correctAnimatedImage">
+        <img src="/static/images/elmoGood.gif" alt="Immagine animata">
+    </div>
+
     <div class="container">
         <div class="left-column">
             <div class="title-scoreboard">
@@ -99,19 +79,15 @@
                 <div id="button_div" class="button_div" style="display: none;">
                     <!-- <button>Il bottone è abilitato</button> -->
                     <button id="cambiaDiv">Cambia Div</button>
-                    <div style="position: relative;">
-                        <div class="iframe-overlay">
-                            <!-- <iframe src="https://giphy.com/embed/YIo7D00296YL6LyV2P" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->
-                            <iframe src="https://giphy.com/embed/P7JmDW7IkB7TW" width="480" height="328" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                        </div> <!-- Elemento trasparente sopra l'iframe -->
-                    </div>  
                 </div>
 
                 <!-- Div nascosto se enable_button è False -->
                 <div id="hidden_div" class="hidden_div" style="display: none;">
-                    <p>Il bottone non è abilitato.</p>
-                    <div class="countdown" id="countdown"></div>
-                <button id="myButton" disabled>Attendi il timer</button>
+                    <div class="cont">
+                        <p>Puoi giocare una sola volta al giorno, aspetta domani... <br></p>
+                        <div id="countdown">Tempo rimanente: --h --m --s</div>
+                        <div><button id="randomButton">Gioca</button></div>
+                    </div>
                 </div>
             </div>
             <div id="div2" class="hidden">
@@ -249,37 +225,33 @@
         <script>
             // Funzione per calcolare il tempo rimanente fino a mezzanotte
             function getRemainingTime() {
-            const now = new Date();
-            const midnight = new Date(now);
-            midnight.setHours(24, 0, 0, 0); // Imposta a mezzanotte
-        
-            return midnight - now; // Tempo rimanente in millisecondi
+                const now = new Date();
+                const midnight = new Date();
+                midnight.setHours(24, 0, 0, 0); // Imposta a mezzanotte di oggi
+    
+                return midnight - now; // Tempo rimanente in millisecondi
             }
-        
+    
             // Funzione per aggiornare il timer
             function updateTimer() {
-            const remainingTime = getRemainingTime();
-        
-            // Calcola le ore, i minuti e i secondi rimanenti
-            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-        
-            // Aggiorna il testo del timer
-            document.getElementById('countdown').innerText = `Tempo rimanente: ${hours}h ${minutes}m ${seconds}s`;
-        
-            // Abilita il pulsante quando il timer scade
-            const button = document.getElementById('myButton');
-            if (remainingTime <= 0) {
-                button.removeAttribute('disabled');
-            } else {
-                button.setAttribute('disabled', 'disabled');
+                const remainingTime = getRemainingTime();
+    
+                // Calcola le ore, i minuti e i secondi rimanenti
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    
+                // Aggiorna il testo del timer
+                document.getElementById('countdown').innerText = `Tempo rimanente: ${hours}h ${minutes}m ${seconds}s`;
+    
             }
-            }
-        
-            // Avvia il timer
-            updateTimer();
-            setInterval(updateTimer, 1000); // Aggiorna il timer ogni secondo
+    
+            // Assicurarsi che il DOM sia completamente caricato prima di eseguire lo script
+            document.addEventListener('DOMContentLoaded', () => {
+                // Avvia il timer
+                updateTimer();
+                setInterval(updateTimer, 1000); // Aggiorna il timer ogni secondo
+            });
         </script>
 
         <script>
@@ -319,8 +291,123 @@
             });
         </script>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('randomButton');
+            const container = document.querySelector('.cont');
+
+            button.addEventListener('mouseover', () => {
+                const containerRect = container.getBoundingClientRect();
+                const buttonRect = button.getBoundingClientRect();
+
+                // Calculate the maximum position within the container
+                const maxX = containerRect.width - buttonRect.width;
+                const maxY = containerRect.height - buttonRect.height;
+
+                // Generate random positions
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                // Set the new position
+                button.style.left = `${randomX}px`;
+                button.style.top = `${randomY}px`;
+            });
+        });
+
+        </script>
+
+        <div class="scorrimento">
+            <h2 style="text-align: center; color: white;">CLASSIFICA</h2>
+            <div class="marquee">
+                <div class="marquee-content">
+                <!-- <div class="item">Elemento 1</div>
+                <div class="item">Elemento 2</div>
+                <div class="item">Elemento 3</div>
+                <div class="item">Elemento 4</div> -->
+                {% set count = 0 %}
+                    {% for faco in facolta %}
+                        <div class="item">{{ loop.index }} {{ faco.nome }} {{ faco.puntiTot }}</div>
+                        {% set count = count + 1 %}
+                    {% endfor %}
+                <!-- Aggiungi altri elementi qui -->
+                </div>
+            </div>
+        </div>
+        <script src="script.js">
+            // script.js
+            window.addEventListener('load', function() {
+            const marqueeContent = document.querySelector('.marquee-content');
+            const items = Array.from(marqueeContent.children);
+            items.forEach(item => {
+                const clone = item.cloneNode(true);
+                marqueeContent.appendChild(clone);
+            });
+            });
+        </script>
+
+        <script>
+            // Seleziona tutti i bottoni con la classe 'risposta-sbagliata'
+            let buttons = document.querySelectorAll('.risposta-sbagliata');
+
+            // Aggiungi l'evento di click a ciascun bottone
+            buttons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Scuro il sito
+                    let overlay = document.getElementById('overlay');
+                    overlay.style.background = 'rgba(0, 0, 0, 0.5)';
+
+                    // Animo l'immagine
+                    let animatedImage = document.getElementById('animatedImage');
+                    animatedImage.style.opacity = '1';
+                    animatedImage.style.transform = 'translate(-50%, -130%)';
+
+                    // Ferma l'immagine al centro per qualche secondo
+                    setTimeout(function() {
+                        // Scorrere l'immagine fino a scomparire
+                        animatedImage.style.transform = 'translate(-50%, -400%)';
+                        animatedImage.style.opacity = '0';
+
+                        // Ripristina il sito allo stato iniziale
+                        setTimeout(function() {
+                            overlay.style.background = 'rgba(0, 0, 0, 0)';
+                        }, 500); // Tempo di transizione dello sfondo
+
+                    }, 2000); // Tempo di fermata al centro
+                });
+            });
 
             
+        // Seleziona il bottone con la classe 'risposta-esatta'
+        let correctButton = document.querySelector('.risposta-esatta');
+
+        // Aggiungi l'evento di click al bottone con la classe 'risposta-esatta'
+        correctButton.addEventListener('click', function() {
+            // Scuro il sito
+            let overlay = document.getElementById('overlay');
+            overlay.style.background = 'rgba(0, 0, 0, 0.5)';
+
+            // Animo l'immagine
+            let correctAnimatedImage = document.getElementById('correctAnimatedImage');
+            correctAnimatedImage.style.opacity = '1';
+            correctAnimatedImage.style.transform = 'translate(-50%, -120%)';
+
+            // Ferma l'immagine al centro per qualche secondo
+            setTimeout(function() {
+                // Scorrere l'immagine fino a scomparire
+                correctAnimatedImage.style.transform = 'translate(-50%, -400%)';
+                correctAnimatedImage.style.opacity = '0';
+
+                // Ripristina il sito allo stato iniziale
+                setTimeout(function() {
+                    overlay.style.background = 'rgba(0, 0, 0, 0)';
+                }, 500); // Tempo di transizione dello sfondo
+
+            }, 2000); // Tempo di fermata al centro
+        });
+        </script>
+            
     </div>
+    
+    
 </body>
 </html>

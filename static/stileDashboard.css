@@ -224,13 +224,27 @@ body,html {
 }
 
 .hidden_div{
-  background-color: #eaeaea;
-  color: #fff;
+  background-color: #e4e4e4;
+  color: black;
+  text-align: center;
   width: 80%;
+  height: 40%;
   padding: 10px;
   border: 3px;
   border-radius: 5px ;
 }
+
+.cont {
+  position: relative;
+  height: 100%;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
 
 .box-domanda {
   background-color: #fff;
@@ -271,7 +285,7 @@ body,html {
 
 .img-argomento img{
   align-items: center;
-  width: 85%;
+  width: 75%;
   margin: 1%;
   border: solid 1px black;
 }
@@ -377,8 +391,77 @@ form{
   display: none;
 }
 
+.button_div {
+  display: flex; /* Utilizziamo flexbox per centrare il contenuto */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+  border: #000 solid 3px;
+  height: 100%;
+  width: 100%;
+}
+
+.bottoneGioca {
+  /* position: fixed; */
+  margin-top: 60%;
+  color: white;
+  background-color: #881c1c;
+  height: 10%;
+  width: 15%;
+  border-radius: 5px;
+}
+
+#randomButton {
+  position: absolute;
+  color: white;
+  background-color: #881c1c;
+  height: 15%;
+  width: 15%;
+  border-radius: 5px;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#animatedImage {
+  position: fixed;
+  bottom: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: 20;
+}
+
+#animatedImage img {
+  width: 150%; /* Modifica la dimensione dell'immagine secondo necessità */
+}
+
+#correctAnimatedImage {
+  position: fixed;
+  bottom: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: 20;
+}
+
+#correctAnimatedImage img {
+  width: 100%; /* Modifica la dimensione dell'immagine secondo necessità */
+}
+
 @media (max-width: 768px) {
   .header{
+    z-index: 1000;
     position:relative;
     padding-left: 20px;
     padding-right: 60px;
@@ -433,7 +516,7 @@ form{
   .container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 52px);
+    height: calc(100vh - 49px);
     padding-top: 0;
     margin-top: 0;
   }  
@@ -447,16 +530,19 @@ form{
   }
 
   .right-column {
+    position: relative;
     background-color: #881c1c;
     border: 3px;
     display: flex;
     flex-direction: column;
     flex: 2;
+
   }
 
   .scorrimento{
     background-color: #881c1c;
     display: block;
+    padding-bottom: 5%;
   }
   
   .marquee {
@@ -488,5 +574,57 @@ form{
     from { transform: translateX(100%); }
     to { transform: translateX(-100%); }
   }
+
+  .hidden_div{
+    background-color: #e4e4e4;
+    color: black;
+    text-align: center;
+    width: 80%;
+    height: 70%;
+    padding: 10px;
+    border: 3px;
+    border-radius: 5px ;
+  }
+
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  #animatedImage {
+    position: fixed;
+    bottom: -400px;
+    left: 20%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+    z-index: 20;
+  }
+  
+  #animatedImage img {
+    width: 150%; /* Modifica la dimensione dell'immagine secondo necessità */
+  }
+  
+  #correctAnimatedImage {
+    position: fixed;
+    bottom: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+    z-index: 20;
+  }
+  
+  #correctAnimatedImage img {
+    width: 100%; /* Modifica la dimensione dell'immagine secondo necessità */
+  }
+  
  
 }
