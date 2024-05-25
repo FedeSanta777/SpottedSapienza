@@ -19,6 +19,13 @@
                 <li><a href="/classifica">Quiz</a></li>
             </ul>   
         </nav>
+        <div class="sign" style="visibility: hidden;">
+            <span class="signin">
+                <img src="/static/images/user-plus.svg" class="userplusimg">
+                <a href="/reg_page" class="reg" onclick="openregCard(event, '/reg_page')">Registrati</a>
+            </span>
+            <a href="loginpage.html" class="login" onclick="openlogCard(event, '/loginpage')">Accedi</a>
+        </div>
 
         <div class="hamburger">
             <span></span>
@@ -54,7 +61,7 @@
         <div class="right-column">
             <h1>Profilo di {{ utente.nome }} {{ utente.cognome }}</h1>
             <div class=" dati_personali">
-                <h5> Email: <div class="utente_email">{{utente.email}}</class></h5>
+                <h5> Email: <div class="utente_email">{{utente.email}}</h5>
                 <h5>Ultima partita: {{utente.ultimaGiocata}}</h5>
                 <h5> Facoltà: {{utente.facolta.nome}}</h5>
                 <h5> Punti Facoltà: {{utente.facolta.puntiTot}}</h5>

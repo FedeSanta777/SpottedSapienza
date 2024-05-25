@@ -107,24 +107,12 @@
         <span class="closebtn">&times;</span>
     </div>
 
-
-
-    
-
     <div class="bacheca">
         <div class="riquadrospot">
             {% for spot in spot %}
-            <div class="spotted" id="{{ spot.id_utente }}" onclick="changeBackgroundColor(this)">
+            <div class="spotted" id="{{ spot.id_spot }}" onclick="changeBackgroundColor(this)">
                 <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="1">
-                <p class="p1">{{ spot.utente.nome }}</p>
-                <p class="p2">{{ spot.contenuto }}</p>
-            </div>
-            {% endfor %}
-
-            {% for spot in spot %}
-            <div class="spotted" id="{{ spot.id_utente }}" onclick="changeBackgroundColor(this)">
-                <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="1">
-                <p class="p1">{{ spot.utente.nome }}</p>
+                <p class="p1">{% if 1 == spot.anonimato %}ANONIMO{% else %}{{spot.utente.nome}}{% endif %}</p>
                 <p class="p2">{{ spot.contenuto }}</p>
             </div>
             {% endfor %}
@@ -154,28 +142,33 @@
             </div>
         </div>
 
-        <div class="creaspot utentelog">
-            <div class="spot">
-                <img src="/static/images/create.svg" class="createimg">
-                <input type="text" placeholder="Crea il tuo spot" class="input-spot">
+        <form id="creaSpotForm" action="/inserisci_spot" method="POST">
+            <div class="creaspot utentelog">
+                <div class="spot">
+                    <img src="/static/images/create.svg" class="createimg">
+                    <input type="text" name="contenuto" placeholder="Crea il tuo spot" class="input-spot">
+                    <input type="hidden" id="facolta" name="facolta" value={{utente.facolta_codice}}>
+                </div>
+                <span class="anonimo">
+                    <input type="checkbox" name="anonimato" id="anonimo-checkbox">Anonimo
+                </span>
+                <button type="submit" class="btninvia">INVIA</button>
             </div>
-            <span class="anonimo">
-                <input type="checkbox">Anonimo
-            </span>
-            <button class="btninvia">INVIA</button>
-        </div>
+        </form>
+        
+        
 
         <div class="rispondi utentelog">
             <div class="risp">
                 <img src="/static/images/rispondi.svg" class="rispondiimg">
-                <p>Rispondi a uno spot</p>
+                <p>Rispondi a uno spot </p>
             </div>
             <div class="risposta">
-                <form id="rispostaForm" action="/inserisci_risposta" method="POST">
-                    <input type="hidden" id="id_utente_risp" name="id_utente_risp" value="2"> <!-- Sostituisci con il valore reale -->
+                <form id="rispostaForm" method="POST">
+                    <input type="hidden" id="id_utente_risp" name="id_utente_risp" value={{session["id"]}}> <!-- Sostituisci con il valore reale -->
                     <input type="hidden" id="id_spot" name="id_spot" value="1"> <!-- Sostituisci con il valore reale -->
                     <input type="text" id="contenuto" name="contenuto" placeholder="Rispondi..." class="input-risp" required>
-                    <button type="submit" class="btninvia">Invia</button>
+                    <button type="button" class="btninvia" onclick="inviaRisposta()">Invia</button>
                 </form>
             </div>
             
@@ -265,34 +258,68 @@
         }
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('rispostaForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Impedisce l'azione predefinita del form
+        function inviaRisposta() {
+        let id_utente_risp = document.getElementById('id_utente_risp').value;
+        let id_spot = clickedDivId;
+        let contenuto = document.getElementById('contenuto').value;
 
-                let form = event.target;
-                let formData = new FormData(form); // Crea un oggetto FormData con i dati del form
+        let formData = new FormData();
+        formData.append('id_utente_risp', id_utente_risp);
+        formData.append('id_spot', id_spot);
+        formData.append('contenuto', contenuto);
 
-                fetch('/inserisci_risposta', {
-                    method: 'POST',
-                    body: formData // Invia i dati come FormData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Risposta inserita con successo!');
-                        form.reset();
-                    } else {
-                        alert('Errore durante l\'inserimento della risposta.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Errore:', error);
-                    alert('Errore durante l\'inserimento della risposta.');
-                });
+        fetch('/inserisci_risposta', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Risposta inserita con successo!');
+                document.getElementById('contenuto').value = ''; // Cancella il campo di risposta
+            } else {
+                alert('Errore durante l\'inserimento della risposta.');
+            }
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+            alert('Errore durante l\'inserimento della risposta.');
+        });
+    }
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('creaSpotForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impedisci l'invio del form predefinito
+            
+            var formData = new FormData(this); // Crea un oggetto FormData con i dati del form
+            
+            fetch('/inserisci_spot', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Errore durante l\'inserimento dello spot.');
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Spot inserito con successo!');
+                    // Puoi eseguire ulteriori azioni qui, ad esempio chiudere il popup o aggiornare la pagina
+                } else {
+                    throw new Error('Errore durante l\'inserimento dello spot.');
+                }
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+                alert('Errore durante l\'inserimento dello spot.');
             });
         });
+    });
     </script>
-        
      
 </body>
 </html>

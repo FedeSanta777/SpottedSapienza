@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout a due colonne con mappa Leaflet</title>
+    <title>Spot Eventi</title>
     <!-- Aggiungi il link alla libreria Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> -->
@@ -19,14 +19,14 @@
             <img src="/static/images/Logo sapienza.jpg" class="logoimg">SPOTTED SAPIENZA
         </div>
 
-        <nav class="menu">
+        <nav class="menu" style="z-index: 2000;">
             <ul>
                 <li><a href="/">Bacheca</a></li>
                <li><a href="/mappa">Feste</a></li> 
                 <li><a href="/classifica">Quiz</a></li>
             </ul>   
         </nav>
-        <div class="sign">
+        <div class="sign" style="visibility: hidden;">
             <span class="signin">
                 <img src="/static/images/user-plus.svg" class="userplusimg">
                 <a href="/reg_page" class="reg" onclick="openCard(event, '/reg_page')">Registrati</a>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session, Response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from datetime import datetime
@@ -97,10 +97,34 @@ def home():
     if test_database_connection():
         # utente = Utenti.query.filter(Utenti.email == email).first()
         session["id"] = 1
+        id_utente = session["id"]
+        utente = Utenti.query.filter_by(id=id_utente).first()
         spot = Spot.query.all() # Recupera tutti gli spot dalla tabella "spot"
-        return render_template('home.html', spot=spot)
+        return render_template('home.html', spot=spot, utente=utente)
     else:
         return "Errore di connessione al database"
+    
+@app.route('/inserisci_spot', methods=['POST'])
+def inserisci_spot():
+    id_utente = session.get('id')  # Accedi all'ID dell'utente dalla sessione Flask
+    contenuto = request.form.get('contenuto')
+    anonimato = True if request.form.get('anonimato') == 'on' else False
+    facolta = request.form.get('facolta')
+    
+    nuovo_spot = Spot(
+        id_utente=id_utente,
+        contenuto=contenuto,
+        anonimato=anonimato,
+        id_facolta=facolta
+    )
+
+    try:
+        db.session.add(nuovo_spot)
+        db.session.commit()
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
     
 @app.route('/inserisci_risposta', methods=['POST'])
 def inserisci_risposta():
@@ -119,11 +143,14 @@ def inserisci_risposta():
         contenuto=contenuto
     )
     
-    db.session.add(nuova_risposta)
-    db.session.commit()
+    try:
+        db.session.add(nuova_risposta)
+        db.session.commit()
+        return Response('success', status=200)
+    except Exception as e:
+        db.session.rollback()
+        return Response('error', status=500)
     
-    return jsonify(success=True)
-
 ## Codice per la pagina classifica
 
 @app.route('/classifica')
@@ -188,7 +215,7 @@ def submit_event():
         db.session.add(nuovo_evento)
         db.session.commit()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('mappa'))
     
 @app.route('/profilo')
 def profilo():

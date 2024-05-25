@@ -140,7 +140,7 @@ h1{
     color: #fff;
     align-items: center;
     padding: 1%;
-    margin-top: 0;
+    margin-top: 3%;
     margin-bottom: 0;
     font-size: 32px;
 }
@@ -179,29 +179,33 @@ h3{
 
 .dati_personali{
    display: flex;
+   align-items: center;
    flex-direction: column; 
    margin-right:8%;
-   margin-top:0;
+   margin-top:3%;
+   background-color: #f2f2f2;
+   border-radius: 5px;
 }
 .utente_email{
+    display: contents;
     margin-top: 5%;
     font-weight: lighter;
     font-size: 80%;
 }
 h5{
-    background-color: #eaeaea;
     width: 80%;
-    padding: 6%;
-    border-radius: 5px;
+    height: 20%;
     font-weight: lighter;
     font-size: 18px;
+    padding: 3%;
     margin-top: 2%;
+    border-bottom: 5px solid #881c1c;
 }
 
 p{
     background-color: #881c1c;
     color: #fff;
-    width: 40%;
+    width: 80%;
     padding: 0.5em;
     border-radius: 5px;
 }
@@ -264,10 +268,33 @@ p{
 .utente_email{
     font-size: 60%;
 }
+
+h5{
+    width: 80%;
+    height: 20%;
+    font-weight: lighter;
+    font-size: 14px;
+    padding: 2%;
+    margin-top: 1%;
 }
 
 
 
+
+}
+
+.spot {
+    padding-left: 2%;
+}
+
+.spot h4{
+    margin-bottom: 0;
+}
+
+
+.spot li {
+    margin: 2%;
+}
 
 
 .utentelog{
