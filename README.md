@@ -88,7 +88,6 @@ Abbiamo inoltre aggiunto ulteriori funzionalità come la possibilità di spottar
     + Foglio di stile per migliorare l'estetica del sito
     + media query per rendere responsive la pagina, adatta quindi anche a dispositivi mobile
 
-
 ## Profilo
 
 ⁠- ⁠profilo.html

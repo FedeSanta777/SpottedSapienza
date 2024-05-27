@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
-<!-- caricare un file di stile -->
+<!-- caricamento file di stile -->
 <link rel="stylesheet" href="/static/stileDashboard.css">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
         <div class="logo">
             <img src="/static/images/Logo sapienza.jpg" class="logoimg">SPOTTED SAPIENZA
         </div>
-
+        <!-- MENU -->
         <nav class="menu">
             <ul>
                 <li><a href="/">Bacheca</a></li>
@@ -56,6 +56,7 @@
             <div class="title-scoreboard">
                 <h3>CLASSIFICA</h3>
             </div>
+            <!-- visualizzazione classifica -->
             <div class="scoreboard">
                 <table>
                     {% set count = 0 %}
@@ -102,12 +103,13 @@
                 <div class="box-domanda">
                     <div class="domanda">
                         <div class="img-argomento">
-                        <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
+                        <!-- inserisco l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
                             <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}">
                         </div>
                         <p>{{ domande.testo }}</p>
                     </div>
                 </div>
+                <!-- Sezione Quiz -->
                 <div class="box-risposta" id="box-risposta">
                     <form action="/incrementa/{{ utente_scelto.facolta_codice }}" method="POST">
                     <table>
@@ -131,9 +133,8 @@
                 </form> 
                 </div>
             </div>
-            <!-- <button id="cambiaContenutoBtn">Cambia Contenuto</button> -->
         </div>
-          
+          <!-- Gestione animazione di risposta esatta/sbagliata -->
           <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var buttons = document.querySelectorAll('#box-risposta button');
@@ -166,6 +167,7 @@
                 });
             });
         </script>
+        <!-- Cambio div se premuto il pulsante gioca -->
         <script>
             document.getElementById("cambiaDiv").addEventListener("click", function() {
             var div1 = document.getElementById("div1");
@@ -177,7 +179,7 @@
                 div1.classList.toggle("hidden");
                 div2.classList.toggle("visible");
                 div2.classList.toggle("hidden");
-            }, 1000); // Ritardo di 50 millisecondi
+            }, 1000); // Ritardo
 
             if (div1.classList.contains("visible")) {
                 div1.classList.remove("visible");
@@ -231,14 +233,14 @@
     
             }
     
-            // Assicurarsi che il DOM sia completamente caricato prima di eseguire lo script
+            // Mi assicuro che il DOM sia completamente caricato prima di eseguire lo script
             document.addEventListener('DOMContentLoaded', () => {
                 // Avvia il timer
                 updateTimer();
                 setInterval(updateTimer, 1000); // Aggiorna il timer ogni secondo
             });
         </script>
-
+        <!-- incremento punti facoltà -->
         <script>
             $(document).ready(function() {
                 $('.risposta-esatta').click(function() {
@@ -264,7 +266,7 @@
                 });
             });
         </script>
-
+        <!-- gestione hamburger -->
         <script>
             document.addEventListener("DOMContentLoaded", function() {
             let hamburger = document.querySelector('.hamburger');
@@ -275,7 +277,7 @@
                 });
             });
         </script>
-
+        <!-- gestione pulsante che "scappa" dal cursore del mouse -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
             const button = document.getElementById('randomButton');
@@ -285,22 +287,20 @@
                 const containerRect = container.getBoundingClientRect();
                 const buttonRect = button.getBoundingClientRect();
 
-                // Calculate the maximum position within the container
+                // sposto il bottone randomicamente
                 const maxX = containerRect.width - buttonRect.width;
                 const maxY = containerRect.height - buttonRect.height;
-
-                // Generate random positions
                 const randomX = Math.random() * maxX;
                 const randomY = Math.random() * maxY;
 
-                // Set the new position
+                // Imposto la nuova posizione
                 button.style.left = `${randomX}px`;
                 button.style.top = `${randomY}px`;
             });
         });
 
         </script>
-
+        <!-- classifica alternativa per mobile -->
         <div class="scorrimento">
             <h2 style="text-align: center; color: white;">CLASSIFICA</h2>
             <div class="marquee">
@@ -314,7 +314,6 @@
             </div>
         </div>
         <script src="script.js">
-            // script.js
             window.addEventListener('load', function() {
             const marqueeContent = document.querySelector('.marquee-content');
             const items = Array.from(marqueeContent.children);
@@ -324,7 +323,7 @@
             });
             });
         </script>
-
+        <!-- Animazione della gif in caso di risposta esatta/sbagliata -->
         <script>
             // Seleziona tutti i bottoni con la classe 'risposta-sbagliata'
             let buttons = document.querySelectorAll('.risposta-sbagliata');
@@ -332,7 +331,7 @@
             // Aggiungi l'evento di click a ciascun bottone
             buttons.forEach(function(button) {
                 button.addEventListener('click', function() {
-                    // Scuro il sito
+                    // Scurisco il sito
                     let overlay = document.getElementById('overlay');
                     overlay.style.background = 'rgba(0, 0, 0, 0.5)';
 
@@ -360,9 +359,9 @@
         // Seleziona il bottone con la classe 'risposta-esatta'
         let correctButton = document.querySelector('.risposta-esatta');
 
-        // Aggiungi l'evento di click al bottone con la classe 'risposta-esatta'
+        // Aggiungo l'evento di click al bottone con la classe 'risposta-esatta'
         correctButton.addEventListener('click', function() {
-            // Scuro il sito
+            // Scurisco il sito
             let overlay = document.getElementById('overlay');
             overlay.style.background = 'rgba(0, 0, 0, 0.5)';
 

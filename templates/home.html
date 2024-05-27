@@ -7,16 +7,13 @@
     <script language="JavaScript" type="text/javascript" src="homepage.js"></script>
     <title>Spotted Sapienza</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
-
-
 </head>
 <body>
-
     <header class="header">
         <div class="logo">
             <img src="/static/images/Logo sapienza.jpg" class="logoimg">SPOTTED SAPIENZA
         </div>
-
+        <!-- MENU -->
         <nav class="menu">
             <ul>
                 <li><a href="/">Bacheca</a></li>
@@ -31,22 +28,17 @@
             </span>
             <a href="loginpage.html" class="login" onclick="openlogCard(event, '/loginpage')">Accedi</a>
         </div>
-        
-
         <span class="userpage utentelog">
             <img src="/static/images/user.svg" class="userimg">
             <a href="/profilo" class="profilo">Il mio profilo</a>
         </span>
-
         <div class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
-
     </header>
     <div class="overlay"></div>
-
     <div class="icon-container">
         <div class="icon" data-popup="popup1">
             <img src="/static/images/search.svg" class="icon-search">
@@ -58,7 +50,7 @@
             <img src="/static/images/rispondi.svg" class="icon-risp">
         </div>
     </div>
-
+    <!-- Filtro Facoltà -->
     <div id="popup1" class="popup popup-filtri">
         <div class="filtri">
             <img src="/static/images/search.svg" class="searchimg">
@@ -82,6 +74,7 @@
         </div>
         <span class="closebtn">&times;</span>
     </div>
+    <!-- Crea Spot -->
     <div id="popup2" class="popup popup-creaspot">
             <div class="spot">
                 <img src="/static/images/create.svg" class="createimg">
@@ -93,6 +86,7 @@
             <button class="btninvia">INVIA</button>
         <span class="closebtn">&times;</span>
     </div>
+    <!-- Risposta a spot -->
     <div id="popup3" class="popup popup-rispondi">
             <div class="risp">
                 <img src="/static/images/rispondi.svg" class="rispondiimg">
@@ -106,7 +100,7 @@
             </div>
         <span class="closebtn">&times;</span>
     </div>
-
+    <!-- Bacheca -->
     <div class="bacheca">
         <div class="riquadrospot">
             {% for spot in spot %}
@@ -117,7 +111,7 @@
             </div>
             {% endfor %}
         </div>
-
+    <!-- Filtri di facoltà -->
     <div class="container">
         <div class="cerca">
             <div class="filtri">
@@ -141,7 +135,7 @@
                 </select>
             </div>
         </div>
-
+    <!-- inserimento spot -->
         <form id="creaSpotForm" action="/inserisci_spot" method="POST">
             <div class="creaspot utentelog">
                 <div class="spot">
@@ -155,9 +149,7 @@
                 <button type="submit" class="btninvia">INVIA</button>
             </div>
         </form>
-        
-        
-
+    <!-- Rispondi a uno spot -->
         <div class="rispondi utentelog">
             <div class="risp">
                 <img src="/static/images/rispondi.svg" class="rispondiimg">
@@ -176,7 +168,7 @@
 
     </div>
     </div>
-
+    <!-- script apertura card registrazione -->
     <script>
         function openregCard(event, url) {
             event.preventDefault();
@@ -207,7 +199,7 @@
             document.body.appendChild(card);
           }
     </script>
-
+    <!-- script apertura card login -->
     <script>
         function openlogCard(event, url) {
             event.preventDefault();
@@ -235,10 +227,9 @@
             document.body.appendChild(card);
           }
     </script>
-
+    <!-- gestione del click per selezionare lo spot a cui rispondere -->
     <script>
         let clickedDivId = null;
-    
         function changeBackgroundColor(element) {
             // Rimozione del colore grigio da tutte le div
             const allSpottedDivs = document.querySelectorAll('.spotted');
@@ -254,6 +245,7 @@
             console.log("Clicked div id:", clickedDivId);
         }
     </script>
+    <!-- invio risposta a spot selezionato -->
     <script>
         function inviaRisposta() {
         let id_utente_risp = document.getElementById('id_utente_risp').value;
@@ -284,6 +276,7 @@
     }
 
     </script>
+    <!-- Inserimento dello spot -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('creaSpotForm').addEventListener('submit', function(event) {

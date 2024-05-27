@@ -38,7 +38,7 @@
 
         <div class="left-column">
             
-
+        <!-- Mostro risposte agli spot dell'utente loggato -->
         <h2>I tuoi spot</h2>
             {% for spot in spots %}
                 <div class="spot">
@@ -56,7 +56,7 @@
                 </div>
             {% endfor %}
         </div>
-
+        <!-- visualizzazione informazioni sull'utente loggato -->
         <div class="right-column">
             <h1>Profilo di {{ utente.nome }} {{ utente.cognome }}</h1>
             <div class=" dati_personali">
@@ -68,7 +68,7 @@
         </div>
 
     </div>
-
+<!-- gestione hamburger -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
     let hamburger = document.querySelector('.hamburger');

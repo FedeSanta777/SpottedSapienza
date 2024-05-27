@@ -84,14 +84,10 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        // Aggiungi un marker alla posizione desiderata a Roma
-        // var marker = L.marker([41.9028, 12.4964]).addTo(map);
-        // marker.bindPopup("<b>Colosseo</b><br>Il famoso Colosseo di Roma.").openPopup();
+        // inserimento eventi
         {% for evento in eventi %}
             var marker = L.marker([{{ evento.latitudine }}, {{ evento.longitudine }}]).addTo(map);
             marker.bindPopup("<b>{{ evento.nome_evento }}</b><br>{{ evento.data_evento }}").openPopup();
-            // <li>{{ evento.nome_evento }} - Posizione: ({{ evento.latitudine }}, {{ evento.longitudine }}) - Data: {{ evento.data_evento }}</li>
         {% endfor %}
 
         var marker; // Variabile per memorizzare il marker
@@ -114,6 +110,7 @@
             }
         });
     </script>
+    <!-- aggiornamento coordinate per l'inserimento di spot eventi -->
     <script>
 
         map.on('click', function(e) {
