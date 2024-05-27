@@ -138,26 +138,6 @@
             <!-- <button id="cambiaContenutoBtn">Cambia Contenuto</button> -->
         </div>
           
-          
-        <!-- <script>
-            // Ottieni riferenze agli elementi DOM
-            const contenutoDiv = document.getElementById('contenuto');
-            const cambiaContenutoBtn = document.getElementById('cambiaContenutoBtn');
-          
-            // Aggiungi un gestore di eventi al pulsante
-            cambiaContenutoBtn.addEventListener('click', function() {
-              // Nascondi temporaneamente il contenuto
-              contenutoDiv.classList.add('hidden');
-          
-              // Cambia il contenuto della div dopo l'animazione
-              setTimeout(function() {
-                contenutoDiv.textContent = 'Nuovo contenuto della div!';
-                
-                // Mostra nuovamente il contenuto
-                contenutoDiv.classList.remove('hidden');
-              }, 500); // Tempo corrispondente alla durata dell'animazione (0.5s)
-            });
-          </script> -->
           <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var buttons = document.querySelectorAll('#box-risposta button');
@@ -329,16 +309,11 @@
             <h2 style="text-align: center; color: white;">CLASSIFICA</h2>
             <div class="marquee">
                 <div class="marquee-content">
-                <!-- <div class="item">Elemento 1</div>
-                <div class="item">Elemento 2</div>
-                <div class="item">Elemento 3</div>
-                <div class="item">Elemento 4</div> -->
                 {% set count = 0 %}
                     {% for faco in facolta %}
                         <div class="item">{{ loop.index }} {{ faco.nome }} {{ faco.puntiTot }}</div>
                         {% set count = count + 1 %}
                     {% endfor %}
-                <!-- Aggiungi altri elementi qui -->
                 </div>
             </div>
         </div>

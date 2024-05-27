@@ -38,23 +38,23 @@
                 alert("Selezionare facoltà");
                 return false;
             }
-            // Costruisci l'oggetto dei dati da inviare al server
+            // Costruzione dell'oggetto dei dati da inviare al server
             var data = {
                 nome: nome,
                 cognome: cognome,
                 email: email,
                 password: password,
-                facolta: facolta // Invia il codice della facoltà al server
+                facolta: facolta 
             };
 
-             // Invia una richiesta GET per controllare se l'email è già registrata
+             // Invio richiesta GET per controllare se l'email è già registrata
             fetch('/check_email?email=' + email)
             .then(response => response.json())
             .then(data => {
             if (data.exists) {
                 alert("L'email inserita è già registrata. Si prega di utilizzare un'email diversa.");
             } else {
-                // Invia una richiesta POST al server Flask solo se l'email non è già registrata
+                // Invio richiesta POST al server Flask solo se l'email non è già registrata
                 fetch('/registrazione', {
                     method: 'POST',
                     headers: {
@@ -70,10 +70,10 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Reindirizza alla homepage
+                        // Reindirizzamento alla homepage
                         closeCard();
                     } else {
-                        // Gestisci eventuali errori di registrazione
+                        // Gestione di eventuali errori di registrazione
                         alert("Errore durante la registrazione");
                     }
                 })
@@ -86,7 +86,7 @@
             console.error('Errore durante la verifica dell\'email:', error);
         });
 
-        // Impedisce l'invio del modulo HTML
+        // Blocco dell'invio del modulo HTML
         return false;
     }
     // Funzione per chiudere la card

@@ -8,17 +8,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="application/javascript">
         function validateLogin() {
-            // Ottieni i valori inseriti dall'utente
+            //Recupero valori inseriti dall'utente
             var email = document.log.logemail.value;
             var password = document.log.logpass.value;
             
-            // Costruisci l'oggetto dei dati da inviare al server
+            // Costruzione dell'oggetto dei dati da inviare al server
             var data = {
                 email: email,
                 password: password
             };
         
-            // Invia una richiesta POST al server Flask
+            // Invio richiesta POST al server Flask
             fetch('/login', {
                 method: 'POST',
                 headers: {
@@ -30,7 +30,7 @@
                 if (response.ok) {
                     closeCard();
                 } else {
-                    // Gestisci eventuali errori di login
+                    // Gestione eventuali errori di login
                     alert("Errore durante il login");
                 }
             })
@@ -38,7 +38,7 @@
                 console.error('Errore durante la richiesta di login:', error);
             });
         
-            // Impedisce l'invio del modulo HTML
+            // Blocco dell'invio del modulo HTML
             return false;
         }
         function closeCard() {
