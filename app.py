@@ -95,7 +95,6 @@ def test_database_connection():
 @app.route('/')
 def home():
     if test_database_connection():
-        # utente = Utenti.query.filter(Utenti.email == email).first()
         session["id"] = 1
         id_utente = session["id"]
         utente = Utenti.query.filter_by(id=id_utente).first()
@@ -106,7 +105,7 @@ def home():
     
 @app.route('/inserisci_spot', methods=['POST'])
 def inserisci_spot():
-    id_utente = session.get('id')  # Accedi all'ID dell'utente dalla sessione Flask
+    id_utente = session.get('id')  # Accesso all'ID dell'utente dalla sessione Flask
     contenuto = request.form.get('contenuto')
     anonimato = True if request.form.get('anonimato') == 'on' else False
     facolta = request.form.get('facolta')
@@ -156,14 +155,13 @@ def inserisci_risposta():
 @app.route('/classifica')
 def index():
     if test_database_connection():
-        utenti = Utenti.query.all()  # Recupera tutti i dati dalla tabella "utenti"
-        facolta = Facolta.query.order_by(Facolta.puntiTot.desc()).all()  # Recupera tutti i dati dalla tabella "facolta"
+        utenti = Utenti.query.all()  # Recupero di tutti i dati dalla tabella "utenti"
+        facolta = Facolta.query.order_by(Facolta.puntiTot.desc()).all()  # Recupero di tutti i dati dalla tabella "facolta"
         id = session["id"]
-        # Recupera una domanda a caso dal database
+        # Recupero di una domanda a caso dal database
         random_question = Domande.query.order_by(db.func.random()).first()
         
-        # Query per ottenere la data dall'ultima giocata per l'utente, sostituisci con la tua logica di query
-        # prima_tupla_utenti = Utenti.query.order_by(db.func.random()).first()
+        # Query per ottenere la data dall'ultima giocata per l'utente
         prima_tupla_utenti = Utenti.query.filter(Utenti.id == id).first()
         ultima_giocata = prima_tupla_utenti.ultimaGiocata
         
@@ -178,27 +176,27 @@ def index():
 
 @app.route('/incrementa/<int:codice_facolta>/<int:codice_utente>', methods=['POST'])
 def incrementa_punti(codice_facolta, codice_utente):
-    # Ottieni la facoltà dal database
+    # Ottenimento della facoltà dal database
     facolta = Facolta.query.get_or_404(codice_facolta)
-    # Incrementa i punti della facoltà
+    # Incremento dei punti della facoltà
     facolta.puntiTot += 10
 
-    # Ottieni l'utente dal database
+    # Ottenimento dell'utente dal database
     utente = Utenti.query.get_or_404(codice_utente)
-    # Aggiorna il campo ultima_giocata con la data attuale
+    # Aggiornamento dell campo ultima_giocata con la data attuale
     utente.ultimaGiocata = datetime.now().strftime('%Y-%m-%d')
 
-    # Salva le modifiche nel database
+    # Salvataggio delle modifiche nel database
     db.session.commit()
 
-    # Restituisci una risposta JSON
+    # Restituzione di una risposta JSON
     return jsonify({'success': True, 'nuovi_punti': facolta.puntiTot, 'ultima_giocata': utente.ultimaGiocata})
 
 ## Codice per la pagina Spotted Eventi
 # Pagina principale
 @app.route('/mappa')
 def mappa():
-    # Recupera tutti gli eventi dal database
+    # Recupero di tutti gli eventi dal database
     eventi = Eventi.query.all()
     return render_template('mappa.html', eventi=eventi)
 
@@ -219,7 +217,7 @@ def submit_event():
     
 @app.route('/profilo')
 def profilo():
-    # Recupera l'ID dell'utente loggato
+    # Recupero dell'ID dell'utente loggato
     user_id = session["id"]
     u = Utenti.query.filter(Utenti.id == user_id).first()
     
@@ -230,14 +228,14 @@ def profilo():
     spot_ids = [spot.id_spot for spot in spots]
     risposte = Risposte.query.filter(Risposte.id_spot.in_(spot_ids)).all()
     
-    # Organizza le risposte per spot
+    # Organizzazione delle risposte per spot
     risposte_per_spot = {}
     for risposta in risposte:
         if risposta.id_spot not in risposte_per_spot:
             risposte_per_spot[risposta.id_spot] = []
         risposte_per_spot[risposta.id_spot].append(risposta)
     
-    # Passa i dati al template
+    # Passaggio dei dati al template
     return render_template('profilo.html', spots=spots, risposte_per_spot=risposte_per_spot, utente=u, id=session["id"])
 
 # Registrazione
@@ -251,17 +249,17 @@ def reg():
     
 @app.route('/registrazione', methods=['POST'])
 def registrazione():
-     # Ricevi i dati inviati come JSON
+     # Ricezione dei dati inviati come JSON
     data = request.get_json()
 
-    # Estrai i valori dei campi
+    # Estrazione dei valori dei campi
     nome = data['nome']
     cognome = data['cognome']
     email = data['email']
     password = data['password']
     facolta_codice = data['facolta']
     
-    # Controlla se l'email esiste già nel database
+    # Controllo se l'email esiste già nel database
     existing_user = Utenti.query.filter_by(email=email).first()
     if existing_user:
         return "L'email inserita è già registrata. Si prega di utilizzare un'email diversa."
@@ -273,7 +271,7 @@ def registrazione():
     try:
         db.session.add(nuovo_utente)
         db.session.commit()
-        return redirect('/successo')  # Reindirizza alla pagina di registrazione avvenuta con successo
+        return redirect('/successo')  # Reindirizzamento alla pagina di registrazione avvenuta con successo
     except Exception as e:
         print(f"Errore durante la registrazione: {e}")
         db.session.rollback()
@@ -301,15 +299,15 @@ def log():
 
 @app.route('/login', methods=['POST'])
 def login():
-    # Ottieni i dati inviati dal client come JSON
+    # Ottenimento i dati inviati dal client come JSON
     data = request.json
-    # Estrai email e password dall'oggetto dei dati
+    # Estrazione della email e della password dall'oggetto dei dati
     email = data.get('email')
     password = data.get('password')
     
     print(f'Trying to login with email: {email}')
     
-    # Verifica le credenziali dell'utente nel database
+    # Verifica delle credenziali dell'utente nel database
     user = verify_user(email, password)
     print(user)
     if user is not None:
