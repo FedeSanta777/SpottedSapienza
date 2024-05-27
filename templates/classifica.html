@@ -86,7 +86,6 @@
                         <li>La facoltà con più punti vince </li><br>
                         <button id="cambiaDiv" class="bottoneGioca">GIOCA ORA</button>
                     </div>
-                    <!-- <button>Il bottone è abilitato</button> -->
                     
                 </div>
 
@@ -104,9 +103,6 @@
                     <div class="domanda">
                         <div class="img-argomento">
                         <!-- inserisci l'immagine dal nome 'informatica.jpg' contenuto nella cartella img -->
-                            <!-- <img src="{{ url_for('static', filename='domande.srcArg') }}" alt="Immagine"> -->
-                            <!-- <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}"> -->
-                            <!-- <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}"> -->
                             <img src="{{ url_for('static', filename=domande.srcArg) }}" alt="{{ domande.argomento }}">
                         </div>
                         <p>{{ domande.testo }}</p>
